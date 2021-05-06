@@ -1,0 +1,24 @@
+{
+  "name": "generic-oracle-contracts",
+  "version": "1.0.0",
+  "description": "Contracts for Iexec generic DOracle",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@iexec/doracle": "^5.2.1-2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "iexec",
+    "oracle",
+    "doracle",
+    "generic"
+  ],
+  "author": "remi.burgel@iex.ec",
+  "license": "ISC"
+}
