@@ -21,23 +21,23 @@ pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
-import "@iexec/doracle/contracts//IexecDoracle.sol";
+import "@iexec/doracle/contracts/IexecDoracle.sol";
 
 contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
     // Data storage
     struct TimedRawValue {
-        bytes32 value;
+        bytes value;
         uint256 date;
     }
 
-    mapping(bytes32 => TimedValue) public values;
+    mapping(bytes32 => TimedRawValue) public values;
 
     // Event
     event ValueUpdated(
         bytes32 indexed id,
         bytes32 indexed oracleCallID,
         uint256 date,
-        int256 value
+        bytes value
     );
 
     // Use _iexecHubAddr to force use of custom iexechub, leave 0x0 for autodetect
@@ -62,16 +62,16 @@ contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
     // ERC1154 - Callback processing
     function receiveResult(bytes32 _callID, bytes calldata) external override {
         // Parse results
-        (bytes32 id, bytes32 value) =
+        (bytes32 id, bytes memory value) =
             abi.decode(
                 _iexecDoracleGetVerifiedResult(_callID),
-                (bytes32, bytes32)
+                (bytes32, bytes)
             );
 
         values[id].date = now;
         values[id].value = value;
 
-        emit ValueUpdated(id, _callID, date, value);
+        emit ValueUpdated(id, _callID, now, value);
     }
 
     function getString(bytes32 _oracleId)
@@ -79,7 +79,8 @@ contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
         view
         returns (string memory stringValue, uint256 date)
     {
-        return (abi.decode(values[_oracleId], (string)), values[_oracleId].date);
+        bytes memory value = values[_oracleId].value;
+        return (abi.decode(value, (string)), values[_oracleId].date);
     }
 
     function getRaw(bytes32 _oracleId)
@@ -87,14 +88,25 @@ contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
         view
         returns (bytes memory bytesValue, uint256 date)
     {
-        return (values[_oracleId], values[_oracleId].date);
+        bytes memory value = values[_oracleId].value;
+        return (value, values[_oracleId].date);
     }
 
-    function getInt(bytes32 _oracleId) public view returns (int256 intValue, uint256 date) {
-        return (abi.decode(values[_oracleId], (int256)), values[_oracleId].date);
+    function getInt(bytes32 _oracleId)
+        public
+        view
+        returns (int256 intValue, uint256 date)
+    {
+        bytes memory value = values[_oracleId].value;
+        return (abi.decode(value, (int256)), values[_oracleId].date);
     }
 
-    function getBool(bytes32 _oracleId) public view returns (bool boolValue, uint256 date) {
-        return (abi.decode(values[_oracleId], (bool)), values[_oracleId].date);
+    function getBool(bytes32 _oracleId)
+        public
+        view
+        returns (bool boolValue, uint256 date)
+    {
+        bytes memory value = values[_oracleId].value;
+        return (abi.decode(value, (bool)), values[_oracleId].date);
     }
 }

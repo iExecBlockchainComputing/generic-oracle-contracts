@@ -1,0 +1,570 @@
+{
+  "contractName": "IOracle",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "resultFor",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"resultFor\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@iexec/solidity/contracts/ERC1154/IERC1154.sol\":\"IOracle\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@iexec/solidity/contracts/ERC1154/IERC1154.sol\":{\"keccak256\":\"0x542ed19435ffdf4e5f1fbf57f87d26883e04cf96c21c69f7eb691e46c0f6ee5d\",\"urls\":[\"bzz-raw://d7744c331a362162870775cdea560f2db4da1ae6123ca05aba825a8850da37a0\",\"dweb:/ipfs/Qmf3FgPtiUiCA4Mnb9LpGrUciub9RwxniGSRPriRM4hVpc\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.6.0;\n\n/**\n * @title EIP1154 interface\n * @dev see https://eips.ethereum.org/EIPS/eip-1154\n */\ninterface IOracleConsumer\n{\n\tfunction receiveResult(bytes32, bytes calldata)\n\t\texternal;\n}\n\ninterface IOracle\n{\n\tfunction resultFor(bytes32)\n\t\texternal view returns (bytes memory);\n}\n",
+  "sourcePath": "@iexec/solidity/contracts/ERC1154/IERC1154.sol",
+  "ast": {
+    "absolutePath": "@iexec/solidity/contracts/ERC1154/IERC1154.sol",
+    "exportedSymbols": {
+      "IOracle": [
+        2159
+      ],
+      "IOracleConsumer": [
+        2151
+      ]
+    },
+    "id": 2160,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2142,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:20"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 2143,
+          "nodeType": "StructuredDocumentation",
+          "src": "25:87:20",
+          "text": " @title EIP1154 interface\n @dev see https://eips.ethereum.org/EIPS/eip-1154"
+        },
+        "fullyImplemented": false,
+        "id": 2151,
+        "linearizedBaseContracts": [
+          2151
+        ],
+        "name": "IOracleConsumer",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "5dd80855",
+            "id": 2150,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "receiveResult",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 2148,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2145,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 2150,
+                  "src": "165:7:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2144,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "165:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2147,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 2150,
+                  "src": "174:14:20",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2146,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "174:5:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "164:25:20"
+            },
+            "returnParameters": {
+              "id": 2149,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "200:0:20"
+            },
+            "scope": 2151,
+            "src": "142:59:20",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2160,
+        "src": "113:90:20"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2159,
+        "linearizedBaseContracts": [
+          2159
+        ],
+        "name": "IOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "d09cc57e",
+            "id": 2158,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "resultFor",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 2154,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2153,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 2158,
+                  "src": "245:7:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2152,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "245:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "244:9:20"
+            },
+            "returnParameters": {
+              "id": 2157,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2156,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 2158,
+                  "src": "279:12:20",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2155,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "279:5:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "278:14:20"
+            },
+            "scope": 2159,
+            "src": "226:67:20",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2160,
+        "src": "205:90:20"
+      }
+    ],
+    "src": "0:296:20"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "@iexec/solidity/contracts/ERC1154/IERC1154.sol",
+      "exportedSymbols": {
+        "IOracle": [
+          2159
+        ],
+        "IOracleConsumer": [
+          2151
+        ]
+      },
+      "license": null
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.6",
+            ".0"
+          ]
+        },
+        "id": 2142,
+        "name": "PragmaDirective",
+        "src": "0:23:20"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            2151
+          ],
+          "name": "IOracleConsumer",
+          "scope": 2160
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @title EIP1154 interface\n @dev see https://eips.ethereum.org/EIPS/eip-1154"
+            },
+            "id": 2143,
+            "name": "StructuredDocumentation",
+            "src": "25:87:20"
+          },
+          {
+            "attributes": {
+              "body": null,
+              "documentation": null,
+              "functionSelector": "5dd80855",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "receiveResult",
+              "overrides": null,
+              "scope": 2151,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "overrides": null,
+                      "scope": 2150,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 2144,
+                        "name": "ElementaryTypeName",
+                        "src": "165:7:20"
+                      }
+                    ],
+                    "id": 2145,
+                    "name": "VariableDeclaration",
+                    "src": "165:7:20"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "overrides": null,
+                      "scope": 2150,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "bytes",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 2146,
+                        "name": "ElementaryTypeName",
+                        "src": "174:5:20"
+                      }
+                    ],
+                    "id": 2147,
+                    "name": "VariableDeclaration",
+                    "src": "174:14:20"
+                  }
+                ],
+                "id": 2148,
+                "name": "ParameterList",
+                "src": "164:25:20"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 2149,
+                "name": "ParameterList",
+                "src": "200:0:20"
+              }
+            ],
+            "id": 2150,
+            "name": "FunctionDefinition",
+            "src": "142:59:20"
+          }
+        ],
+        "id": 2151,
+        "name": "ContractDefinition",
+        "src": "113:90:20"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            2159
+          ],
+          "name": "IOracle",
+          "scope": 2160
+        },
+        "children": [
+          {
+            "attributes": {
+              "body": null,
+              "documentation": null,
+              "functionSelector": "d09cc57e",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "resultFor",
+              "overrides": null,
+              "scope": 2159,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "overrides": null,
+                      "scope": 2158,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 2152,
+                        "name": "ElementaryTypeName",
+                        "src": "245:7:20"
+                      }
+                    ],
+                    "id": 2153,
+                    "name": "VariableDeclaration",
+                    "src": "245:7:20"
+                  }
+                ],
+                "id": 2154,
+                "name": "ParameterList",
+                "src": "244:9:20"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "overrides": null,
+                      "scope": 2158,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "bytes",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 2155,
+                        "name": "ElementaryTypeName",
+                        "src": "279:5:20"
+                      }
+                    ],
+                    "id": 2156,
+                    "name": "VariableDeclaration",
+                    "src": "279:12:20"
+                  }
+                ],
+                "id": 2157,
+                "name": "ParameterList",
+                "src": "278:14:20"
+              }
+            ],
+            "id": 2158,
+            "name": "FunctionDefinition",
+            "src": "226:67:20"
+          }
+        ],
+        "id": 2159,
+        "name": "ContractDefinition",
+        "src": "205:90:20"
+      }
+    ],
+    "id": 2160,
+    "name": "SourceUnit",
+    "src": "0:296:20"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.0",
+  "updatedAt": "2021-05-07T09:06:23.847Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

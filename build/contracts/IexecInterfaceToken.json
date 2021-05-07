@@ -1,0 +1,5087 @@
+{
+  "contractName": "IexecInterfaceToken",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AccurateContribution",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct IexecLibOrders_v5.AppOrder",
+          "name": "apporder",
+          "type": "tuple"
+        }
+      ],
+      "name": "BroadcastAppOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "datasetprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct IexecLibOrders_v5.DatasetOrder",
+          "name": "datasetorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "BroadcastDatasetOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "datasetmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerpoolmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct IexecLibOrders_v5.RequestOrder",
+          "name": "requestorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "BroadcastRequestOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerpoolprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct IexecLibOrders_v5.WorkerpoolOrder",
+          "name": "workerpoolorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "BroadcastWorkerpoolOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "appHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ClosedAppOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "datasetHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ClosedDatasetOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "requestHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ClosedRequestOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "workerpoolHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ClosedWorkerpoolOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "catid",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "workClockTimeRef",
+          "type": "uint256"
+        }
+      ],
+      "name": "CreateCategory",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "FaultyContribution",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Lock",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "dealid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "appHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "datasetHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "workerpoolHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "requestHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "volume",
+          "type": "uint256"
+        }
+      ],
+      "name": "OrdersMatched",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "ref",
+          "type": "bytes32"
+        }
+      ],
+      "name": "Reward",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "workerpool",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "dealid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "SchedulerNotice",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "ref",
+          "type": "bytes32"
+        }
+      ],
+      "name": "Seize",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "appHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "SignedAppOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "datasetHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "SignedDatasetOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "requestHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "SignedRequestOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "workerpoolHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "SignedWorkerpoolOrder",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskClaimed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "consensus",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskConsensus",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskContribute",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "results",
+          "type": "bytes"
+        }
+      ],
+      "name": "TaskFinalize",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "workerpool",
+          "type": "address"
+        }
+      ],
+      "name": "TaskInitialize",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskReopen",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "digest",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskReveal",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Unlock",
+      "type": "event"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "inputs": [],
+      "name": "UniswapV2Router",
+      "outputs": [
+        {
+          "internalType": "contract IUniswapV2Router02",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "appregistry",
+      "outputs": [
+        {
+          "internalType": "contract IRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "approveAndCall",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.AppOrder",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "broadcastAppOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "datasetprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.DatasetOrder",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "broadcastDatasetOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "datasetmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerpoolmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.RequestOrder",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "broadcastRequestOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerpoolprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.WorkerpoolOrder",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "broadcastWorkerpoolOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "callbackgas",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "claim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "claimArray",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "configure",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "contribute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "contributeAndFinalize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "contribution_deadline_ratio",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "countCategory",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "createCategory",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "datasetregistry",
+      "outputs": [
+        {
+          "internalType": "contract IRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "decreaseAllowance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "deposit",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "depositEth",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "depositEthFor",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "depositFor",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "name": "depositForArray",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "domain",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "version",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "chainId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "verifyingContract",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.EIP712Domain",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "eip712domain_separator",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "estimateDepositEthSent",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "estimateDepositTokenWanted",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "estimateWithdrawEthWanted",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "estimateWithdrawTokenSent",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "final_deadline_ratio",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "finalize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "frozenOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "groupmember_purpose",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "importScore",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "increaseAllowance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "initializeAndClaimArray",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "initializeArray",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "kitty_address",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "kitty_min",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "kitty_ratio",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "app",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "appprice",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "volume",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "tag",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "address",
+                  "name": "datasetrestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "workerpoolrestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "requesterrestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "salt",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "sign",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct IexecLibOrders_v5.AppOrder",
+              "name": "order",
+              "type": "tuple"
+            },
+            {
+              "internalType": "enum IexecLibOrders_v5.OrderOperationEnum",
+              "name": "operation",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.AppOrderOperation",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "manageAppOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "dataset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "datasetprice",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "volume",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "tag",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "address",
+                  "name": "apprestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "workerpoolrestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "requesterrestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "salt",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "sign",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct IexecLibOrders_v5.DatasetOrder",
+              "name": "order",
+              "type": "tuple"
+            },
+            {
+              "internalType": "enum IexecLibOrders_v5.OrderOperationEnum",
+              "name": "operation",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.DatasetOrderOperation",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "manageDatasetOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "app",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "appmaxprice",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "dataset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "datasetmaxprice",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "workerpool",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "workerpoolmaxprice",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "requester",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "volume",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "tag",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "category",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "trust",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "beneficiary",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "callback",
+                  "type": "address"
+                },
+                {
+                  "internalType": "string",
+                  "name": "params",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "salt",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "sign",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct IexecLibOrders_v5.RequestOrder",
+              "name": "order",
+              "type": "tuple"
+            },
+            {
+              "internalType": "enum IexecLibOrders_v5.OrderOperationEnum",
+              "name": "operation",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.RequestOrderOperation",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "manageRequestOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "workerpool",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "workerpoolprice",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "volume",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "tag",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "category",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "trust",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "apprestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "datasetrestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "requesterrestrict",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "salt",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "sign",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct IexecLibOrders_v5.WorkerpoolOrder",
+              "name": "order",
+              "type": "tuple"
+            },
+            {
+              "internalType": "enum IexecLibOrders_v5.OrderOperationEnum",
+              "name": "operation",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.WorkerpoolOrderOperation",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "manageWorkerpoolOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.AppOrder",
+          "name": "",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "datasetprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.DatasetOrder",
+          "name": "",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerpoolprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.WorkerpoolOrder",
+          "name": "",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "datasetmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerpoolmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.RequestOrder",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "matchOrders",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.AppOrder",
+          "name": "",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "datasetprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.DatasetOrder",
+          "name": "",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerpoolprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.WorkerpoolOrder",
+          "name": "",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "datasetmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerpoolmaxprice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "sign",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibOrders_v5.RequestOrder",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "name": "matchOrdersWithEth",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "receiveApproval",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "recover",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "reopen",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "requestToken",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "requestTokenFor",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "resultFor",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "reveal",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "reveal_deadline_ratio",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "safeDepositEth",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "safeDepositEthFor",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "safeWithdrawEth",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "safeWithdrawEthTo",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "setCallbackGas",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "ens",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "setName",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "setTeeBroker",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "teebroker",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "updateDomainSeparator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "verifyPresignature",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "verifyPresignatureOrSignature",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "verifySignature",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "viewAccount",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "stake",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "locked",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IexecLibCore_v5.Account",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "viewCategory",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workClockTimeRef",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IexecLibCore_v5.Category",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewConsumed",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "viewContribution",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum IexecLibCore_v5.ContributionStatusEnum",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "resultHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "resultSeal",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "enclaveChallenge",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "weight",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IexecLibCore_v5.Contribution",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewDeal",
+      "outputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "pointer",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "owner",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "price",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IexecLibCore_v5.Resource",
+              "name": "app",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "pointer",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "owner",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "price",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IexecLibCore_v5.Resource",
+              "name": "dataset",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "pointer",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "owner",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "price",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IexecLibCore_v5.Resource",
+              "name": "workerpool",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "botFirst",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "botSize",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "workerStake",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "schedulerRewardRatio",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IexecLibCore_v5.Deal",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewPresigned",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "viewScore",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewTask",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum IexecLibCore_v5.TaskStatusEnum",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "dealid",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "idx",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timeref",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "contributionDeadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "revealDeadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "finalDeadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "consensusValue",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "revealCounter",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "winnerCounter",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address[]",
+              "name": "contributors",
+              "type": "address[]"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "resultDigest",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "results",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "resultsTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "resultsCallback",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IexecLibCore_v5.Task",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawEth",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "withdrawEthTo",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "withdrawTo",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "workerpool_stake_ratio",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "workerpoolregistry",
+      "outputs": [
+        {
+          "internalType": "contract IRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"}],\"name\":\"AccurateContribution\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"indexed\":false,\"internalType\":\"struct IexecLibOrders_v5.AppOrder\",\"name\":\"apporder\",\"type\":\"tuple\"}],\"name\":\"BroadcastAppOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"indexed\":false,\"internalType\":\"struct IexecLibOrders_v5.DatasetOrder\",\"name\":\"datasetorder\",\"type\":\"tuple\"}],\"name\":\"BroadcastDatasetOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"beneficiary\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"callback\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"params\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"indexed\":false,\"internalType\":\"struct IexecLibOrders_v5.RequestOrder\",\"name\":\"requestorder\",\"type\":\"tuple\"}],\"name\":\"BroadcastRequestOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"indexed\":false,\"internalType\":\"struct IexecLibOrders_v5.WorkerpoolOrder\",\"name\":\"workerpoolorder\",\"type\":\"tuple\"}],\"name\":\"BroadcastWorkerpoolOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"appHash\",\"type\":\"bytes32\"}],\"name\":\"ClosedAppOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"datasetHash\",\"type\":\"bytes32\"}],\"name\":\"ClosedDatasetOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"requestHash\",\"type\":\"bytes32\"}],\"name\":\"ClosedRequestOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"workerpoolHash\",\"type\":\"bytes32\"}],\"name\":\"ClosedWorkerpoolOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"catid\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"workClockTimeRef\",\"type\":\"uint256\"}],\"name\":\"CreateCategory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"}],\"name\":\"FaultyContribution\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Lock\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"dealid\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"appHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"datasetHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"workerpoolHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"requestHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"}],\"name\":\"OrdersMatched\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"ref\",\"type\":\"bytes32\"}],\"name\":\"Reward\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"dealid\",\"type\":\"bytes32\"}],\"name\":\"SchedulerNotice\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"ref\",\"type\":\"bytes32\"}],\"name\":\"Seize\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"appHash\",\"type\":\"bytes32\"}],\"name\":\"SignedAppOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"datasetHash\",\"type\":\"bytes32\"}],\"name\":\"SignedDatasetOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"requestHash\",\"type\":\"bytes32\"}],\"name\":\"SignedRequestOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"workerpoolHash\",\"type\":\"bytes32\"}],\"name\":\"SignedWorkerpoolOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"}],\"name\":\"TaskClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"consensus\",\"type\":\"bytes32\"}],\"name\":\"TaskConsensus\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"TaskContribute\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"results\",\"type\":\"bytes\"}],\"name\":\"TaskFinalize\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"}],\"name\":\"TaskInitialize\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"}],\"name\":\"TaskReopen\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"taskid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"digest\",\"type\":\"bytes32\"}],\"name\":\"TaskReveal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Unlock\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[],\"name\":\"UniswapV2Router\",\"outputs\":[{\"internalType\":\"contract IUniswapV2Router02\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"appregistry\",\"outputs\":[{\"internalType\":\"contract IRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"approveAndCall\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.AppOrder\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"broadcastAppOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.DatasetOrder\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"broadcastDatasetOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"beneficiary\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"callback\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"params\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.RequestOrder\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"broadcastRequestOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.WorkerpoolOrder\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"broadcastWorkerpoolOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"callbackgas\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"name\":\"claimArray\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"configure\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"contribute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"contributeAndFinalize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"contribution_deadline_ratio\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"countCategory\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"createCategory\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"datasetregistry\",\"outputs\":[{\"internalType\":\"contract IRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"depositEth\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"depositEthFor\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"depositFor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"},{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"name\":\"depositForArray\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"domain\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"version\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"chainId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"verifyingContract\",\"type\":\"address\"}],\"internalType\":\"struct IexecLibOrders_v5.EIP712Domain\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"eip712domain_separator\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"estimateDepositEthSent\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"estimateDepositTokenWanted\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"estimateWithdrawEthWanted\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"estimateWithdrawTokenSent\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"final_deadline_ratio\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"finalize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"frozenOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"groupmember_purpose\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"importScore\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"initialize\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"},{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"name\":\"initializeAndClaimArray\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"},{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"name\":\"initializeArray\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kitty_address\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kitty_min\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kitty_ratio\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.AppOrder\",\"name\":\"order\",\"type\":\"tuple\"},{\"internalType\":\"enum IexecLibOrders_v5.OrderOperationEnum\",\"name\":\"operation\",\"type\":\"uint8\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.AppOrderOperation\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"manageAppOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.DatasetOrder\",\"name\":\"order\",\"type\":\"tuple\"},{\"internalType\":\"enum IexecLibOrders_v5.OrderOperationEnum\",\"name\":\"operation\",\"type\":\"uint8\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.DatasetOrderOperation\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"manageDatasetOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"beneficiary\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"callback\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"params\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.RequestOrder\",\"name\":\"order\",\"type\":\"tuple\"},{\"internalType\":\"enum IexecLibOrders_v5.OrderOperationEnum\",\"name\":\"operation\",\"type\":\"uint8\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.RequestOrderOperation\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"manageRequestOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.WorkerpoolOrder\",\"name\":\"order\",\"type\":\"tuple\"},{\"internalType\":\"enum IexecLibOrders_v5.OrderOperationEnum\",\"name\":\"operation\",\"type\":\"uint8\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.WorkerpoolOrderOperation\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"manageWorkerpoolOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.AppOrder\",\"name\":\"\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.DatasetOrder\",\"name\":\"\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.WorkerpoolOrder\",\"name\":\"\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"beneficiary\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"callback\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"params\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.RequestOrder\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"matchOrders\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.AppOrder\",\"name\":\"\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"workerpoolrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.DatasetOrder\",\"name\":\"\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolprice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"apprestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"datasetrestrict\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"requesterrestrict\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.WorkerpoolOrder\",\"name\":\"\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"app\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"appmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"dataset\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"datasetmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"workerpool\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"workerpoolmaxprice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"volume\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"beneficiary\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"callback\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"params\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"salt\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sign\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibOrders_v5.RequestOrder\",\"name\":\"\",\"type\":\"tuple\"}],\"name\":\"matchOrdersWithEth\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"receiveApproval\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"recover\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"reopen\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"requestToken\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"requestTokenFor\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"resultFor\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"reveal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"reveal_deadline_ratio\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"safeDepositEth\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"safeDepositEthFor\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"safeWithdrawEth\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"safeWithdrawEthTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"setCallbackGas\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"ens\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"setName\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"setTeeBroker\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"teebroker\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"updateDomainSeparator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"verifyPresignature\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"verifyPresignatureOrSignature\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"verifySignature\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"viewAccount\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"stake\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"locked\",\"type\":\"uint256\"}],\"internalType\":\"struct IexecLibCore_v5.Account\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"viewCategory\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"workClockTimeRef\",\"type\":\"uint256\"}],\"internalType\":\"struct IexecLibCore_v5.Category\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"viewConsumed\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"viewContribution\",\"outputs\":[{\"components\":[{\"internalType\":\"enum IexecLibCore_v5.ContributionStatusEnum\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"resultHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"resultSeal\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"enclaveChallenge\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"weight\",\"type\":\"uint256\"}],\"internalType\":\"struct IexecLibCore_v5.Contribution\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"viewDeal\",\"outputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"pointer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"internalType\":\"struct IexecLibCore_v5.Resource\",\"name\":\"app\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"pointer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"internalType\":\"struct IexecLibCore_v5.Resource\",\"name\":\"dataset\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"pointer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"internalType\":\"struct IexecLibCore_v5.Resource\",\"name\":\"workerpool\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"trust\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"tag\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"beneficiary\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"callback\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"params\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"botFirst\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"botSize\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"workerStake\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"schedulerRewardRatio\",\"type\":\"uint256\"}],\"internalType\":\"struct IexecLibCore_v5.Deal\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"viewPresigned\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"viewScore\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"viewTask\",\"outputs\":[{\"components\":[{\"internalType\":\"enum IexecLibCore_v5.TaskStatusEnum\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"dealid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"timeref\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"contributionDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealDeadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"finalDeadline\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"consensusValue\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"revealCounter\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"winnerCounter\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"contributors\",\"type\":\"address[]\"},{\"internalType\":\"bytes32\",\"name\":\"resultDigest\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"results\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"resultsTimestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"resultsCallback\",\"type\":\"bytes\"}],\"internalType\":\"struct IexecLibCore_v5.Task\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"withdrawEth\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"withdrawEthTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"withdrawTo\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"workerpool_stake_ratio\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"workerpoolregistry\",\"outputs\":[{\"internalType\":\"contract IRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@iexec/poco/contracts/IexecInterfaceToken.sol\":\"IexecInterfaceToken\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@iexec/poco/contracts/IexecInterfaceToken.sol\":{\"keccak256\":\"0x51e969def9716a696108fdb30d0f4bdf9108d048ecca2dbdcb86d722390d571d\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://1e9ec3ce4152503555c7bf058e8300bfff26795052d75ca04ee70c74e0201633\",\"dweb:/ipfs/QmZVSWU2vmTKuTT7qUED5EWuKDtW8u3LqAjJu7EiLePJQn\"]},\"@iexec/poco/contracts/libs/IexecLibCore_v5.sol\":{\"keccak256\":\"0x7fab9c16493884c64cdd31627c5d71389de785becf611b738343d75f7495471d\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://3e243796363e7d4cd249b432a2511cdb49759ed7d2e8bd73817f09ff60ff919c\",\"dweb:/ipfs/Qmeat95AtRviDFcJ3W3aBZmH51aHReX9RLnPZ3Gof3FnzW\"]},\"@iexec/poco/contracts/libs/IexecLibOrders_v5.sol\":{\"keccak256\":\"0x430eaa82ce8d43771c8a84af5113e31de79490d5b9d561ef90034bdc5a2a993b\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://65cb57ac25afa5b6e0811290866aace3b013fe67aa82c5e72b6bb00d50e9f28a\",\"dweb:/ipfs/QmTTNTASsnM8db9vTjkbxz5kiNtqVxNrjwxkvVEmoHuMj9\"]},\"@iexec/poco/contracts/modules/interfaces/ENSIntegration.sol\":{\"keccak256\":\"0x42793f9e2a355f6141d35e020ab171c765432d01c5985eaa8a4836a59b425d45\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://0d2d6682dd3cc397377d58c78333642a89d93ef8253fd078bedb98c42ffd823e\",\"dweb:/ipfs/QmRhHceCaNuvkhTQEE7wExfNJ9xLHasLiNrYmHJ6zGU5ye\"]},\"@iexec/poco/contracts/modules/interfaces/IOwnable.sol\":{\"keccak256\":\"0x0fc7a7e8b0369534d786936faa191e1009d52546663f41fb38a902417de86013\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://f4e507d9a833e7c9e02cb58b7abcc7042d13301f6f4a171ba6b18f29e49424b6\",\"dweb:/ipfs/QmbtStaZGTFtdHUXETXNhzRqYYHp1PWxNbnZbQiJwig9V2\"]},\"@iexec/poco/contracts/modules/interfaces/IexecAccessors.sol\":{\"keccak256\":\"0x8fd873d47d70a0627c3b8c0ad7d07d9f812c88bf579d6661accf773c6c7d573e\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://b3178bf6f47bcfca7514a1a88188c5243de38f3fb3d8608b5769bc9c1629009f\",\"dweb:/ipfs/QmUVYe5uu5NTSZywGVbasmsHL5y32v7F7w5iuXgyzpWCEj\"]},\"@iexec/poco/contracts/modules/interfaces/IexecCategoryManager.sol\":{\"keccak256\":\"0xefb1eae4d1089857cd7123cd1ed96495c591f9853335687591c72c8dd6ebaafc\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://bad0e1a8935d0319b7322d592fef1c2147486960375c53712ea789686b4367f2\",\"dweb:/ipfs/QmVxDamvZMxHGc6rvrgvUj6m3HxZFkr92WLpgQruYQzk7m\"]},\"@iexec/poco/contracts/modules/interfaces/IexecERC20.sol\":{\"keccak256\":\"0x48a3d6b87e89223fc9e3858342fabd761b55883cdbbcb8b95e0f87c92de758b0\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://e1e033e1509c4d7560b214f24301a1748033697c662d2ef2d25ff2e4b0dc1e0e\",\"dweb:/ipfs/Qmaa1XduJbBDEXn9kd1ZqWo8TBi5aiafUFpkFMXQqz3by7\"]},\"@iexec/poco/contracts/modules/interfaces/IexecEscrowToken.sol\":{\"keccak256\":\"0x35891a5e6747ea3f767461e96c0f83a65083266f2a408ca7d12d3f5f75a95b22\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://ab801e62787f65163dc730c778fb470dcf8ec2e294184b54905fc9dcd93d61c9\",\"dweb:/ipfs/QmcVsR97kjqQqaggUokYrKKRSFGbgzRpx9ki2wgJtj8rZc\"]},\"@iexec/poco/contracts/modules/interfaces/IexecEscrowTokenSwap.sol\":{\"keccak256\":\"0xdfe6663ac036a9501d278f7ba1e6144ad59aabee8c289b28c2d800663495ab0f\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://d6d75060a1464e965ede31661b229fde479df1a860def0e06096fb9067904bdb\",\"dweb:/ipfs/QmQKfbEdiWqXFxVzBgox9TaHzfshQtFRVg5gVu6AZRZx5x\"]},\"@iexec/poco/contracts/modules/interfaces/IexecMaintenance.sol\":{\"keccak256\":\"0x6f0c9c34b2ba94a932826c66c3189cc55a5237ed985ef7a969180ff6e8eb5618\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://11f45bf202dd54d9ceae73978b5a75ed05219ac83151df0cae87fb42efd6a6f0\",\"dweb:/ipfs/QmaZmEsGWJwbqyWgrMv87qxPpzUucukv9rm9VnZ4e5gLs7\"]},\"@iexec/poco/contracts/modules/interfaces/IexecOrderManagement.sol\":{\"keccak256\":\"0xb17cfba6292d0c9daf1b30d4e10b63ae42ab2618d07558a27783ca7aa753b9d8\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://a3f3328c7cfaecc2c5fd41b80d356faed3bb1e33ffdfa66dcf89a586d91186e3\",\"dweb:/ipfs/QmPJtetPtdWM6PbpQbyLLc6iDnjDa5e27KmAWnMZ4hyzzN\"]},\"@iexec/poco/contracts/modules/interfaces/IexecPoco.sol\":{\"keccak256\":\"0x78ac0f8ed8011f803580c2a6891b35b994292aed0e56758fe2d603f62ad7e3f3\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://e0a90dec762e2e404d2cd05c940a09625788309d17a124c35b832edab42991a6\",\"dweb:/ipfs/QmbKkX5xdJUc4zA154wULYqjJK79jv6m7ReX2PYY9EbRSV\"]},\"@iexec/poco/contracts/modules/interfaces/IexecRelay.sol\":{\"keccak256\":\"0x1447352e58f33bb27b3aba10b1a3d64ca3da8b5a603594d0e2e1709310bab0e6\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://4778960a020597d692580432717f68de4596b9215a7b9857193d1d6ba1e3c628\",\"dweb:/ipfs/QmeBALzFkK7c8HeQCCjbaUmcvwwrZ5CrpxdLBzaHV7BWWV\"]},\"@iexec/poco/contracts/modules/interfaces/IexecTokenSpender.sol\":{\"keccak256\":\"0xd914d8f8a6ebf78bdb876c2243e90c6bfffcf280e3760affa57afd7e618cd420\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://1807226c064ecf6819c50440342aaaab2833209193c6307f4ab42567d54d329c\",\"dweb:/ipfs/QmSBVCBo2GqWKqW98pw3mXwzXY7iupoUTnDytXAVyTi8T5\"]},\"@iexec/poco/contracts/registries/IRegistry.sol\":{\"keccak256\":\"0xc735f7764e312ea161551bc1a2749820928b1bf80c4aeb2f528a2f4a498078cd\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://7dbefb9d9bec9b56f694d2ee6dc0a44b341c027c0d392534b457867208f019b9\",\"dweb:/ipfs/QmSiSkhgUcAGscopDoRtGnHiWAbxNwBf9ZV8nnVYoWqZ8Z\"]},\"@iexec/solidity/contracts/ERC1154/IERC1154.sol\":{\"keccak256\":\"0x542ed19435ffdf4e5f1fbf57f87d26883e04cf96c21c69f7eb691e46c0f6ee5d\",\"urls\":[\"bzz-raw://d7744c331a362162870775cdea560f2db4da1ae6123ca05aba825a8850da37a0\",\"dweb:/ipfs/Qmf3FgPtiUiCA4Mnb9LpGrUciub9RwxniGSRPriRM4hVpc\"]},\"@openzeppelin/contracts/introspection/IERC165.sol\":{\"keccak256\":\"0xfa152b6e88a1dc50780e8f1580426dc23ad2e1e2c2f086a088adf206a202f453\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5127b264994adab88fae419b1c493efc5acd07134c19ee5c0397e50018291ebf\",\"dweb:/ipfs/QmWwJZVhvdmvUCdimbb6R2Jiu59zjPqm6XTMchM6LaEHAp\"]},\"@openzeppelin/contracts/token/ERC721/IERC721.sol\":{\"keccak256\":\"0xaf936da92f3a9a4f98b237323b5eb1d813fb86c4d07a184beba7027cf0509ba3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://aaa210e132e06975eb9f20060db6ba7dee78f6fce691a1c2489525584de521c0\",\"dweb:/ipfs/QmRwzi4nUW3UWBwhY5ik2xW3JZo9NMLN5UyGi1xPpMQYrh\"]},\"@openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol\":{\"keccak256\":\"0x3636662804cd8f474536b2875a9038a4c3fb91879f1bbff48af5c3f140fcd2f0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9fab8521263fa581544000cb57335a3f2e6bcdfbb5579d3ceaa5acf741c67c4f\",\"dweb:/ipfs/QmZfXnMom7JSNtfyie5yGPN1SUC4SmHbz4ScVBH88URmA7\"]},\"@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol\":{\"keccak256\":\"0x8a3c5c449d4b7cd76513ed6995f4b86e4a86f222c770f8442f5fc128ce29b4d2\",\"urls\":[\"bzz-raw://1df63ca373dafae3bd0ee7fe70f890a1dc7c45ed869c01de68413e0e97ff9deb\",\"dweb:/ipfs/QmefJgEYGUL8KX7kQKYTrDweF8GB7yjy3nw5Bmqzryg7PG\"]},\"@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol\":{\"keccak256\":\"0x744e30c133bd0f7ca9e7163433cf6d72f45c6bb1508c2c9c02f1a6db796ae59d\",\"urls\":[\"bzz-raw://9bf2f4454ad63d4cff03a0630e787d9e8a9deed80aec89682cd8ad6379d9ef8c\",\"dweb:/ipfs/Qme51hQNR2wpax7ooUadhtqLtXm8ffeVVYyubLkTT4wMCG\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: Apache-2.0\n\n/******************************************************************************\n * Copyright 2020 IEXEC BLOCKCHAIN TECH                                       *\n *                                                                            *\n * Licensed under the Apache License, Version 2.0 (the \"License\");            *\n * you may not use this file except in compliance with the License.           *\n * You may obtain a copy of the License at                                    *\n *                                                                            *\n *     http://www.apache.org/licenses/LICENSE-2.0                             *\n *                                                                            *\n * Unless required by applicable law or agreed to in writing, software        *\n * distributed under the License is distributed on an \"AS IS\" BASIS,          *\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *\n * See the License for the specific language governing permissions and        *\n * limitations under the License.                                             *\n ******************************************************************************/\n\npragma solidity ^0.6.0;\npragma experimental ABIEncoderV2;\n\nimport \"./modules/interfaces/IOwnable.sol\";\nimport \"./modules/interfaces/IexecAccessors.sol\";\nimport \"./modules/interfaces/IexecCategoryManager.sol\";\nimport \"./modules/interfaces/IexecERC20.sol\";\nimport \"./modules/interfaces/IexecEscrowToken.sol\";\nimport \"./modules/interfaces/IexecEscrowTokenSwap.sol\";\nimport \"./modules/interfaces/IexecMaintenance.sol\";\nimport \"./modules/interfaces/IexecOrderManagement.sol\";\nimport \"./modules/interfaces/IexecPoco.sol\";\nimport \"./modules/interfaces/IexecRelay.sol\";\nimport \"./modules/interfaces/IexecTokenSpender.sol\";\nimport \"./modules/interfaces/ENSIntegration.sol\";\n\n\ninterface IexecInterfaceToken is IOwnable, IexecAccessors, IexecCategoryManager, IexecERC20, IexecEscrowToken, IexecEscrowTokenSwap, IexecMaintenance, IexecOrderManagement, IexecPoco, IexecRelay, IexecTokenSpender, ENSIntegration\n{\n\treceive()  external override(IexecEscrowToken, IexecEscrowTokenSwap) payable;\n\tfallback() external override(IexecEscrowToken, IexecEscrowTokenSwap) payable;\n}\n",
+  "sourcePath": "@iexec/poco/contracts/IexecInterfaceToken.sol",
+  "ast": {
+    "absolutePath": "@iexec/poco/contracts/IexecInterfaceToken.sol",
+    "exportedSymbols": {
+      "IexecInterfaceToken": [
+        665
+      ]
+    },
+    "id": 666,
+    "license": "Apache-2.0",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 615,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "1242:23:4"
+      },
+      {
+        "id": 616,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "1266:33:4"
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IOwnable.sol",
+        "file": "./modules/interfaces/IOwnable.sol",
+        "id": 617,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1249,
+        "src": "1301:43:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecAccessors.sol",
+        "file": "./modules/interfaces/IexecAccessors.sol",
+        "id": 618,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1439,
+        "src": "1345:49:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecCategoryManager.sol",
+        "file": "./modules/interfaces/IexecCategoryManager.sol",
+        "id": 619,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1464,
+        "src": "1395:55:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecERC20.sol",
+        "file": "./modules/interfaces/IexecERC20.sol",
+        "id": 620,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1542,
+        "src": "1451:45:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecEscrowToken.sol",
+        "file": "./modules/interfaces/IexecEscrowToken.sol",
+        "id": 621,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1600,
+        "src": "1497:51:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecEscrowTokenSwap.sol",
+        "file": "./modules/interfaces/IexecEscrowTokenSwap.sol",
+        "id": 622,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1718,
+        "src": "1549:55:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecMaintenance.sol",
+        "file": "./modules/interfaces/IexecMaintenance.sol",
+        "id": 623,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1765,
+        "src": "1605:51:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecOrderManagement.sol",
+        "file": "./modules/interfaces/IexecOrderManagement.sol",
+        "id": 624,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1822,
+        "src": "1657:55:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecPoco.sol",
+        "file": "./modules/interfaces/IexecPoco.sol",
+        "id": 625,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 2070,
+        "src": "1713:44:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecRelay.sol",
+        "file": "./modules/interfaces/IexecRelay.sol",
+        "id": 626,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 2111,
+        "src": "1758:45:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecTokenSpender.sol",
+        "file": "./modules/interfaces/IexecTokenSpender.sol",
+        "id": 627,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 2128,
+        "src": "1804:52:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@iexec/poco/contracts/modules/interfaces/ENSIntegration.sol",
+        "file": "./modules/interfaces/ENSIntegration.sol",
+        "id": 628,
+        "nodeType": "ImportDirective",
+        "scope": 666,
+        "sourceUnit": 1226,
+        "src": "1857:49:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 629,
+              "name": "IOwnable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1248,
+              "src": "1942:8:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IOwnable_$1248",
+                "typeString": "contract IOwnable"
+              }
+            },
+            "id": 630,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1942:8:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 631,
+              "name": "IexecAccessors",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1438,
+              "src": "1952:14:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecAccessors_$1438",
+                "typeString": "contract IexecAccessors"
+              }
+            },
+            "id": 632,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1952:14:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 633,
+              "name": "IexecCategoryManager",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1463,
+              "src": "1968:20:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecCategoryManager_$1463",
+                "typeString": "contract IexecCategoryManager"
+              }
+            },
+            "id": 634,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1968:20:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 635,
+              "name": "IexecERC20",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1541,
+              "src": "1990:10:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecERC20_$1541",
+                "typeString": "contract IexecERC20"
+              }
+            },
+            "id": 636,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1990:10:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 637,
+              "name": "IexecEscrowToken",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1599,
+              "src": "2002:16:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecEscrowToken_$1599",
+                "typeString": "contract IexecEscrowToken"
+              }
+            },
+            "id": 638,
+            "nodeType": "InheritanceSpecifier",
+            "src": "2002:16:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 639,
+              "name": "IexecEscrowTokenSwap",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1717,
+              "src": "2020:20:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecEscrowTokenSwap_$1717",
+                "typeString": "contract IexecEscrowTokenSwap"
+              }
+            },
+            "id": 640,
+            "nodeType": "InheritanceSpecifier",
+            "src": "2020:20:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 641,
+              "name": "IexecMaintenance",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1764,
+              "src": "2042:16:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecMaintenance_$1764",
+                "typeString": "contract IexecMaintenance"
+              }
+            },
+            "id": 642,
+            "nodeType": "InheritanceSpecifier",
+            "src": "2042:16:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 643,
+              "name": "IexecOrderManagement",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1821,
+              "src": "2060:20:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecOrderManagement_$1821",
+                "typeString": "contract IexecOrderManagement"
+              }
+            },
+            "id": 644,
+            "nodeType": "InheritanceSpecifier",
+            "src": "2060:20:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 645,
+              "name": "IexecPoco",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2069,
+              "src": "2082:9:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecPoco_$2069",
+                "typeString": "contract IexecPoco"
+              }
+            },
+            "id": 646,
+            "nodeType": "InheritanceSpecifier",
+            "src": "2082:9:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 647,
+              "name": "IexecRelay",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2110,
+              "src": "2093:10:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecRelay_$2110",
+                "typeString": "contract IexecRelay"
+              }
+            },
+            "id": 648,
+            "nodeType": "InheritanceSpecifier",
+            "src": "2093:10:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 649,
+              "name": "IexecTokenSpender",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2127,
+              "src": "2105:17:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecTokenSpender_$2127",
+                "typeString": "contract IexecTokenSpender"
+              }
+            },
+            "id": 650,
+            "nodeType": "InheritanceSpecifier",
+            "src": "2105:17:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 651,
+              "name": "ENSIntegration",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1225,
+              "src": "2124:14:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ENSIntegration_$1225",
+                "typeString": "contract ENSIntegration"
+              }
+            },
+            "id": 652,
+            "nodeType": "InheritanceSpecifier",
+            "src": "2124:14:4"
+          }
+        ],
+        "contractDependencies": [
+          1225,
+          1248,
+          1438,
+          1463,
+          1541,
+          1599,
+          1717,
+          1764,
+          1821,
+          2069,
+          2110,
+          2127,
+          2159
+        ],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 665,
+        "linearizedBaseContracts": [
+          665,
+          1225,
+          2127,
+          2110,
+          2069,
+          1821,
+          1764,
+          1717,
+          1599,
+          1541,
+          1463,
+          1438,
+          2159,
+          1248
+        ],
+        "name": "IexecInterfaceToken",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "baseFunctions": [
+              1547,
+              1607
+            ],
+            "body": null,
+            "documentation": null,
+            "id": 658,
+            "implemented": false,
+            "kind": "receive",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 656,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [
+                {
+                  "contractScope": null,
+                  "id": 654,
+                  "name": "IexecEscrowToken",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1599,
+                  "src": "2171:16:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IexecEscrowToken_$1599",
+                    "typeString": "contract IexecEscrowToken"
+                  }
+                },
+                {
+                  "contractScope": null,
+                  "id": 655,
+                  "name": "IexecEscrowTokenSwap",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1717,
+                  "src": "2189:20:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IexecEscrowTokenSwap_$1717",
+                    "typeString": "contract IexecEscrowTokenSwap"
+                  }
+                }
+              ],
+              "src": "2162:48:4"
+            },
+            "parameters": {
+              "id": 653,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2149:2:4"
+            },
+            "returnParameters": {
+              "id": 657,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2218:0:4"
+            },
+            "scope": 665,
+            "src": "2142:77:4",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              1550,
+              1610
+            ],
+            "body": null,
+            "documentation": null,
+            "id": 664,
+            "implemented": false,
+            "kind": "fallback",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 662,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [
+                {
+                  "contractScope": null,
+                  "id": 660,
+                  "name": "IexecEscrowToken",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1599,
+                  "src": "2250:16:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IexecEscrowToken_$1599",
+                    "typeString": "contract IexecEscrowToken"
+                  }
+                },
+                {
+                  "contractScope": null,
+                  "id": 661,
+                  "name": "IexecEscrowTokenSwap",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1717,
+                  "src": "2268:20:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IexecEscrowTokenSwap_$1717",
+                    "typeString": "contract IexecEscrowTokenSwap"
+                  }
+                }
+              ],
+              "src": "2241:48:4"
+            },
+            "parameters": {
+              "id": 659,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2229:2:4"
+            },
+            "returnParameters": {
+              "id": 663,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2297:0:4"
+            },
+            "scope": 665,
+            "src": "2221:77:4",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 666,
+        "src": "1909:391:4"
+      }
+    ],
+    "src": "1242:1059:4"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "@iexec/poco/contracts/IexecInterfaceToken.sol",
+      "exportedSymbols": {
+        "IexecInterfaceToken": [
+          665
+        ]
+      },
+      "license": "Apache-2.0"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.6",
+            ".0"
+          ]
+        },
+        "id": 615,
+        "name": "PragmaDirective",
+        "src": "1242:23:4"
+      },
+      {
+        "attributes": {
+          "literals": [
+            "experimental",
+            "ABIEncoderV2"
+          ]
+        },
+        "id": 616,
+        "name": "PragmaDirective",
+        "src": "1266:33:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1249,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IOwnable.sol",
+          "file": "./modules/interfaces/IOwnable.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 617,
+        "name": "ImportDirective",
+        "src": "1301:43:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1439,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecAccessors.sol",
+          "file": "./modules/interfaces/IexecAccessors.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 618,
+        "name": "ImportDirective",
+        "src": "1345:49:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1464,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecCategoryManager.sol",
+          "file": "./modules/interfaces/IexecCategoryManager.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 619,
+        "name": "ImportDirective",
+        "src": "1395:55:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1542,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecERC20.sol",
+          "file": "./modules/interfaces/IexecERC20.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 620,
+        "name": "ImportDirective",
+        "src": "1451:45:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1600,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecEscrowToken.sol",
+          "file": "./modules/interfaces/IexecEscrowToken.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 621,
+        "name": "ImportDirective",
+        "src": "1497:51:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1718,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecEscrowTokenSwap.sol",
+          "file": "./modules/interfaces/IexecEscrowTokenSwap.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 622,
+        "name": "ImportDirective",
+        "src": "1549:55:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1765,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecMaintenance.sol",
+          "file": "./modules/interfaces/IexecMaintenance.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 623,
+        "name": "ImportDirective",
+        "src": "1605:51:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1822,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecOrderManagement.sol",
+          "file": "./modules/interfaces/IexecOrderManagement.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 624,
+        "name": "ImportDirective",
+        "src": "1657:55:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 2070,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecPoco.sol",
+          "file": "./modules/interfaces/IexecPoco.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 625,
+        "name": "ImportDirective",
+        "src": "1713:44:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 2111,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecRelay.sol",
+          "file": "./modules/interfaces/IexecRelay.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 626,
+        "name": "ImportDirective",
+        "src": "1758:45:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 2128,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/IexecTokenSpender.sol",
+          "file": "./modules/interfaces/IexecTokenSpender.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 627,
+        "name": "ImportDirective",
+        "src": "1804:52:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1226,
+          "absolutePath": "@iexec/poco/contracts/modules/interfaces/ENSIntegration.sol",
+          "file": "./modules/interfaces/ENSIntegration.sol",
+          "scope": 666,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 628,
+        "name": "ImportDirective",
+        "src": "1857:49:4"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "contractDependencies": [
+            1225,
+            1248,
+            1438,
+            1463,
+            1541,
+            1599,
+            1717,
+            1764,
+            1821,
+            2069,
+            2110,
+            2127,
+            2159
+          ],
+          "contractKind": "interface",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            665,
+            1225,
+            2127,
+            2110,
+            2069,
+            1821,
+            1764,
+            1717,
+            1599,
+            1541,
+            1463,
+            1438,
+            2159,
+            1248
+          ],
+          "name": "IexecInterfaceToken",
+          "scope": 666
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IOwnable",
+                  "referencedDeclaration": 1248,
+                  "type": "contract IOwnable"
+                },
+                "id": 629,
+                "name": "UserDefinedTypeName",
+                "src": "1942:8:4"
+              }
+            ],
+            "id": 630,
+            "name": "InheritanceSpecifier",
+            "src": "1942:8:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecAccessors",
+                  "referencedDeclaration": 1438,
+                  "type": "contract IexecAccessors"
+                },
+                "id": 631,
+                "name": "UserDefinedTypeName",
+                "src": "1952:14:4"
+              }
+            ],
+            "id": 632,
+            "name": "InheritanceSpecifier",
+            "src": "1952:14:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecCategoryManager",
+                  "referencedDeclaration": 1463,
+                  "type": "contract IexecCategoryManager"
+                },
+                "id": 633,
+                "name": "UserDefinedTypeName",
+                "src": "1968:20:4"
+              }
+            ],
+            "id": 634,
+            "name": "InheritanceSpecifier",
+            "src": "1968:20:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecERC20",
+                  "referencedDeclaration": 1541,
+                  "type": "contract IexecERC20"
+                },
+                "id": 635,
+                "name": "UserDefinedTypeName",
+                "src": "1990:10:4"
+              }
+            ],
+            "id": 636,
+            "name": "InheritanceSpecifier",
+            "src": "1990:10:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecEscrowToken",
+                  "referencedDeclaration": 1599,
+                  "type": "contract IexecEscrowToken"
+                },
+                "id": 637,
+                "name": "UserDefinedTypeName",
+                "src": "2002:16:4"
+              }
+            ],
+            "id": 638,
+            "name": "InheritanceSpecifier",
+            "src": "2002:16:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecEscrowTokenSwap",
+                  "referencedDeclaration": 1717,
+                  "type": "contract IexecEscrowTokenSwap"
+                },
+                "id": 639,
+                "name": "UserDefinedTypeName",
+                "src": "2020:20:4"
+              }
+            ],
+            "id": 640,
+            "name": "InheritanceSpecifier",
+            "src": "2020:20:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecMaintenance",
+                  "referencedDeclaration": 1764,
+                  "type": "contract IexecMaintenance"
+                },
+                "id": 641,
+                "name": "UserDefinedTypeName",
+                "src": "2042:16:4"
+              }
+            ],
+            "id": 642,
+            "name": "InheritanceSpecifier",
+            "src": "2042:16:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecOrderManagement",
+                  "referencedDeclaration": 1821,
+                  "type": "contract IexecOrderManagement"
+                },
+                "id": 643,
+                "name": "UserDefinedTypeName",
+                "src": "2060:20:4"
+              }
+            ],
+            "id": 644,
+            "name": "InheritanceSpecifier",
+            "src": "2060:20:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecPoco",
+                  "referencedDeclaration": 2069,
+                  "type": "contract IexecPoco"
+                },
+                "id": 645,
+                "name": "UserDefinedTypeName",
+                "src": "2082:9:4"
+              }
+            ],
+            "id": 646,
+            "name": "InheritanceSpecifier",
+            "src": "2082:9:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecRelay",
+                  "referencedDeclaration": 2110,
+                  "type": "contract IexecRelay"
+                },
+                "id": 647,
+                "name": "UserDefinedTypeName",
+                "src": "2093:10:4"
+              }
+            ],
+            "id": 648,
+            "name": "InheritanceSpecifier",
+            "src": "2093:10:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IexecTokenSpender",
+                  "referencedDeclaration": 2127,
+                  "type": "contract IexecTokenSpender"
+                },
+                "id": 649,
+                "name": "UserDefinedTypeName",
+                "src": "2105:17:4"
+              }
+            ],
+            "id": 650,
+            "name": "InheritanceSpecifier",
+            "src": "2105:17:4"
+          },
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "ENSIntegration",
+                  "referencedDeclaration": 1225,
+                  "type": "contract ENSIntegration"
+                },
+                "id": 651,
+                "name": "UserDefinedTypeName",
+                "src": "2124:14:4"
+              }
+            ],
+            "id": 652,
+            "name": "InheritanceSpecifier",
+            "src": "2124:14:4"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                1547,
+                1607
+              ],
+              "body": null,
+              "documentation": null,
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "receive",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "scope": 665,
+              "stateMutability": "payable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "IexecEscrowToken",
+                      "referencedDeclaration": 1599,
+                      "type": "contract IexecEscrowToken"
+                    },
+                    "id": 654,
+                    "name": "UserDefinedTypeName",
+                    "src": "2171:16:4"
+                  },
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "IexecEscrowTokenSwap",
+                      "referencedDeclaration": 1717,
+                      "type": "contract IexecEscrowTokenSwap"
+                    },
+                    "id": 655,
+                    "name": "UserDefinedTypeName",
+                    "src": "2189:20:4"
+                  }
+                ],
+                "id": 656,
+                "name": "OverrideSpecifier",
+                "src": "2162:48:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 653,
+                "name": "ParameterList",
+                "src": "2149:2:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 657,
+                "name": "ParameterList",
+                "src": "2218:0:4"
+              }
+            ],
+            "id": 658,
+            "name": "FunctionDefinition",
+            "src": "2142:77:4"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                1550,
+                1610
+              ],
+              "body": null,
+              "documentation": null,
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "fallback",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "scope": 665,
+              "stateMutability": "payable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "IexecEscrowToken",
+                      "referencedDeclaration": 1599,
+                      "type": "contract IexecEscrowToken"
+                    },
+                    "id": 660,
+                    "name": "UserDefinedTypeName",
+                    "src": "2250:16:4"
+                  },
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "IexecEscrowTokenSwap",
+                      "referencedDeclaration": 1717,
+                      "type": "contract IexecEscrowTokenSwap"
+                    },
+                    "id": 661,
+                    "name": "UserDefinedTypeName",
+                    "src": "2268:20:4"
+                  }
+                ],
+                "id": 662,
+                "name": "OverrideSpecifier",
+                "src": "2241:48:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 659,
+                "name": "ParameterList",
+                "src": "2229:2:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 663,
+                "name": "ParameterList",
+                "src": "2297:0:4"
+              }
+            ],
+            "id": 664,
+            "name": "FunctionDefinition",
+            "src": "2221:77:4"
+          }
+        ],
+        "id": 665,
+        "name": "ContractDefinition",
+        "src": "1909:391:4"
+      }
+    ],
+    "id": 666,
+    "name": "SourceUnit",
+    "src": "1242:1059:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.0",
+  "updatedAt": "2021-05-07T09:06:23.800Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

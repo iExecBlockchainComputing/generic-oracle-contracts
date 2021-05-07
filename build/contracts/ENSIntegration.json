@@ -1,0 +1,350 @@
+{
+  "contractName": "ENSIntegration",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "ens",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "setName",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"ens\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"setName\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@iexec/poco/contracts/modules/interfaces/ENSIntegration.sol\":\"ENSIntegration\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@iexec/poco/contracts/modules/interfaces/ENSIntegration.sol\":{\"keccak256\":\"0x42793f9e2a355f6141d35e020ab171c765432d01c5985eaa8a4836a59b425d45\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://0d2d6682dd3cc397377d58c78333642a89d93ef8253fd078bedb98c42ffd823e\",\"dweb:/ipfs/QmRhHceCaNuvkhTQEE7wExfNJ9xLHasLiNrYmHJ6zGU5ye\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: Apache-2.0\n\n/******************************************************************************\n * Copyright 2020 IEXEC BLOCKCHAIN TECH                                       *\n *                                                                            *\n * Licensed under the Apache License, Version 2.0 (the \"License\");            *\n * you may not use this file except in compliance with the License.           *\n * You may obtain a copy of the License at                                    *\n *                                                                            *\n *     http://www.apache.org/licenses/LICENSE-2.0                             *\n *                                                                            *\n * Unless required by applicable law or agreed to in writing, software        *\n * distributed under the License is distributed on an \"AS IS\" BASIS,          *\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *\n * See the License for the specific language governing permissions and        *\n * limitations under the License.                                             *\n ******************************************************************************/\n\npragma solidity ^0.6.0;\npragma experimental ABIEncoderV2;\n\n\ninterface ENSIntegration\n{\n\tfunction setName(address ens, string calldata name) external;\n}\n",
+  "sourcePath": "@iexec/poco/contracts/modules/interfaces/ENSIntegration.sol",
+  "ast": {
+    "absolutePath": "@iexec/poco/contracts/modules/interfaces/ENSIntegration.sol",
+    "exportedSymbols": {
+      "ENSIntegration": [
+        1225
+      ]
+    },
+    "id": 1226,
+    "license": "Apache-2.0",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1216,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "1242:23:7"
+      },
+      {
+        "id": 1217,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "1266:33:7"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1225,
+        "linearizedBaseContracts": [
+          1225
+        ],
+        "name": "ENSIntegration",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "3121db1c",
+            "id": 1224,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setName",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 1222,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1219,
+                  "mutability": "mutable",
+                  "name": "ens",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 1224,
+                  "src": "1347:11:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1218,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1347:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1221,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 1224,
+                  "src": "1360:20:7",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1220,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1360:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1346:35:7"
+            },
+            "returnParameters": {
+              "id": 1223,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1390:0:7"
+            },
+            "scope": 1225,
+            "src": "1330:61:7",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1226,
+        "src": "1302:91:7"
+      }
+    ],
+    "src": "1242:152:7"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "@iexec/poco/contracts/modules/interfaces/ENSIntegration.sol",
+      "exportedSymbols": {
+        "ENSIntegration": [
+          1225
+        ]
+      },
+      "license": "Apache-2.0"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.6",
+            ".0"
+          ]
+        },
+        "id": 1216,
+        "name": "PragmaDirective",
+        "src": "1242:23:7"
+      },
+      {
+        "attributes": {
+          "literals": [
+            "experimental",
+            "ABIEncoderV2"
+          ]
+        },
+        "id": 1217,
+        "name": "PragmaDirective",
+        "src": "1266:33:7"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            1225
+          ],
+          "name": "ENSIntegration",
+          "scope": 1226
+        },
+        "children": [
+          {
+            "attributes": {
+              "body": null,
+              "documentation": null,
+              "functionSelector": "3121db1c",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "setName",
+              "overrides": null,
+              "scope": 1225,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "ens",
+                      "overrides": null,
+                      "scope": 1224,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 1218,
+                        "name": "ElementaryTypeName",
+                        "src": "1347:7:7"
+                      }
+                    ],
+                    "id": 1219,
+                    "name": "VariableDeclaration",
+                    "src": "1347:11:7"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "name",
+                      "overrides": null,
+                      "scope": 1224,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 1220,
+                        "name": "ElementaryTypeName",
+                        "src": "1360:6:7"
+                      }
+                    ],
+                    "id": 1221,
+                    "name": "VariableDeclaration",
+                    "src": "1360:20:7"
+                  }
+                ],
+                "id": 1222,
+                "name": "ParameterList",
+                "src": "1346:35:7"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1223,
+                "name": "ParameterList",
+                "src": "1390:0:7"
+              }
+            ],
+            "id": 1224,
+            "name": "FunctionDefinition",
+            "src": "1330:61:7"
+          }
+        ],
+        "id": 1225,
+        "name": "ContractDefinition",
+        "src": "1302:91:7"
+      }
+    ],
+    "id": 1226,
+    "name": "SourceUnit",
+    "src": "1242:152:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.0",
+  "updatedAt": "2021-05-07T09:06:23.815Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
