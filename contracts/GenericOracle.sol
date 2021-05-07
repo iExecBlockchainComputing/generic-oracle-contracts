@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /******************************************************************************
- * Copyright 2020 IEXEC BLOCKCHAIN TECH                                       *
+ * Copyright 2021 IEXEC BLOCKCHAIN TECH                                       *
  *                                                                            *
  * Licensed under the Apache License, Version 2.0 (the "License");            *
  * you may not use this file except in compliance with the License.           *
@@ -21,72 +21,80 @@ pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
-import "@iexec/solidity/contracts/ERC2362/IERC2362.sol";
-import "../IexecDoracle.sol";
+import "@iexec/doracle/contracts//IexecDoracle.sol";
 
+contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
+    // Data storage
+    struct TimedRawValue {
+        bytes32 value;
+        uint256 date;
+    }
 
-contract PriceOracle is IexecDoracle, Ownable, IOracleConsumer, IERC2362
-{
-	// Data storage
-	struct TimedValue
-	{
-		bytes32 oracleCallID;
-		uint256 date;
-		int256  value;
-		string  details;
-	}
+    mapping(bytes32 => TimedValue) public values;
 
-	mapping(bytes32 => TimedValue) public values;
+    // Event
+    event ValueUpdated(
+        bytes32 indexed id,
+        bytes32 indexed oracleCallID,
+        uint256 date,
+        int256 value
+    );
 
-	// Event
-	event ValueUpdated(bytes32 indexed id, bytes32 indexed oracleCallID, uint256 date, int256 value);
+    // Use _iexecHubAddr to force use of custom iexechub, leave 0x0 for autodetect
+    constructor(address _iexecHubAddr) public IexecDoracle(_iexecHubAddr) {}
 
-	// Use _iexecHubAddr to force use of custom iexechub, leave 0x0 for autodetect
-	constructor(address _iexecHubAddr)
-	public IexecDoracle(_iexecHubAddr)
-	{}
+    function updateEnv(
+        address _authorizedApp,
+        address _authorizedDataset,
+        address _authorizedWorkerpool,
+        bytes32 _requiredtag,
+        uint256 _requiredtrust
+    ) public onlyOwner {
+        _iexecDoracleUpdateSettings(
+            _authorizedApp,
+            _authorizedDataset,
+            _authorizedWorkerpool,
+            _requiredtag,
+            _requiredtrust
+        );
+    }
 
-	function updateEnv(
-	  address _authorizedApp
-	, address _authorizedDataset
-	, address _authorizedWorkerpool
-	, bytes32 _requiredtag
-	, uint256 _requiredtrust
-	)
-	public onlyOwner
-	{
-		_iexecDoracleUpdateSettings(_authorizedApp, _authorizedDataset, _authorizedWorkerpool, _requiredtag, _requiredtrust);
-	}
+    // ERC1154 - Callback processing
+    function receiveResult(bytes32 _callID, bytes calldata) external override {
+        // Parse results
+        (bytes32 id, bytes32 value) =
+            abi.decode(
+                _iexecDoracleGetVerifiedResult(_callID),
+                (bytes32, bytes32)
+            );
 
-	// ERC1154 - Callback processing
-	function receiveResult(bytes32 _callID, bytes calldata)
-	external override
-	{
-		// Parse results
-		(uint256 date, string memory details, int256 value) = abi.decode(_iexecDoracleGetVerifiedResult(_callID), (uint256, string, int256));
+        values[id].date = now;
+        values[id].value = value;
 
-		// Process results
-		bytes32 id = keccak256(bytes(details));
-		require(values[id].date < date, "new-value-is-too-old");
-		values[id].oracleCallID = _callID;
-		values[id].date         = date;
-		values[id].value        = value;
-		values[id].details      = details;
+        emit ValueUpdated(id, _callID, date, value);
+    }
 
-		emit ValueUpdated(id, _callID, date, value);
-	}
+    function getString(bytes32 _oracleId)
+        public
+        view
+        returns (string memory stringValue, uint256 date)
+    {
+        return (abi.decode(values[_oracleId], (string)), values[_oracleId].date);
+    }
 
-	// ERC2362 - ADO result viewer
-	function valueFor(bytes32 _id)
-	external override view returns (int256, uint256, uint256)
-	{
-		if (values[_id].oracleCallID == bytes32(0))
-		{
-			return (0, 0, 404);
-		}
-		else
-		{
-			return (values[_id].value, values[_id].date, 200);
-		}
-	}
+    function getRaw(bytes32 _oracleId)
+        public
+        view
+        returns (bytes memory bytesValue, uint256 date)
+    {
+        return (values[_oracleId], values[_oracleId].date);
+    }
+
+    function getInt(bytes32 _oracleId) public view returns (int256 intValue, uint256 date) {
+        return (abi.decode(values[_oracleId], (int256)), values[_oracleId].date);
+    }
+
+    function getBool(bytes32 _oracleId) public view returns (bool boolValue, uint256 date) {
+        return (abi.decode(values[_oracleId], (bool)), values[_oracleId].date);
+    }
 }
