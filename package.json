@@ -7,7 +7,10 @@
     "test": "test"
   },
   "dependencies": {
-    "@iexec/doracle": "^5.2.1-2"
+    "@iexec/doracle": "^5.2.1-2",
+    "@iexec/interface": "5.2.1",
+    "@iexec/solidity": "0.1.0",
+    "@openzeppelin/contracts": "3.4.0"
   },
   "devDependencies": {},
   "scripts": {
