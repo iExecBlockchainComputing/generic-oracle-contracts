@@ -62,16 +62,16 @@ contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
     // ERC1154 - Callback processing
     function receiveResult(bytes32 _callID, bytes calldata) external override {
         // Parse results
-        (bytes32 id, bytes memory value) =
+        (bytes32 id, uint date, bytes memory value) =
             abi.decode(
                 _iexecDoracleGetVerifiedResult(_callID),
-                (bytes32, bytes)
+                (bytes32, uint, bytes)
             );
 
-        values[id].date = now;
+        values[id].date = date;
         values[id].value = value;
 
-        emit ValueUpdated(id, _callID, now, value);
+        emit ValueUpdated(id, _callID, date, value);
     }
 
     function getString(bytes32 _oracleId)

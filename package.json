@@ -12,9 +12,8 @@
     "@iexec/solidity": "0.1.0",
     "@openzeppelin/contracts": "3.4.0"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "truffle-flattener": "^1.5.0"
   },
   "keywords": [
     "iexec",
