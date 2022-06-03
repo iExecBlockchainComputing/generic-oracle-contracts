@@ -21,6 +21,8 @@ pragma experimental ABIEncoderV2;
 
 import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
 
+import "hardhat/console.sol";
+
 contract ClassicOracle is IOracleConsumer {
     // Data storage
     struct TimedRawValue {
@@ -40,16 +42,20 @@ contract ClassicOracle is IOracleConsumer {
 
     constructor() public {}
 
-
     // ERC1154 - Callback processing
-    function receiveResult(bytes32 _callID, bytes memory callback) external override {
+    // TODO: Add ACL
+    function receiveResult(bytes32 _callID, bytes memory callback)
+        external
+        override
+    {
         // Parse results
-        (bytes32 id, uint date, bytes memory value) =
-            abi.decode(callback,(bytes32, uint, bytes));
+        (bytes32 id, uint256 date, bytes memory value) = abi.decode(
+            callback,
+            (bytes32, uint256, bytes)
+        );
 
-        values[id].date = date;
+        values[id].date = date; //What if date is older?
         values[id].value = value;
-
         emit ValueUpdated(id, _callID, date, value);
     }
 
