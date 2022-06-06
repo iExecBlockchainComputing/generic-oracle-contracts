@@ -5,7 +5,8 @@ async function main() {
     console.log("Deploying contracts with the account:", deployer.address);
 
     const ClassicOracle = await ethers.getContractFactory("ClassicOracle");
-    const classicOracle = await ClassicOracle.deploy();
+    const authorizedReporter = '0x767A2D69D7278F200ae1F79a00Ac2CaE299dD784'
+    const classicOracle = await ClassicOracle.deploy(authorizedReporter);
     await classicOracle.deployed();
     console.log("ClassicOracle deployed to:", classicOracle.address);
 }

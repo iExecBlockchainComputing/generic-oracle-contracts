@@ -19,11 +19,15 @@
 pragma solidity ^0.6.12;
 pragma experimental ABIEncoderV2;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
 
 import "hardhat/console.sol";
 
-contract ClassicOracle is IOracleConsumer {
+contract ClassicOracle is IOracleConsumer, Ownable {
+    // Authorized address to report result
+    address public authorizedReporter;
+
     // Data storage
     struct TimedRawValue {
         bytes value;
@@ -40,13 +44,26 @@ contract ClassicOracle is IOracleConsumer {
         bytes value
     );
 
-    constructor() public {}
+    constructor(address _authorizedReporter) public {
+        if (_authorizedReporter != address(0)) {
+            authorizedReporter = _authorizedReporter;
+            console.log("Authorized reporter (custom): %s", authorizedReporter);
+        } else {
+            authorizedReporter = owner();
+            console.log("Authorized reporter (owner): %s", authorizedReporter);
+        }
+    }
+
+    modifier onlyAuthorizedReporter() {
+        require(msg.sender == authorizedReporter, "Reporter is not authorized");
+        _;
+    }
 
     // ERC1154 - Callback processing
-    // TODO: Add ACL
     function receiveResult(bytes32 _callID, bytes memory callback)
         external
         override
+        onlyAuthorizedReporter
     {
         // Parse results
         (bytes32 id, uint256 date, bytes memory value) = abi.decode(
