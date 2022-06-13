@@ -4,6 +4,7 @@ import "@typechain/hardhat";
 import "@nomiclabs/hardhat-etherscan";
 import { config as dotEnvConfig } from "dotenv";
 import { HardhatUserConfig } from "hardhat/types";
+import "solidity-coverage"
 
 dotEnvConfig();
 var PRIVATE_KEY: string = process.env.PRIVATE_KEY || "0x0000000000000000000000000000000000000000000000000000000000000000"
