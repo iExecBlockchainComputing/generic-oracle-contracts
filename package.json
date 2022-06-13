@@ -1,7 +1,10 @@
 {
-  "name": "generic-oracle-contracts",
-  "version": "1.0.0",
+  "name": "@jeremyjames/generic-oracle-contracts",
+  "version": "1.1.0-0",
   "description": "Contracts for Iexec generic DOracle",
+  "files": [
+    "/typechain"
+  ],
   "main": "hardhat.config.ts",
   "directories": {
     "test": "test"
@@ -24,8 +27,17 @@
     "chai": "^4.3.6",
     "dotenv": "^16.0.0",
     "hardhat": "^2.9.3",
+    "solidity-coverage": "^0.7.21",
     "ts-node": "^10.6.0",
     "typechain": "^7.0.0",
     "typescript": "^4.6.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iExecBlockchainComputing/generic-oracle-contracts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iExecBlockchainComputing/generic-oracle-contracts/issues"
+  },
+  "homepage": "https://github.com/iExecBlockchainComputing/generic-oracle-contracts#readme"
 }
