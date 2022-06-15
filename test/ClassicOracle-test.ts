@@ -19,7 +19,7 @@ describe("ClassicOracle", function () {
         classicOracle = await ClassicOracleFactory.deploy(accountTwo.address)
     });
 
-    it('should construct with owner address as authorized reporter', async () => {
+    it('should construct with owner address as authorized reporter when constructor argument is 0x0', async () => {
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
         classicOracle = await ClassicOracleFactory.deploy(ethers.constants.AddressZero)
         expect(await classicOracle.authorizedReporter()).equal(accountOne.address)
