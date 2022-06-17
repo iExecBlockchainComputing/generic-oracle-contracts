@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/iExecBlockchainComputing/generic-oracle-contracts/issues"
   },
-  "homepage": "https://github.com/iExecBlockchainComputing/generic-oracle-contracts#readme"
+  "homepage": "https://github.com/iExecBlockchainComputing/generic-oracle-contracts#readme",
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  }
 }
