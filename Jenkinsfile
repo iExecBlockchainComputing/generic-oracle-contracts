@@ -14,8 +14,11 @@ node('docker') {
             checkout scm
             sh '''
             npm ci
+            npx hardhat typechain
             npx hardhat coverage
             '''
+            //mock versionNoPrefix
+            buildInfo.versionNoPrefix = '0.0.0'
         }
 
         if(buildInfo.versionNoPrefix != null){
