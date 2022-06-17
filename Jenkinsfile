@@ -4,7 +4,7 @@ node('docker') {
 
     def buildInfo = null
 
-    stage('Git checkout') {
+    stage('Build info') {
         buildInfo = getBuildInfo()
     }
         
@@ -23,7 +23,8 @@ node('docker') {
 
         if(buildInfo.versionNoPrefix != null){
             stage('Publish') {
-            sh 'npm publish --access public --tag ' + buildInfo.versionNoPrefix
+                sh 'npm version ' + buildInfo.versionNoPrefix
+                sh 'npm publish --access public'
             }
         }
 
