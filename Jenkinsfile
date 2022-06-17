@@ -1,16 +1,17 @@
 @Library('global-jenkins-library@2.0.0') _
 
 node('docker') {
+
+    def buildInfo = null
+
+    stage('Git checkout') {
+        buildInfo = getBuildInfo()
+    }
         
     docker.image('node:16-alpine').inside {
 
-        buildInfo = null
-
-        stage('Git checkout') {
-            buildInfo = getBuildInfo()
-        }
-
         stage('Test') {
+            checkout scm
             sh '''
             npm ci
             npx hardhat coverage
