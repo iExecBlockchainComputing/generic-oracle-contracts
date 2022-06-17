@@ -23,7 +23,7 @@ node('docker') {
 
         if(buildInfo.versionNoPrefix != null){
             stage('Publish') {
-                sh 'npm version ' + buildInfo.versionNoPrefix
+                sh 'npm version ' + buildInfo.versionNoPrefix + ' --allow-same-version'
                 sh 'npm publish --access public'
             }
         }
