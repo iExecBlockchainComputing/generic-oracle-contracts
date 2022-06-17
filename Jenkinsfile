@@ -1,10 +1,10 @@
 @Library('global-jenkins-library@2.0.0') _
 
 node('docker') {
-
-    buildInfo
         
     docker.image('node:16-alpine').inside {
+
+        buildInfo = null
 
         stage('Git checkout') {
             buildInfo = getBuildInfo()
