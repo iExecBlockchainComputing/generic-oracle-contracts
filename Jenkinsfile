@@ -1,6 +1,6 @@
 node('docker') {
         
-    docker.image('node:14-alpine').inside {
+    docker.image('node:16-alpine').inside {
         stage('Test') {
             checkout scm
             sh '''
