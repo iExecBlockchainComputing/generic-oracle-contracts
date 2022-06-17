@@ -7,6 +7,7 @@ node('docker') {
             ls -la
             npm --v
             npm ci
+            npx hardhat typechain
             npx hardhat coverage
             '''
         }
