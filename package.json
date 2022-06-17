@@ -41,5 +41,6 @@
   "homepage": "https://github.com/iExecBlockchainComputing/generic-oracle-contracts#readme",
   "optionalDependencies": {
     "fsevents": "^2.3.2"
-  }
+  },
+  "version": "0.0.0"
 }
