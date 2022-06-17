@@ -23,9 +23,7 @@ node('docker') {
 
         if(buildInfo.versionNoPrefix != null){
             stage('Publish') {
-            sh '''
-            npm publish --access public --tag ${buildInfo.versionNoPrefix}
-            '''
+            sh 'npm publish --access public --tag ' + buildInfo.versionNoPrefix
             }
         }
 
