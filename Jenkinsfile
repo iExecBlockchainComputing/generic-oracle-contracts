@@ -17,21 +17,25 @@ node('docker') {
             npx hardhat typechain
             npx hardhat coverage
             '''
-            //mock versionNoPrefix
-            buildInfo.versionNoPrefix = '0.0.0'
             archiveArtifacts artifacts: 'coverage/'
         }
 
         if(buildInfo.versionNoPrefix != null){
             stage('Publish') {
                 sh 'npm version ' + buildInfo.versionNoPrefix + ' --allow-same-version'
-                withCredentials([
-                        string(credentialsId: 'JT_NPM_TOKEN', variable: 'AUTH_TOKEN')]) {
-                    sh '''
-                    echo "//registry.npmjs.org/:_authToken=$AUTH_TOKEN" > ~/.npmrc
-                    npm publish --access public
-                    rm ~/.npmrc
-                    '''
+                try {
+                    withCredentials([
+                            string(credentialsId: 'JT_NPM_TOKEN', variable: 'AUTH_TOKEN')]) {
+                        sh '''
+                        echo "//registry.npmjs.org/:_authToken=$AUTH_TOKEN" > ~/.npmrc
+                        npm publish --access public
+                        '''
+                    }
+                } catch (e) {
+                    println 'Failed to publish: $e'
+                } finally {
+                    sh 'rm ~/.npmrc'
+                    println 'Removed NPM credentials'
                 }
             }
         }
