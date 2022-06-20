@@ -30,7 +30,6 @@ node('docker') {
                         string(credentialsId: 'JT_NPM_TOKEN', variable: 'AUTH_TOKEN')]) {
                     sh '''
                     echo "//registry.npmjs.org/:_authToken=$AUTH_TOKEN" > ~/.npmrc
-                    npm login
                     npm publish --access public
                     rm ~/.npmrc
                     '''
