@@ -16,7 +16,6 @@ node('docker') {
             npx hardhat coverage
             '''
             archiveArtifacts artifacts: 'coverage/'
-            buildInfo.versionNoPrefix = '0.0.0' //Dummy tag
         }
 
         if (buildInfo.versionNoPrefix != '') {
@@ -24,7 +23,7 @@ node('docker') {
                 sh 'npm version ' + buildInfo.versionNoPrefix + ' --allow-same-version'
                 isPublished = false
                 try {
-                    withCredentials([string(credentialsId: 'JT_NPM_TOKEN', variable: 'AUTH_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'NPM_TOKEN', variable: 'AUTH_TOKEN')]) {
                         sh '''
                         echo "//registry.npmjs.org/:_authToken=$AUTH_TOKEN" > ~/.npmrc
                         npm publish --access public
