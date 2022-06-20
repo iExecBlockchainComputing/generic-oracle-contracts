@@ -12,15 +12,14 @@ node('docker') {
 
         stage('Test') {
             checkout scm
-            /*
             sh '''
             npm ci
             npx hardhat typechain
             npx hardhat coverage
             '''
-            */
             //mock versionNoPrefix
             buildInfo.versionNoPrefix = '0.0.0'
+            archiveArtifacts artifacts: 'coverage/'
         }
 
         if(buildInfo.versionNoPrefix != null){
