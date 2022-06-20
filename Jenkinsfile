@@ -1,15 +1,13 @@
 @Library('global-jenkins-library@2.0.0') _
 
 node('docker') {
-
-    def buildInfo = null
+    buildInfo = null
 
     stage('Build info') {
         buildInfo = getBuildInfo()
     }
-        
-    docker.image('node:16-alpine').inside {
 
+    docker.image('node:16-alpine').inside {
         stage('Test') {
             checkout scm
             sh '''
@@ -20,9 +18,10 @@ node('docker') {
             archiveArtifacts artifacts: 'coverage/'
         }
 
-        if(buildInfo.versionNoPrefix != null){
+        if (buildInfo.versionNoPrefix != '') {
             stage('Publish') {
                 sh 'npm version ' + buildInfo.versionNoPrefix + ' --allow-same-version'
+                isPublished = false
                 try {
                     withCredentials([
                             string(credentialsId: 'JT_NPM_TOKEN', variable: 'AUTH_TOKEN')]) {
@@ -30,16 +29,15 @@ node('docker') {
                         echo "//registry.npmjs.org/:_authToken=$AUTH_TOKEN" > ~/.npmrc
                         npm publish --access public
                         '''
+                        isPublished = true
                     }
-                } catch (e) {
-                    println 'Failed to publish: $e'
                 } finally {
                     sh 'rm ~/.npmrc'
-                    println 'Removed NPM credentials'
+                    if(!isPublished) {
+                        error 'Failed to publish to NPM.'
+                    }
                 }
             }
         }
-
     }
-
 }
