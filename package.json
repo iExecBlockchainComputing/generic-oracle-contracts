@@ -1,5 +1,5 @@
 {
-  "name": "@jeremyjames/generic-oracle-contracts",
+  "name": "@iexec/generic-oracle-contracts",
   "description": "Contracts for Iexec generic DOracle",
   "files": [
     "/typechain"
