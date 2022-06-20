@@ -12,11 +12,13 @@ node('docker') {
 
         stage('Test') {
             checkout scm
+            /*
             sh '''
             npm ci
             npx hardhat typechain
             npx hardhat coverage
             '''
+            */
             //mock versionNoPrefix
             buildInfo.versionNoPrefix = '0.0.0'
         }
@@ -24,7 +26,14 @@ node('docker') {
         if(buildInfo.versionNoPrefix != null){
             stage('Publish') {
                 sh 'npm version ' + buildInfo.versionNoPrefix + ' --allow-same-version'
-                sh 'npm publish --access public'
+                withCredentials([
+                        string(credentialsId: 'JT_NPM_TOKEN', variable: 'AUTH_TOKEN')]) {
+                    sh '''
+                    echo "https://registry.npmjs.org/:_authToken=$AUTH_TOKEN" > ~/.npmrc
+                    npm publish --access public
+                    rm ~/.npmrc
+                    '''
+                }
             }
         }
 
