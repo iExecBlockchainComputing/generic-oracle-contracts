@@ -17,7 +17,7 @@
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
     "@nomiclabs/hardhat-waffle": "^2.0.2",
-    "@openzeppelin/contracts": "^3.4.0",
+    "@openzeppelin/contracts": "^3.4.2",
     "@typechain/ethers-v5": "^9.0.0",
     "@typechain/hardhat": "^4.0.0",
     "@types/chai": "^4.3.0",
@@ -41,5 +41,11 @@
   "homepage": "https://github.com/iExecBlockchainComputing/generic-oracle-contracts#readme",
   "optionalDependencies": {
     "fsevents": "^2.3.2"
+  },
+  "dependencies": {
+    "openzeppelin-contracts-latest": "npm:@openzeppelin/contracts@4.0"
+  },
+  "dependenciesComments": {
+    "openzeppelin-contracts-latest": "Import latest metatx contracts without breaking other oz usages for now"
   }
 }

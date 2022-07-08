@@ -7,21 +7,22 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 describe("ClassicOracle", function () {
     let defaultAccount: SignerWithAddress
     let reporterAccount: SignerWithAddress
+    let forwarder: SignerWithAddress //TODO: Change
     let classicOracle: ClassicOracle
     const oracleId = ethers.utils.keccak256(new TextEncoder().encode("oracleId"))
     console.log("oracleId: " + oracleId);
 
     beforeEach("Fresh contract & accounts", async () => {
-        [defaultAccount, reporterAccount] = await ethers.getSigners();
+        [defaultAccount, reporterAccount, forwarder] = await ethers.getSigners();
 
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address)
+        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarder.address)
     });
 
-    it('should construct with owner address as authorized reporter when constructor argument is 0x0', async () => {
+    it('should not construct when authorized reporter is 0x0', async () => {
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        classicOracle = await ClassicOracleFactory.deploy(ethers.constants.AddressZero)
-        expect(await classicOracle.authorizedReporter()).equal(defaultAccount.address)
+        await expect(ClassicOracleFactory.deploy(ethers.constants.AddressZero, forwarder.address))
+        .to.be.reverted;
     });
 
     it('should construct with custom address as authorized reporter', async () => {

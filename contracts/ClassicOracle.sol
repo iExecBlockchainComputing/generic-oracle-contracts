@@ -16,15 +16,16 @@
  * limitations under the License.                                             *
  ******************************************************************************/
 
-pragma solidity ^0.6.12;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
+import "openzeppelin-contracts-latest/access/Ownable.sol";
+import "openzeppelin-contracts-latest/metatx/ERC2771Context.sol";
+import "./utils/IERC1154.sol";
+//import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
 
 import "hardhat/console.sol";
 
-contract ClassicOracle is IOracleConsumer, Ownable {
+contract ClassicOracle is ERC2771Context, IOracleConsumer {
     // Authorized address to report result
     address public authorizedReporter;
 
@@ -44,18 +45,20 @@ contract ClassicOracle is IOracleConsumer, Ownable {
         bytes value
     );
 
-    constructor(address _authorizedReporter) public {
-        if (_authorizedReporter != address(0)) {
-            authorizedReporter = _authorizedReporter;
-            console.log("Authorized reporter (custom): %s", authorizedReporter);
-        } else {
-            authorizedReporter = owner();
-            console.log("Authorized reporter (owner): %s", authorizedReporter);
-        }
+    constructor(address _authorizedReporter, address _trustedForwarder)
+        ERC2771Context(_trustedForwarder)
+    {
+        //might be deployed without forwarder, but reporter is required
+        require(_authorizedReporter != address(0));
+        authorizedReporter = _authorizedReporter;
+        console.log("Authorized reporter (custom): %s", authorizedReporter);
     }
 
     modifier onlyAuthorizedReporter() {
-        require(msg.sender == authorizedReporter, "Reporter is not authorized");
+        require(
+            _msgSender() == authorizedReporter,
+            "Reporter is not authorized"
+        );
         _;
     }
 
