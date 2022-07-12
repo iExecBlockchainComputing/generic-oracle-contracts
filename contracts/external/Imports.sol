@@ -19,4 +19,4 @@
 pragma solidity ^0.8.0;
 
 //Compile external contracts to use them in tests
-import "openzeppelin-contracts-latest/metatx/MinimalForwarder.sol";
+import "openzeppelin-contracts/metatx/MinimalForwarder.sol";
