@@ -46,6 +46,6 @@
     "openzeppelin-contracts-solc-0.8": "npm:@openzeppelin/contracts@^4.7.0"
   },
   "dependenciesComments": {
-    "openzeppelin-contracts": "Import latest metatx contracts without breaking other OpenZeppelin usages (iExec libraries) for now. Installed with `npm i openzeppelin-contracts@npm:@openzeppelin/contracts@<version>`"
+    "openzeppelin-contracts-solc-0.8": "Import latest metatx contracts without breaking other OpenZeppelin usages (iExec libraries) for now. Installed with `npm i openzeppelin-contracts-<anything>@npm:@openzeppelin/contracts@<version>`"
   }
 }

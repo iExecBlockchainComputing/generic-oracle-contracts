@@ -38,7 +38,7 @@ contract SaltyForwarder is EIP712 {
             "ForwardRequest(address from,address to,uint256 value,uint256 gas,bytes32 salt,bytes data)"
         );
 
-    //Introducing Bitmap should be gas saving
+    //Note: Might use Bitmap at some point for a more gas-saving approach
     mapping(address => mapping(bytes32 => bool)) private _consumedSalts;
 
     constructor() EIP712("SaltyForwarder", "0.0.1") {}
