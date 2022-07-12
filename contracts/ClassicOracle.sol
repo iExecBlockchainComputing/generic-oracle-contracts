@@ -18,8 +18,8 @@
 
 pragma solidity ^0.8.0;
 
-import "openzeppelin-contracts/access/Ownable.sol";
-import "openzeppelin-contracts/metatx/ERC2771Context.sol";
+import "openzeppelin-contracts-solc-0.8/access/Ownable.sol";
+import "openzeppelin-contracts-solc-0.8/metatx/ERC2771Context.sol";
 import "./utils/IERC1154.sol";
 //TODO: Replace with @iexec/solidity when this dependency is migrated to solidity 0.8.0 and latest OpenZeppelin
 //import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";

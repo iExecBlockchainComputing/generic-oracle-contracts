@@ -1,20 +1,25 @@
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts v4.4.1 (metatx/MinimalForwarder.sol)
+// OpenZeppelin Contracts (last updated v4.7.0) (metatx/MinimalForwarder.sol)
 
 pragma solidity ^0.8.0;
 
-import "openzeppelin-contracts/utils/cryptography/ECDSA.sol";
-import "openzeppelin-contracts/utils/cryptography/draft-EIP712.sol";
+import "openzeppelin-contracts-solc-0.8/utils/cryptography/ECDSA.sol";
+import "openzeppelin-contracts-solc-0.8/utils/cryptography/draft-EIP712.sol";
 
 /*
  * This SaltyForwarder contract is based on OpenZeppelin's MinimalForwarder:
- * https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.4.2/contracts/metatx/MinimalForwarder.sol
+ * https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.0/contracts/metatx/MinimalForwarder.sol
  *
  * This forwarder use salts (instead of nonces) which still protect against replay attacks
  * but is compatible with contracts that does not require transaction ordering
  *
  * Original note from the OpenZeppelin team:
  * @dev Simple minimal forwarder to be used together with an ERC2771 compatible contract. See {ERC2771Context}.
+ *
+ * MinimalForwarder is mainly meant for testing, as it is missing features to be a good production-ready forwarder. This
+ * contract does not intend to have all the properties that are needed for a sound forwarding system. A fully
+ * functioning forwarding system with good properties requires more complexity. We suggest you look at other projects
+ * such as the GSN which do have the goal of building a system like that.
  */
 contract SaltyForwarder is EIP712 {
     using ECDSA for bytes32;
@@ -28,11 +33,12 @@ contract SaltyForwarder is EIP712 {
         bytes data;
     }
 
-    bytes32 private constant TYPEHASH =
+    bytes32 private constant _TYPEHASH =
         keccak256(
             "ForwardRequest(address from,address to,uint256 value,uint256 gas,bytes32 salt,bytes data)"
         );
 
+    //Introducing Bitmap should be gas saving
     mapping(address => mapping(bytes32 => bool)) private _consumedSalts;
 
     constructor() EIP712("SaltyForwarder", "0.0.1") {}
@@ -49,7 +55,7 @@ contract SaltyForwarder is EIP712 {
         address signer = _hashTypedDataV4(
             keccak256(
                 abi.encode(
-                    TYPEHASH,
+                    _TYPEHASH,
                     req.from,
                     req.to,
                     req.value,
@@ -77,9 +83,18 @@ contract SaltyForwarder is EIP712 {
             gas: req.gas,
             value: req.value
         }(abi.encodePacked(req.data, req.from));
+
         // Validate that the relayer has sent enough gas for the call.
         // See https://ronan.eth.link/blog/ethereum-gas-dangers/
-        assert(gasleft() > req.gas / 63);
+        if (gasleft() <= req.gas / 63) {
+            // We explicitly trigger invalid opcode to consume all gas and bubble-up the effects, since
+            // neither revert or assert consume all gas since Solidity 0.8.0
+            // https://docs.soliditylang.org/en/v0.8.0/control-structures.html#panic-via-assert-and-error-via-require
+            /// @solidity memory-safe-assembly
+            assembly {
+                invalid()
+            }
+        }
 
         return (success, returndata);
     }
