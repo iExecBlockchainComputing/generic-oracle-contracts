@@ -2,9 +2,10 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { ClassicOracle, MinimalForwarder } from "../typechain";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { generateDate, buildCallback } from "./utils/utils";
 
 describe("MinimalForwarder", function () {
-    let defaultAccount: SignerWithAddress
+    let sponsorAccount: SignerWithAddress
     let reporterAccount: SignerWithAddress
     let forwarder: MinimalForwarder
     let classicOracle: ClassicOracle
@@ -15,26 +16,23 @@ describe("MinimalForwarder", function () {
     console.log("oracleId: " + oracleId);
 
     beforeEach("Fresh contract & accounts", async () => {
-        [defaultAccount, reporterAccount] = await ethers.getSigners();
-
+        [sponsorAccount, reporterAccount] = await ethers.getSigners();
         const MinimalForwarderFactory = await ethers.getContractFactory("MinimalForwarder")
         forwarder = await MinimalForwarderFactory.deploy()
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
         classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarder.address)
     });
 
-    it('should', async () => {
+    it('should forward with nonce', async () => {
         const data = classicOracle.interface.encodeFunctionData("receiveResult", [oracleId, callback])
-
         const forwardRequest: MinimalForwarder.ForwardRequestStruct = {
             from: reporterAccount.address,
             to: classicOracle.address,
             value: 0,
             gas: await classicOracle.connect(reporterAccount).estimateGas.receiveResult(oracleId, callback),
-            nonce: 0, //TODO: replace nonce with salt
+            nonce: 0,
             data: data
         }
-
         const domain = {
             name: "MinimalForwarder",
             version: "0.0.1",
@@ -51,28 +49,16 @@ describe("MinimalForwarder", function () {
                 { name: 'data', type: 'bytes' },
             ],
         };
-
         const signedRequest = await reporterAccount._signTypedData(domain, types, forwardRequest)
 
-        expect(await forwarder.verify(forwardRequest, signedRequest)).is.true
-
-        await expect(forwarder.execute(forwardRequest, signedRequest))
+        expect(await forwarder.connect(sponsorAccount) //explicitly asking for sponsor account (already default)
+            .verify(forwardRequest, signedRequest)).is.true
+        await expect(forwarder.connect(sponsorAccount)
+            .execute(forwardRequest, signedRequest))
             .to.emit(classicOracle, 'ValueUpdated');
-
         const { date: foundDate, stringValue: foundValue } = await classicOracle.getString(oracleId);
         expect(date).equal(foundDate);
         expect(value).equal(foundValue);
-
-        //console.log(await forwarder.getNonce(reporterAccount.address))
     });
 
-
 });
-
-function generateDate(): BigInt {
-    return BigInt(new Date().getTime());
-}
-
-function buildCallback(oracleId: string, date: BigInt, encodedTypedValue: string): string {
-    return ethers.utils.defaultAbiCoder.encode(['bytes32', 'uint256', 'bytes'], [oracleId, date, encodedTypedValue]);
-}

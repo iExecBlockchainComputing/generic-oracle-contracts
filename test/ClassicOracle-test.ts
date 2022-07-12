@@ -2,27 +2,28 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { ClassicOracle } from "../typechain";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { generateDate, buildCallback } from "./utils/utils";
 
 
 describe("ClassicOracle", function () {
     let defaultAccount: SignerWithAddress
     let reporterAccount: SignerWithAddress
-    let forwarder: SignerWithAddress //TODO: Change
+    let forwarder = ethers.constants.AddressZero
     let classicOracle: ClassicOracle
     const oracleId = ethers.utils.keccak256(new TextEncoder().encode("oracleId"))
     console.log("oracleId: " + oracleId);
 
     beforeEach("Fresh contract & accounts", async () => {
-        [defaultAccount, reporterAccount, forwarder] = await ethers.getSigners();
+        [defaultAccount, reporterAccount] = await ethers.getSigners();
 
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarder.address)
+        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarder)
     });
 
     it('should not construct when authorized reporter is 0x0', async () => {
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        await expect(ClassicOracleFactory.deploy(ethers.constants.AddressZero, forwarder.address))
-        .to.be.reverted;
+        await expect(ClassicOracleFactory.deploy(ethers.constants.AddressZero, forwarder))
+            .to.be.reverted;
     });
 
     it('should construct with custom address as authorized reporter', async () => {
@@ -85,11 +86,3 @@ describe("ClassicOracle", function () {
     });
 
 });
-
-function generateDate(): BigInt {
-    return BigInt(new Date().getTime());
-}
-
-function buildCallback(oracleId: string, date: BigInt, encodedTypedValue: string): string {
-    return ethers.utils.defaultAbiCoder.encode(['bytes32', 'uint256', 'bytes'], [oracleId, date, encodedTypedValue]);
-}
