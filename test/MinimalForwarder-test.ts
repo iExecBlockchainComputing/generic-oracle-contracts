@@ -7,7 +7,7 @@ import { generateDate, buildCallback } from "./utils/utils";
 describe("MinimalForwarder", function () {
     let sponsorAccount: SignerWithAddress
     let reporterAccount: SignerWithAddress
-    let forwarder: MinimalForwarder
+    let forwarderContract: MinimalForwarder
     let classicOracle: ClassicOracle
     const oracleId = ethers.utils.keccak256(new TextEncoder().encode("oracleId"))
     const date: BigInt = generateDate();
@@ -18,9 +18,9 @@ describe("MinimalForwarder", function () {
     beforeEach("Fresh contract & accounts", async () => {
         [sponsorAccount, reporterAccount] = await ethers.getSigners();
         const MinimalForwarderFactory = await ethers.getContractFactory("MinimalForwarder")
-        forwarder = await MinimalForwarderFactory.deploy()
+        forwarderContract = await MinimalForwarderFactory.deploy()
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarder.address)
+        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarderContract.address)
     });
 
     it('should forward with nonce', async () => {
@@ -37,7 +37,7 @@ describe("MinimalForwarder", function () {
             name: "MinimalForwarder",
             version: "0.0.1",
             chainId: ethers.provider.network.chainId,
-            verifyingContract: forwarder.address,
+            verifyingContract: forwarderContract.address,
         };
         const types = {
             ForwardRequest: [
@@ -51,9 +51,9 @@ describe("MinimalForwarder", function () {
         };
         const signedRequest = await reporterAccount._signTypedData(domain, types, forwardRequest)
 
-        expect(await forwarder.connect(sponsorAccount) //explicitly asking for sponsor account (already default)
+        expect(await forwarderContract.connect(sponsorAccount) //explicitly asking for sponsor account (already default)
             .verify(forwardRequest, signedRequest)).is.true
-        await expect(forwarder.connect(sponsorAccount)
+        await expect(forwarderContract.connect(sponsorAccount)
             .execute(forwardRequest, signedRequest))
             .to.emit(classicOracle, 'ValueUpdated');
         const { date: foundDate, stringValue: foundValue } = await classicOracle.getString(oracleId);

@@ -8,7 +8,7 @@ import { generateDate, buildCallback } from "./utils/utils";
 describe("ClassicOracle", function () {
     let defaultAccount: SignerWithAddress
     let reporterAccount: SignerWithAddress
-    let forwarder = ethers.constants.AddressZero
+    let noForwarder = ethers.constants.AddressZero
     let classicOracle: ClassicOracle
     const oracleId = ethers.utils.keccak256(new TextEncoder().encode("oracleId"))
     console.log("oracleId: " + oracleId);
@@ -17,12 +17,12 @@ describe("ClassicOracle", function () {
         [defaultAccount, reporterAccount] = await ethers.getSigners();
 
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarder)
+        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, noForwarder)
     });
 
     it('should not construct when authorized reporter is 0x0', async () => {
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        await expect(ClassicOracleFactory.deploy(ethers.constants.AddressZero, forwarder))
+        await expect(ClassicOracleFactory.deploy(ethers.constants.AddressZero, noForwarder))
             .to.be.reverted;
     });
 

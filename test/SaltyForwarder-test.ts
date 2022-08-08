@@ -7,7 +7,7 @@ import { generateDate, buildCallback } from "./utils/utils";
 describe("SaltyForwarder", function () {
     let sponsorAccount: SignerWithAddress
     let reporterAccount: SignerWithAddress
-    let forwarder: SaltyForwarder
+    let forwarderContract: SaltyForwarder
     let classicOracle: ClassicOracle
     const types = {
         ForwardRequest: [
@@ -24,18 +24,18 @@ describe("SaltyForwarder", function () {
     beforeEach("Fresh contract & accounts", async () => {
         [sponsorAccount, reporterAccount] = await ethers.getSigners();
         const SaltyForwarderFactory = await ethers.getContractFactory("SaltyForwarder")
-        forwarder = await SaltyForwarderFactory.deploy()
+        forwarderContract = await SaltyForwarderFactory.deploy()
         const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarder.address)
+        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarderContract.address)
         domain = {
             name: "SaltyForwarder",
             version: "0.0.1",
             chainId: ethers.provider.network.chainId,
-            verifyingContract: forwarder.address,
+            verifyingContract: forwarderContract.address,
         };
     });
 
-    it('should foward with salt', async () => {
+    it('should forward with salt', async () => {
         const oracleId = buildOracleId(0);
         const date: BigInt = generateDate();
         const value: string = 'abcd';
@@ -43,16 +43,16 @@ describe("SaltyForwarder", function () {
         const forwardRequest: SaltyForwarder.ForwardRequestStruct = await buildForwardRequest(oracleId, callback)
         const signedRequest = await signForwardRequest(forwardRequest)
 
-        expect(await forwarder.verify(forwardRequest, signedRequest)).is.true
-        await expect(forwarder.execute(forwardRequest, signedRequest))
+        expect(await forwarderContract.verify(forwardRequest, signedRequest)).is.true
+        await expect(forwarderContract.execute(forwardRequest, signedRequest))
             .to.emit(classicOracle, 'ValueUpdated');
         const { date: foundDate, stringValue: foundValue } = await classicOracle.getString(oracleId);
         expect(date).equal(foundDate);
         expect(value).equal(foundValue);
-        expect(await forwarder.isFreeSalt(reporterAccount.address, forwardRequest.salt)).is.false;
+        expect(await forwarderContract.isConsumedSalt(reporterAccount.address, forwardRequest.salt)).is.true;
     });
 
-    it('should not foward since replay attack', async () => {
+    it('should not forward since replay attack', async () => {
         const oracleId = buildOracleId(0);
         const date: BigInt = generateDate();
         const value: string = 'abcd';
@@ -60,15 +60,15 @@ describe("SaltyForwarder", function () {
         const forwardRequest: SaltyForwarder.ForwardRequestStruct = await buildForwardRequest(oracleId, callback);
         const signedRequest = await signForwardRequest(forwardRequest)
 
-        expect(await forwarder.connect(sponsorAccount) //explicitly asking for sponsor account (already default)
+        expect(await forwarderContract.connect(sponsorAccount) //explicitly asking for sponsor account (already default)
             .verify(forwardRequest, signedRequest)).is.true
-        await expect(forwarder.connect(sponsorAccount)
+        await expect(forwarderContract.connect(sponsorAccount)
             .execute(forwardRequest, signedRequest))
             .to.emit(classicOracle, 'ValueUpdated');
         //verify cannot replay
-        expect(await forwarder.verify(forwardRequest, signedRequest)).is.false
-        await expect(forwarder.execute(forwardRequest, signedRequest))
-            .to.be.revertedWith("SaltyForwarder: signature is invalid or replay attack");
+        expect(await forwarderContract.verify(forwardRequest, signedRequest)).is.false
+        await expect(forwarderContract.execute(forwardRequest, signedRequest))
+            .to.be.revertedWith("SaltyForwarder: invalid signature or salt");
     });
 
     it('should sign metatxs for different oracles and forward them later', async () => {
@@ -90,7 +90,7 @@ describe("SaltyForwarder", function () {
         for (let i = 0; i < n; i++) {
             const oracleId = buildOracleId(i)
             const requestAndSignature = requestAndSignatureMap.get(i);
-            await expect(forwarder.execute(requestAndSignature[0], requestAndSignature[1]))
+            await expect(forwarderContract.execute(requestAndSignature[0], requestAndSignature[1]))
                 .to.emit(classicOracle, 'ValueUpdated')
             const { date: foundDate, stringValue: foundValue } = await classicOracle.getString(oracleId);
             expect(date).equal(foundDate);

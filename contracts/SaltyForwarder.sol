@@ -58,8 +58,8 @@ contract SaltyForwarder is EIP712 {
 
     constructor() EIP712("SaltyForwarder", "0.0.1") {}
 
-    function isFreeSalt(address from, bytes32 salt) public view returns (bool) {
-        return !_consumedSalts[from][salt];
+    function isConsumedSalt(address from, bytes32 salt) public view returns (bool) {
+        return _consumedSalts[from][salt];
     }
 
     function verify(ForwardRequest calldata req, bytes calldata signature)
@@ -80,7 +80,7 @@ contract SaltyForwarder is EIP712 {
                 )
             )
         ).recover(signature);
-        return isFreeSalt(req.from, req.salt) && signer == req.from;
+        return !isConsumedSalt(req.from, req.salt) && signer == req.from;
     }
 
     function execute(ForwardRequest calldata req, bytes calldata signature)
@@ -90,7 +90,7 @@ contract SaltyForwarder is EIP712 {
     {
         require(
             verify(req, signature),
-            "SaltyForwarder: signature is invalid or replay attack"
+            "SaltyForwarder: invalid signature or salt"
         );
         _consumedSalts[req.from][req.salt] = true;
 
