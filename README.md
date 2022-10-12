@@ -30,5 +30,6 @@ ClassicOracle deployed to: 0x68bDfa911178f72CEA7BCFd0FeEbbA4cDDE24eCF
 ```
 * Goerli
 ```
-ClassicOracle deployed to: 0x28291E6A81aC30cE6099144E68D8aEeE2b64052b
+SaltyForwarder deployed to: 0xc83de370A0D1C99F3D3D9e77bd930520ded81fFA
+ClassicOracle deployed to: 0x8Ad317241854b1A29A06cE5478e6B92FA09Cd03a
 ```
