@@ -22,23 +22,9 @@ pragma experimental ABIEncoderV2;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
 import "@iexec/doracle/contracts/IexecDoracle.sol";
+import "./OracleStorage.sol";
 
-contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
-    // Data storage
-    struct TimedRawValue {
-        bytes value;
-        uint256 date;
-    }
-
-    mapping(bytes32 => TimedRawValue) public values;
-
-    // Event
-    event ValueUpdated(
-        bytes32 indexed id,
-        bytes32 indexed oracleCallID,
-        uint256 date,
-        bytes value
-    );
+contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer, OracleStorage {
 
     // Use _iexecHubAddr to force use of custom iexechub, leave 0x0 for autodetect
     constructor(address _iexecHubAddr) public IexecDoracle(_iexecHubAddr) {}
@@ -68,45 +54,7 @@ contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
                 (bytes32, uint, bytes)
             );
 
-        values[id].date = date;
-        values[id].value = value;
-
-        emit ValueUpdated(id, _callID, date, value);
+        require(updateValue(id, _callID, date, value), "Failed to update value");
     }
 
-    function getString(bytes32 _oracleId)
-        public
-        view
-        returns (string memory stringValue, uint256 date)
-    {
-        bytes memory value = values[_oracleId].value;
-        return (abi.decode(value, (string)), values[_oracleId].date);
-    }
-
-    function getRaw(bytes32 _oracleId)
-        public
-        view
-        returns (bytes memory bytesValue, uint256 date)
-    {
-        bytes memory value = values[_oracleId].value;
-        return (value, values[_oracleId].date);
-    }
-
-    function getInt(bytes32 _oracleId)
-        public
-        view
-        returns (int256 intValue, uint256 date)
-    {
-        bytes memory value = values[_oracleId].value;
-        return (abi.decode(value, (int256)), values[_oracleId].date);
-    }
-
-    function getBool(bytes32 _oracleId)
-        public
-        view
-        returns (bool boolValue, uint256 date)
-    {
-        bytes memory value = values[_oracleId].value;
-        return (abi.decode(value, (bool)), values[_oracleId].date);
-    }
 }
