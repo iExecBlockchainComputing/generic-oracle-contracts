@@ -54,7 +54,7 @@ contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer, OracleStorage 
                 (bytes32, uint, bytes)
             );
 
-        require(updateValue(id, _callID, date, value), "Failed to update value");
+        _updateValue(id, _callID, date, value);
     }
 
 }

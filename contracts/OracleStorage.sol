@@ -37,14 +37,12 @@ contract OracleStorage {
     );
 
     // Update value
-    function updateValue(bytes32 id, bytes32 callId, uint256 date, bytes memory value)
+    function _updateValue(bytes32 id, bytes32 callId, uint256 date, bytes memory value)
         internal
-        returns (bool)
     {
         values[id].date = date; //What if date is older?
         values[id].value = value;
         emit ValueUpdated(id, callId, date, value);
-        return true;
     }
 
     // Read value

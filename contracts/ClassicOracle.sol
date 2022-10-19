@@ -60,7 +60,7 @@ contract ClassicOracle is ERC2771Context, IOracleConsumer, OracleStorage {
             (bytes32, uint256, bytes)
         );
         
-        require(updateValue(id, _callID, date, value), "Failed to update value");
+        _updateValue(id, _callID, date, value);
     }
 
 }
