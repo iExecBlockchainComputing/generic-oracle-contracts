@@ -20,14 +20,14 @@ pragma solidity ^0.8.0;
 
 import "openzeppelin-contracts-solc-0.8/access/Ownable.sol";
 import "openzeppelin-contracts-solc-0.8/metatx/ERC2771Context.sol";
-import "./OracleStorage.sol";
+import "./GenericOracle.sol";
 import "./utils/IERC1154.sol";
 //TODO: Replace with @iexec/solidity when this dependency is migrated to solidity 0.8.0 and latest OpenZeppelin
 //import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
 
 import "hardhat/console.sol";
 
-contract ClassicOracle is ERC2771Context, IOracleConsumer, OracleStorage {
+contract SingleReporterOracle is ERC2771Context, IOracleConsumer, GenericOracle {
     // Authorized address to report result
     address public authorizedReporter;
 

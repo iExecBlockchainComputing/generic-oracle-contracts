@@ -13,16 +13,16 @@ async function main() {
     const forwarder = await SaltyForwarderFactory.deploy()
     await forwarder.deployTransaction.wait()
     console.log("SaltyForwarder deployed to:", forwarder.address);
-    const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-    const classicOracle = await ClassicOracleFactory.deploy(authorizedReporter, forwarder.address)
-    await classicOracle.deployTransaction.wait()
-    console.log("ClassicOracle deployed to:", classicOracle.address);
+    const SingleReporterOracleFactory = await ethers.getContractFactory("SingleReporterOracle")
+    const singleReporterOracle = await SingleReporterOracleFactory.deploy(authorizedReporter, forwarder.address)
+    await singleReporterOracle.deployTransaction.wait()
+    console.log("SingleReporterOracle deployed to:", singleReporterOracle.address);
 
-    console.log("Please verify Forwarder & ClassicOracle with:")
+    console.log("Please verify Forwarder & SingleReporterOracle with:")
     // npx hardhat verify --network <network> <SaltyForwarderAddress>
     console.log("npx hardhat verify --network %s %s", chainName, forwarder.address)
-    // npx hardhat verify --network <network> <ClassicOracleAddress> "0x767A2D69D7278F200ae1F79a00Ac2CaE299dD784" "<SaltyForwarderAddress>"
-    console.log("npx hardhat verify --network %s %s %s %s", chainName, classicOracle.address, authorizedReporter, forwarder.address)
+    // npx hardhat verify --network <network> <SingleReporterOracleAddress> "0x767A2D69D7278F200ae1F79a00Ac2CaE299dD784" "<SaltyForwarderAddress>"
+    console.log("npx hardhat verify --network %s %s %s %s", chainName, singleReporterOracle.address, authorizedReporter, forwarder.address)
 
     // Should only be deployed on source chain
     if(chainId == 134){
