@@ -26,10 +26,10 @@ async function main() {
 
     // Should only be deployed on source chain
     if(chainId == 134){
-        const GenericOracleFactory = await ethers.getContractFactory("GenericOracle")
-        const genericOracle = await GenericOracleFactory.deploy("0x3eca1B216A7DF1C7689aEb259fFB83ADFB894E7f")
-        await genericOracle.deployTransaction.wait()
-        console.log("GenericOracle deployed to:", genericOracle.address);
+        const VerifiedResultOracleFactory = await ethers.getContractFactory("VerifiedResultOracle")
+        const verifiedResultOracle = await VerifiedResultOracleFactory.deploy("0x3eca1B216A7DF1C7689aEb259fFB83ADFB894E7f")
+        await verifiedResultOracle.deployTransaction.wait()
+        console.log("VerifiedResultOracle deployed to:", verifiedResultOracle.address);
     }
 }
 

@@ -79,11 +79,17 @@ npm publish --access public
 ## Testnets (not necessarily up-to-date)
 * Polygon Mumbai
 ```
-SaltyForwarder deployed to: 0x6843aA5A3a777Ae750DD9d93a9D0fdF99e061b53
-SingleReporterOracle deployed to: 0x68bDfa911178f72CEA7BCFd0FeEbbA4cDDE24eCF
+SaltyForwarder deployed to: 0xa715674ecf9D14141421190b6f8Acf20686b54d7
+SingleReporterOracle deployed to: 0x330031CF7e6E2C318Dba230fe25A7f39fD3644EA
 ```
 * Goerli
 ```
-SaltyForwarder deployed to: 0xc83de370A0D1C99F3D3D9e77bd930520ded81fFA
-SingleReporterOracle deployed to: 0x8Ad317241854b1A29A06cE5478e6B92FA09Cd03a
+SaltyForwarder deployed to: 0x2aD6aD4F35cf7354fE703da74F459690dBcC12bf
+SingleReporterOracle deployed to: 0x8dFf608952ADCDa4cF7320324Db1ef44001BE79b
+```
+* Bellecour
+```
+VerifiedResultOracle deployed to: 0xc83b0110F91aD082b580D894BE6c8660cf1FB26d
+(SaltyForwarder deployed to: 0x1aAD77fd3C410096b14B2856cF04E63762A7a00C)
+(SingleReporterOracle deployed to: 0x9A9E20717De105673fc7F1C357F5725Cb78114DA)
 ```
