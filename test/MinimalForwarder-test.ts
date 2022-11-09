@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { ClassicOracle, MinimalForwarder } from "../typechain";
+import { SingleReporterOracle, MinimalForwarder } from "../typechain";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { generateDate, buildCallback } from "./utils/utils";
 
@@ -8,7 +8,7 @@ describe("MinimalForwarder", function () {
     let sponsorAccount: SignerWithAddress
     let reporterAccount: SignerWithAddress
     let forwarderContract: MinimalForwarder
-    let classicOracle: ClassicOracle
+    let singleReporterOracle: SingleReporterOracle
     const oracleId = ethers.utils.keccak256(new TextEncoder().encode("oracleId"))
     const date: BigInt = generateDate();
     const value: string = 'abcd';
@@ -19,17 +19,17 @@ describe("MinimalForwarder", function () {
         [sponsorAccount, reporterAccount] = await ethers.getSigners();
         const MinimalForwarderFactory = await ethers.getContractFactory("MinimalForwarder")
         forwarderContract = await MinimalForwarderFactory.deploy()
-        const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarderContract.address)
+        const SingleReporterOracleFactory = await ethers.getContractFactory("SingleReporterOracle")
+        singleReporterOracle = await SingleReporterOracleFactory.deploy(reporterAccount.address, forwarderContract.address)
     });
 
     it('should forward with nonce', async () => {
-        const data = classicOracle.interface.encodeFunctionData("receiveResult", [oracleId, callback])
+        const data = singleReporterOracle.interface.encodeFunctionData("receiveResult", [oracleId, callback])
         const forwardRequest: MinimalForwarder.ForwardRequestStruct = {
             from: reporterAccount.address,
-            to: classicOracle.address,
+            to: singleReporterOracle.address,
             value: 0,
-            gas: await classicOracle.connect(reporterAccount).estimateGas.receiveResult(oracleId, callback),
+            gas: await singleReporterOracle.connect(reporterAccount).estimateGas.receiveResult(oracleId, callback),
             nonce: 0,
             data: data
         }
@@ -55,8 +55,8 @@ describe("MinimalForwarder", function () {
             .verify(forwardRequest, signedRequest)).is.true
         await expect(forwarderContract.connect(sponsorAccount)
             .execute(forwardRequest, signedRequest))
-            .to.emit(classicOracle, 'ValueUpdated');
-        const { date: foundDate, stringValue: foundValue } = await classicOracle.getString(oracleId);
+            .to.emit(singleReporterOracle, 'ValueUpdated');
+        const { date: foundDate, stringValue: foundValue } = await singleReporterOracle.getString(oracleId);
         expect(date).equal(foundDate);
         expect(value).equal(foundValue);
     });
