@@ -20,31 +20,16 @@ pragma solidity ^0.8.0;
 
 import "openzeppelin-contracts-solc-0.8/access/Ownable.sol";
 import "openzeppelin-contracts-solc-0.8/metatx/ERC2771Context.sol";
+import "./GenericOracle.sol";
 import "./utils/IERC1154.sol";
 //TODO: Replace with @iexec/solidity when this dependency is migrated to solidity 0.8.0 and latest OpenZeppelin
 //import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
 
 import "hardhat/console.sol";
 
-contract ClassicOracle is ERC2771Context, IOracleConsumer {
+contract SingleReporterOracle is GenericOracle, IOracleConsumer, ERC2771Context {
     // Authorized address to report result
     address public authorizedReporter;
-
-    // Data storage
-    struct TimedRawValue {
-        bytes value;
-        uint256 date;
-    }
-
-    mapping(bytes32 => TimedRawValue) public values;
-
-    // Event
-    event ValueUpdated(
-        bytes32 indexed id,
-        bytes32 indexed oracleCallID,
-        uint256 date,
-        bytes value
-    );
 
     constructor(address _authorizedReporter, address _trustedForwarder)
         ERC2771Context(_trustedForwarder)
@@ -74,45 +59,8 @@ contract ClassicOracle is ERC2771Context, IOracleConsumer {
             callback,
             (bytes32, uint256, bytes)
         );
-
-        values[id].date = date; //What if date is older?
-        values[id].value = value;
-        emit ValueUpdated(id, _callID, date, value);
+        
+        _updateValue(id, _callID, date, value);
     }
 
-    function getString(bytes32 _oracleId)
-        public
-        view
-        returns (string memory stringValue, uint256 date)
-    {
-        bytes memory value = values[_oracleId].value;
-        return (abi.decode(value, (string)), values[_oracleId].date);
-    }
-
-    function getRaw(bytes32 _oracleId)
-        public
-        view
-        returns (bytes memory bytesValue, uint256 date)
-    {
-        bytes memory value = values[_oracleId].value;
-        return (value, values[_oracleId].date);
-    }
-
-    function getInt(bytes32 _oracleId)
-        public
-        view
-        returns (int256 intValue, uint256 date)
-    {
-        bytes memory value = values[_oracleId].value;
-        return (abi.decode(value, (int256)), values[_oracleId].date);
-    }
-
-    function getBool(bytes32 _oracleId)
-        public
-        view
-        returns (bool boolValue, uint256 date)
-    {
-        bytes memory value = values[_oracleId].value;
-        return (abi.decode(value, (bool)), values[_oracleId].date);
-    }
 }

@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { ClassicOracle, SaltyForwarder } from "../typechain";
+import { SingleReporterOracle, SaltyForwarder } from "../typechain";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { generateDate, buildCallback } from "./utils/utils";
 
@@ -8,7 +8,7 @@ describe("SaltyForwarder", function () {
     let sponsorAccount: SignerWithAddress
     let reporterAccount: SignerWithAddress
     let forwarderContract: SaltyForwarder
-    let classicOracle: ClassicOracle
+    let singleReporterOracle: SingleReporterOracle
     const types = {
         ForwardRequest: [
             { name: 'from', type: 'address' },
@@ -25,8 +25,8 @@ describe("SaltyForwarder", function () {
         [sponsorAccount, reporterAccount] = await ethers.getSigners();
         const SaltyForwarderFactory = await ethers.getContractFactory("SaltyForwarder")
         forwarderContract = await SaltyForwarderFactory.deploy()
-        const ClassicOracleFactory = await ethers.getContractFactory("ClassicOracle")
-        classicOracle = await ClassicOracleFactory.deploy(reporterAccount.address, forwarderContract.address)
+        const SingleReporterOracleFactory = await ethers.getContractFactory("SingleReporterOracle")
+        singleReporterOracle = await SingleReporterOracleFactory.deploy(reporterAccount.address, forwarderContract.address)
         domain = {
             name: "SaltyForwarder",
             version: "0.0.1",
@@ -45,8 +45,8 @@ describe("SaltyForwarder", function () {
 
         expect(await forwarderContract.verify(forwardRequest, signedRequest)).is.true
         await expect(forwarderContract.execute(forwardRequest, signedRequest))
-            .to.emit(classicOracle, 'ValueUpdated');
-        const { date: foundDate, stringValue: foundValue } = await classicOracle.getString(oracleId);
+            .to.emit(singleReporterOracle, 'ValueUpdated');
+        const { date: foundDate, stringValue: foundValue } = await singleReporterOracle.getString(oracleId);
         expect(date).equal(foundDate);
         expect(value).equal(foundValue);
         expect(await forwarderContract.isConsumedSalt(reporterAccount.address, forwardRequest.salt)).is.true;
@@ -64,7 +64,7 @@ describe("SaltyForwarder", function () {
             .verify(forwardRequest, signedRequest)).is.true
         await expect(forwarderContract.connect(sponsorAccount)
             .execute(forwardRequest, signedRequest))
-            .to.emit(classicOracle, 'ValueUpdated');
+            .to.emit(singleReporterOracle, 'ValueUpdated');
         //verify cannot replay
         expect(await forwarderContract.verify(forwardRequest, signedRequest)).is.false
         await expect(forwarderContract.execute(forwardRequest, signedRequest))
@@ -90,9 +90,10 @@ describe("SaltyForwarder", function () {
         for (let i = 0; i < n; i++) {
             const oracleId = buildOracleId(i)
             const requestAndSignature = requestAndSignatureMap.get(i);
-            await expect(forwarderContract.execute(requestAndSignature[0], requestAndSignature[1]))
-                .to.emit(classicOracle, 'ValueUpdated')
-            const { date: foundDate, stringValue: foundValue } = await classicOracle.getString(oracleId);
+            const tx = forwarderContract.execute(requestAndSignature[0], requestAndSignature[1]);
+            await expect(tx)
+                .to.emit(singleReporterOracle, 'ValueUpdated')
+            const { date: foundDate, stringValue: foundValue } = await singleReporterOracle.getString(oracleId);
             expect(date).equal(foundDate);
             expect(value).equal(foundValue);
             console.log("Submited metatx (now mined):   %s->%s", i, oracleId)
@@ -109,13 +110,14 @@ describe("SaltyForwarder", function () {
     }
 
     async function buildForwardRequest(oracleId: string, callback: string): Promise<SaltyForwarder.ForwardRequestStruct> {
+        const gas = await singleReporterOracle.connect(reporterAccount).estimateGas.receiveResult(oracleId, callback);
         return {
             from: reporterAccount.address,
-            to: classicOracle.address,
+            to: singleReporterOracle.address,
             value: 0,
-            gas: await classicOracle.connect(reporterAccount).estimateGas.receiveResult(oracleId, callback),
+            gas: gas,
             salt: ethers.utils.keccak256(ethers.utils.toUtf8Bytes(Math.random().toString())),
-            data: classicOracle.interface.encodeFunctionData("receiveResult", [oracleId, callback])
+            data: singleReporterOracle.interface.encodeFunctionData("receiveResult", [oracleId, callback])
         };
     }
 

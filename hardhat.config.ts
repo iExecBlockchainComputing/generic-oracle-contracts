@@ -25,6 +25,10 @@ const config: HardhatUserConfig = {
     polygonTestnet: {
       url: 'https://rpc-mumbai.maticvigil.com',
       accounts: [PRIVATE_KEY]
+    },
+    bellecour: {
+        url: 'https://bellecour.iex.ec',
+        accounts: [PRIVATE_KEY]
     }
   },
   etherscan: {
