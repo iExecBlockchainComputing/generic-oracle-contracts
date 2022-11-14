@@ -27,7 +27,7 @@ import "./utils/IERC1154.sol";
 
 import "hardhat/console.sol";
 
-contract SingleReporterOracle is ERC2771Context, IOracleConsumer, GenericOracle {
+contract SingleReporterOracle is GenericOracle, IOracleConsumer, ERC2771Context {
     // Authorized address to report result
     address public authorizedReporter;
 

@@ -24,7 +24,7 @@ import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
 import "@iexec/doracle/contracts/IexecDoracle.sol";
 import "./GenericOracle.sol";
 
-contract VerifiedResultOracle is IexecDoracle, Ownable, IOracleConsumer, GenericOracle {
+contract VerifiedResultOracle is GenericOracle, IOracleConsumer, IexecDoracle, Ownable  {
 
     // Use _iexecHubAddr to force use of custom iexechub, leave 0x0 for autodetect
     constructor(address _iexecHubAddr) public IexecDoracle(_iexecHubAddr) {}
