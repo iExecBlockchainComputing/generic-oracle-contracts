@@ -17,8 +17,11 @@
  ******************************************************************************/
 
 pragma solidity >=0.6.12;
-
-contract GenericOracle {
+/**
+ * @dev Any contract which implements this GenericOracle contract should add its
+ * own protection logic reponsible of securing the `_updateValue(..)` method.
+ */
+abstract contract GenericOracle {
 
     // Data storage
     struct TimedRawValue {
