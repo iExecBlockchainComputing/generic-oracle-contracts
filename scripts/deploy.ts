@@ -1,6 +1,7 @@
 import { ethers } from "hardhat";
 import { exit } from "process";
 
+const iexecHubAddress = "0x3eca1B216A7DF1C7689aEb259fFB83ADFB894E7f";
 // Dev environment: Goerli, Mumbai
 //const authorizedReporter = '0x767A2D69D7278F200ae1F79a00Ac2CaE299dD784'
 // Prod environment: Mainnet, Polygon, Goerli, Mumbai
@@ -17,7 +18,8 @@ async function main() {
     // Should only be deployed on source chain
     if (chainId == 134) {
         const VerifiedResultOracleFactory = await ethers.getContractFactory("VerifiedResultOracle")
-        const verifiedResultOracle = await VerifiedResultOracleFactory.deploy("0x3eca1B216A7DF1C7689aEb259fFB83ADFB894E7f")
+        // All submitted results will be verified against an existing iExec Hub
+        const verifiedResultOracle = await VerifiedResultOracleFactory.deploy(iexecHubAddress)
         await verifiedResultOracle.deployTransaction.wait()
         console.log("VerifiedResultOracle:%s [tx:%s]", 
             verifiedResultOracle.address, verifiedResultOracle.deployTransaction.hash);
