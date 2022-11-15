@@ -18,6 +18,10 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
     },
+    mainnet: {
+        url: 'https://mainnet.infura.io/v3/' + INFURA_API_KEY,
+        accounts: [PRIVATE_KEY]
+      },
     goerli: {
       url: 'https://goerli.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY]
@@ -26,6 +30,10 @@ const config: HardhatUserConfig = {
       url: 'https://rpc-mumbai.maticvigil.com',
       accounts: [PRIVATE_KEY]
     },
+    polygon: {
+        url: 'https://rpc-mainnet.maticvigil.com',
+        accounts: [PRIVATE_KEY]
+      },
     bellecour: {
         url: 'https://bellecour.iex.ec',
         accounts: [PRIVATE_KEY]
@@ -33,9 +41,10 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      goerli: ETHERSCAN_API_KEY,
-      polygonMumbai: ETHERSCAN_POLYGON_API_KEY,
-      polygon: ETHERSCAN_POLYGON_API_KEY,
+        mainnet: ETHERSCAN_API_KEY,
+        goerli: ETHERSCAN_API_KEY,
+        polygonMumbai: ETHERSCAN_POLYGON_API_KEY,
+        polygon: ETHERSCAN_POLYGON_API_KEY,
     }
   },
   solidity: {
