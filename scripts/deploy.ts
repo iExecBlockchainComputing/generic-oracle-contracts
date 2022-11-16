@@ -1,5 +1,7 @@
 import { ethers } from "hardhat";
 
+const { AUTHORIZED_REPORTER } = process.env;
+
 async function main() {
     const [deployer] = await ethers.getSigners();
     const chainId = (await ethers.provider.getNetwork()).chainId
@@ -7,7 +9,7 @@ async function main() {
     console.log("Deploying contracts..");
     console.log("Chain ID: ", chainId);
     console.log("Deployer: ", deployer.address);
-    const authorizedReporter = '0x767A2D69D7278F200ae1F79a00Ac2CaE299dD784'
+    const authorizedReporter = AUTHORIZED_REPORTER || "0x767A2D69D7278F200ae1F79a00Ac2CaE299dD784";
 
     const SaltyForwarderFactory = await ethers.getContractFactory("SaltyForwarder")
     const forwarder = await SaltyForwarderFactory.deploy()

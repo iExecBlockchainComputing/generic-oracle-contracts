@@ -4,23 +4,28 @@ import "@typechain/hardhat";
 import "@nomiclabs/hardhat-etherscan";
 import { config as dotEnvConfig } from "dotenv";
 import { HardhatUserConfig } from "hardhat/types";
-import "solidity-coverage"
+import "solidity-coverage";
 
 dotEnvConfig();
-var PRIVATE_KEY: string = process.env.PRIVATE_KEY || "0x0000000000000000000000000000000000000000000000000000000000000000"
-var INFURA_API_KEY: string = process.env.INFURA_API_KEY || ""
-var ETHERSCAN_API_KEY: string = process.env.ETHERSCAN_API_KEY || ""
-var ETHERSCAN_POLYGON_API_KEY: string = process.env.ETHERSCAN_POLYGON_API_KEY || ""
-
+var PRIVATE_KEY: string =
+  process.env.PRIVATE_KEY ||
+  "0x0000000000000000000000000000000000000000000000000000000000000000";
+var INFURA_API_KEY: string = process.env.INFURA_API_KEY || "";
+var ETHERSCAN_API_KEY: string = process.env.ETHERSCAN_API_KEY || "";
+var ETHERSCAN_POLYGON_API_KEY: string =
+  process.env.ETHERSCAN_POLYGON_API_KEY || "";
 
 const config: HardhatUserConfig = {
-  defaultNetwork: 'hardhat',
+  defaultNetwork: "hardhat",
   networks: {
-    hardhat: {
+    hardhat: {},
+    local: {
+      url: "http://localhost:8545",
+      accounts: [PRIVATE_KEY],
     },
     goerli: {
-      url: 'https://goerli.infura.io/v3/' + INFURA_API_KEY,
-      accounts: [PRIVATE_KEY]
+      url: "https://goerli.infura.io/v3/" + INFURA_API_KEY,
+      accounts: [PRIVATE_KEY],
     },
     polygonTestnet: {
       url: 'https://rpc-mumbai.maticvigil.com',
@@ -36,7 +41,7 @@ const config: HardhatUserConfig = {
       goerli: ETHERSCAN_API_KEY,
       polygonMumbai: ETHERSCAN_POLYGON_API_KEY,
       polygon: ETHERSCAN_POLYGON_API_KEY,
-    }
+    },
   },
   solidity: {
     compilers: [
@@ -57,11 +62,11 @@ const config: HardhatUserConfig = {
             runs: 200,
           },
         },
-      }
+      },
     ],
   },
   typechain: {
-    outDir: 'typechain'
+    outDir: "typechain",
   },
 };
 

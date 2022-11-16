@@ -1,0 +1,9 @@
+//Readme @ https://gitlab.intra.iex.ec/iexec/jenkins-library
+
+@Library('global-jenkins-library@2.0.0') _
+buildUiFromDocker(
+    imageprivacy: 'private',
+    dockerImageRepositoryName: 'generic-oracle-contracts-testchain',
+    dockerfileDir: 'testchain',
+    buildContext: '.'
+    )
