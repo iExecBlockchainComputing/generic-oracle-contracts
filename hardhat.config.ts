@@ -19,18 +19,22 @@ const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
+    local: {
+      url: "http://localhost:8545",
+      accounts: [PRIVATE_KEY],
+    },
     goerli: {
       url: "https://goerli.infura.io/v3/" + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
     polygonTestnet: {
-      url: "https://rpc-mumbai.maticvigil.com",
-      accounts: [PRIVATE_KEY],
+      url: 'https://rpc-mumbai.maticvigil.com',
+      accounts: [PRIVATE_KEY]
     },
-    local: {
-      url: "http://localhost:8545",
-      accounts: [PRIVATE_KEY],
-    },
+    bellecour: {
+        url: 'https://bellecour.iex.ec',
+        accounts: [PRIVATE_KEY]
+    }
   },
   etherscan: {
     apiKey: {

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /******************************************************************************
- * Copyright 2021 IEXEC BLOCKCHAIN TECH                                       *
+ * Copyright 2022 IEXEC BLOCKCHAIN TECH                                       *
  *                                                                            *
  * Licensed under the Apache License, Version 2.0 (the "License");            *
  * you may not use this file except in compliance with the License.           *
@@ -16,14 +16,13 @@
  * limitations under the License.                                             *
  ******************************************************************************/
 
-pragma solidity ^0.6.12;
-pragma experimental ABIEncoderV2;
+pragma solidity >=0.6.12;
+/**
+ * @dev Any contract which implements this GenericOracle contract should add its
+ * own protection logic reponsible of securing the `_updateValue(..)` method.
+ */
+abstract contract GenericOracle {
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
-import "@iexec/doracle/contracts/IexecDoracle.sol";
-
-contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
     // Data storage
     struct TimedRawValue {
         bytes value;
@@ -40,40 +39,16 @@ contract GenericOracle is IexecDoracle, Ownable, IOracleConsumer {
         bytes value
     );
 
-    // Use _iexecHubAddr to force use of custom iexechub, leave 0x0 for autodetect
-    constructor(address _iexecHubAddr) public IexecDoracle(_iexecHubAddr) {}
-
-    function updateEnv(
-        address _authorizedApp,
-        address _authorizedDataset,
-        address _authorizedWorkerpool,
-        bytes32 _requiredtag,
-        uint256 _requiredtrust
-    ) public onlyOwner {
-        _iexecDoracleUpdateSettings(
-            _authorizedApp,
-            _authorizedDataset,
-            _authorizedWorkerpool,
-            _requiredtag,
-            _requiredtrust
-        );
-    }
-
-    // ERC1154 - Callback processing
-    function receiveResult(bytes32 _callID, bytes calldata) external override {
-        // Parse results
-        (bytes32 id, uint date, bytes memory value) =
-            abi.decode(
-                _iexecDoracleGetVerifiedResult(_callID),
-                (bytes32, uint, bytes)
-            );
-
-        values[id].date = date;
+    // Update value
+    function _updateValue(bytes32 id, bytes32 callId, uint256 date, bytes memory value)
+        internal
+    {
+        values[id].date = date; //What if date is older?
         values[id].value = value;
-
-        emit ValueUpdated(id, _callID, date, value);
+        emit ValueUpdated(id, callId, date, value);
     }
 
+    // Read value
     function getString(bytes32 _oracleId)
         public
         view
