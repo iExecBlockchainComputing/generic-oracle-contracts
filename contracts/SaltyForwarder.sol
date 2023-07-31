@@ -58,15 +58,17 @@ contract SaltyForwarder is EIP712 {
 
     constructor() EIP712("SaltyForwarder", "0.0.1") {}
 
-    function isConsumedSalt(address from, bytes32 salt) public view returns (bool) {
+    function isConsumedSalt(
+        address from,
+        bytes32 salt
+    ) public view returns (bool) {
         return _consumedSalts[from][salt];
     }
 
-    function verify(ForwardRequest calldata req, bytes calldata signature)
-        public
-        view
-        returns (bool)
-    {
+    function verify(
+        ForwardRequest calldata req,
+        bytes calldata signature
+    ) public view returns (bool) {
         address signer = _hashTypedDataV4(
             keccak256(
                 abi.encode(
@@ -83,11 +85,10 @@ contract SaltyForwarder is EIP712 {
         return !isConsumedSalt(req.from, req.salt) && signer == req.from;
     }
 
-    function execute(ForwardRequest calldata req, bytes calldata signature)
-        public
-        payable
-        returns (bool, bytes memory)
-    {
+    function execute(
+        ForwardRequest calldata req,
+        bytes calldata signature
+    ) public payable returns (bool, bytes memory) {
         require(
             verify(req, signature),
             "SaltyForwarder: invalid signature or salt"

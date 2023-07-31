@@ -24,8 +24,12 @@ import "@iexec/solidity/contracts/ERC1154/IERC1154.sol";
 import "@iexec/doracle/contracts/IexecDoracle.sol";
 import "./GenericOracle.sol";
 
-contract VerifiedResultOracle is GenericOracle, IOracleConsumer, IexecDoracle, Ownable  {
-
+contract VerifiedResultOracle is
+    GenericOracle,
+    IOracleConsumer,
+    IexecDoracle,
+    Ownable
+{
     // Use _iexecHubAddr to force use of custom iexechub, leave 0x0 for autodetect
     constructor(address _iexecHubAddr) public IexecDoracle(_iexecHubAddr) {}
 
@@ -48,13 +52,11 @@ contract VerifiedResultOracle is GenericOracle, IOracleConsumer, IexecDoracle, O
     // ERC1154 - Callback processing
     function receiveResult(bytes32 _callID, bytes calldata) external override {
         // Parse results
-        (bytes32 id, uint date, bytes memory value) =
-            abi.decode(
-                _iexecDoracleGetVerifiedResult(_callID),
-                (bytes32, uint, bytes)
-            );
+        (bytes32 id, uint date, bytes memory value) = abi.decode(
+            _iexecDoracleGetVerifiedResult(_callID),
+            (bytes32, uint, bytes)
+        );
 
         _updateValue(id, _callID, date, value);
     }
-
 }
