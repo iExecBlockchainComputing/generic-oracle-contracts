@@ -3,7 +3,7 @@ import { exit } from 'process';
 import { saveDeployed } from './utils/utils';
 
 const authorizedReporter =
-  process.env.AUTHORIZED_REPORTER ||
+  process.env.AUTHORIZED_REPORTER ??
   '0xa1135C5f1309eF9836679d31d7bea9846827f699';
 
 async function main() {
@@ -19,9 +19,7 @@ async function main() {
   const forwarder = await SaltyForwarderFactory.deploy();
   await forwarder.deployTransaction.wait();
   console.log(
-    'SaltyForwarder: %s [tx:%s]',
-    forwarder.address,
-    forwarder.deployTransaction.hash
+    `SaltyForwarder: ${forwarder.address} [tx:${forwarder.deployTransaction.hash}]`
   );
   await saveDeployed({
     contractName: 'SaltyForwarder',
@@ -39,9 +37,7 @@ async function main() {
   );
   await singleReporterOracle.deployTransaction.wait();
   console.log(
-    'SingleReporterOracle: %s [tx:%s]',
-    singleReporterOracle.address,
-    singleReporterOracle.deployTransaction.hash
+    `SingleReporterOracle: ${singleReporterOracle.address} [tx:${singleReporterOracle.deployTransaction.hash}]`
   );
   await saveDeployed({
     contractName: 'SingleReporterOracle',
