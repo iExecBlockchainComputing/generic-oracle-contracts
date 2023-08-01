@@ -31,13 +31,13 @@ steps:
     commands:
       - npm run test
 
-  - name: dry-run native deployment
-    image: node:18
-    commands:
-      - npm run deploy-native
-
   # # require iexec instance not present on hardhat chain
-  # - name: dry-run x-chain deployment
+  # - name: dry-run native deployment
   #   image: node:18
   #   commands:
-  #     - npm run deploy-x-chain
+  #     - npm run deploy-native
+
+  - name: dry-run x-chain deployment
+    image: node:18
+    commands:
+      - npm run deploy-x-chain
