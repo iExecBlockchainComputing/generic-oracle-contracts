@@ -181,6 +181,12 @@ steps:
       AUTHORIZED_REPORTER: '0x767a2d69d7278f200ae1f79a00ac2cae299dd784'
       PRIVATE_KEY:
         from_secret: deployer-dev-privatekey
+      INFURA_API_KEY:
+        from_secret: infura-api-key
+      ETHERSCAN_API_KEY:
+        from_secret: etherscan-api-key
+      POLYSCAN_API_KEY:
+        from_secret: polyscan-api-key
     commands:
       - npm run deploy-x-chain -- --network $NETWORK
       - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
@@ -200,6 +206,12 @@ steps:
       AUTHORIZED_REPORTER: '0xa1135C5f1309eF9836679d31d7bea9846827f699'
       PRIVATE_KEY:
         from_secret: deployer-prod-privatekey
+      INFURA_API_KEY:
+        from_secret: infura-api-key
+      ETHERSCAN_API_KEY:
+        from_secret: etherscan-api-key
+      POLYSCAN_API_KEY:
+        from_secret: polyscan-api-key
     commands:
       - npm run deploy-native -- --network $NETWORK
       - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
