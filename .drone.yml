@@ -91,7 +91,7 @@ steps:
     commands:
       - npm run test
 
-  - name: native deployment dev
+  - name: native deploy and verify dev
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     environment:
@@ -103,13 +103,14 @@ steps:
         from_secret: deployer-dev-privatekey
     commands:
       - npm run deploy-native -- --network $NETWORK
+      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/VerifiedResultOracle/address) $(cat deployed/$NETWORK/VerifiedResultOracle/constructorArgs)
     when:
       target:
         - native-dev
       branch:
         - develop
 
-  - name: native deployment production
+  - name: native deploy and verify production
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     environment:
@@ -121,16 +122,9 @@ steps:
         from_secret: deployer-prod-privatekey
     commands:
       - npm run deploy-native -- --network $NETWORK
+      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/VerifiedResultOracle/address) $(cat deployed/$NETWORK/VerifiedResultOracle/constructorArgs)
     when:
       target:
         - native-production
       branch:
         - main
-
-  - name: verify
-    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-    image: node:18.12.1
-    environment:
-      NETWORK: bellecour
-    commands:
-      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/VerifiedResultOracle/address) $(cat deployed/$NETWORK/VerifiedResultOracle/constructorArgs)
