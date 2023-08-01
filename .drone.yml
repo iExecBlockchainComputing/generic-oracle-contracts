@@ -92,6 +92,7 @@ steps:
         from_secret: deployer-dev-privatekey
     commands:
       - npm run deploy-native -- --network bellecour
+      - sleep 30
       - npx hardhat verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
     when:
       target:
@@ -110,6 +111,7 @@ steps:
         from_secret: deployer-prod-privatekey
     commands:
       - npm run deploy-native -- --network bellecour
+      - sleep 30
       - npx hardhat verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
     when:
       target:
@@ -173,6 +175,7 @@ steps:
         from_secret: polyscan-api-key
     commands:
       - npm run deploy-x-chain -- --network $NETWORK
+      - sleep 30
       - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
       - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
     when:
@@ -198,6 +201,7 @@ steps:
         from_secret: polyscan-api-key
     commands:
       - npm run deploy-native -- --network $NETWORK
+      - sleep 30
       - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
       - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
     when:
