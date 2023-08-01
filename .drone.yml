@@ -45,6 +45,8 @@ steps:
   - name: dry-run x-chain deployment
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
+    environment:
+      AUTHORIZED_REPORTER: '0xa1135C5f1309eF9836679d31d7bea9846827f699'
     commands:
       - npm run deploy-x-chain
 
@@ -178,7 +180,6 @@ steps:
     params:
       - NETWORK
     environment:
-      # todo check AUTHORIZED_REPORTER
       AUTHORIZED_REPORTER: '0x767a2d69d7278f200ae1f79a00ac2cae299dd784'
       PRIVATE_KEY:
         from_secret: deployer-dev-privatekey
@@ -198,7 +199,6 @@ steps:
     params:
       - NETWORK
     environment:
-      # todo check AUTHORIZED_REPORTER
       AUTHORIZED_REPORTER: '0xa1135C5f1309eF9836679d31d7bea9846827f699'
       PRIVATE_KEY:
         from_secret: deployer-prod-privatekey
