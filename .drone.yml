@@ -97,15 +97,14 @@ steps:
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     environment:
-      NETWORK: bellecour
       # todo change TARGET_OWNER
       TARGET_OWNER:
         from_secret: deployer-dev-address
       PRIVATE_KEY:
         from_secret: deployer-dev-privatekey
     commands:
-      - npm run deploy-native -- --network $NETWORK
-      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/VerifiedResultOracle/address) $(cat deployed/$NETWORK/VerifiedResultOracle/constructorArgs)
+      - npm run deploy-native -- --network bellecour
+      - npx hardhat verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
     when:
       target:
         - native-dev
@@ -116,15 +115,14 @@ steps:
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     environment:
-      NETWORK: bellecour
       # todo change TARGET_OWNER
       TARGET_OWNER:
         from_secret: deployer-prod-address
       PRIVATE_KEY:
         from_secret: deployer-prod-privatekey
     commands:
-      - npm run deploy-native -- --network $NETWORK
-      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/VerifiedResultOracle/address) $(cat deployed/$NETWORK/VerifiedResultOracle/constructorArgs)
+      - npm run deploy-native -- --network bellecour
+      - npx hardhat verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
     when:
       target:
         - native-production
