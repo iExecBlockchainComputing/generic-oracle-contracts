@@ -2,11 +2,11 @@ import { ethers, network } from 'hardhat';
 import { exit } from 'process';
 import { saveDeployed } from './utils/utils';
 
-const authorizedReporter =
-  process.env.AUTHORIZED_REPORTER ??
-  '0xa1135C5f1309eF9836679d31d7bea9846827f699';
-
 async function main() {
+  const authorizedReporter = process.env.AUTHORIZED_REPORTER;
+  if (!authorizedReporter) {
+    throw Error('missing AUTHORIZED_REPORTER');
+  }
   const [deployer] = await ethers.getSigners();
   const chainId = (await ethers.provider.getNetwork()).chainId;
   console.log('Deploying contracts...');
