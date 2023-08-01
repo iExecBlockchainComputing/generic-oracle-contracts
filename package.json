@@ -7,7 +7,8 @@
   "main": "hardhat.config.ts",
   "scripts": {
     "compile": "hardhat compile",
-    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy-native": "hardhat run scripts/deploy-native.ts",
+    "deploy-x-chain": "hardhat run scripts/deploy-x-chain.ts",
     "verify": "hardhat verify",
     "test": "hardhat test",
     "coverage": "hardhat coverage",
