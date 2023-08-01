@@ -1,0 +1,43 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  event:
+    exclude:
+      - promote
+
+steps:
+  - name: install deps
+    image: node:18
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: check format
+    image: node:18
+    commands:
+      - npm run check-format
+
+  - name: compile
+    image: node:18
+    commands:
+      - npm run compile
+
+  - name: test
+    image: node:18
+    commands:
+      - npm run test
+
+  - name: dry-run native deployment
+    image: node:18
+    commands:
+      - npm run deploy-native
+
+  # # require iexec instance not present on hardhat chain
+  # - name: dry-run x-chain deployment
+  #   image: node:18
+  #   commands:
+  #     - npm run deploy-x-chain
