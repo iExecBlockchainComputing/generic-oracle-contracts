@@ -1,4 +1,4 @@
-import { ethers } from 'hardhat';
+import { ethers, network } from 'hardhat';
 import { exit } from 'process';
 import { saveDeployed } from './utils/utils';
 
@@ -23,7 +23,7 @@ async function main() {
   );
   await saveDeployed({
     contractName: 'SaltyForwarder',
-    chainId,
+    chain: network.name,
     address: forwarder.address,
     constructorArgs: [],
   });
@@ -41,7 +41,7 @@ async function main() {
   );
   await saveDeployed({
     contractName: 'SingleReporterOracle',
-    chainId,
+    chain: network.name,
     address: singleReporterOracle.address,
     constructorArgs: [authorizedReporter, forwarder.address],
   });

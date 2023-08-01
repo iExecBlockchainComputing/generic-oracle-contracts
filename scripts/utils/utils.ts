@@ -3,20 +3,16 @@ import path from 'path';
 
 export const saveDeployed = async ({
   contractName,
-  chainId,
+  chain,
   address,
   constructorArgs,
 }: {
   contractName: string;
-  chainId: number;
+  chain: string;
   address: string;
   constructorArgs: string[];
 }) => {
-  const deploymentPath = path.join(
-    'deployed',
-    chainId.toString(),
-    contractName
-  );
+  const deploymentPath = path.join('deployed', chain, contractName);
   console.log(`saving deployment to ${deploymentPath}`);
   await fs.mkdir(deploymentPath, { recursive: true });
   await Promise.all([

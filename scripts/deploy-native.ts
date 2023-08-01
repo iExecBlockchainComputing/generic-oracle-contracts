@@ -1,4 +1,4 @@
-import { ethers } from 'hardhat';
+import { ethers, network } from 'hardhat';
 import { exit } from 'process';
 import { saveDeployed } from './utils/utils';
 
@@ -27,7 +27,7 @@ async function main() {
   );
   await saveDeployed({
     contractName: 'VerifiedResultOracle',
-    chainId,
+    chain: network.name,
     address: verifiedResultOracle.address,
     constructorArgs: [iexecHubAddress],
   });
