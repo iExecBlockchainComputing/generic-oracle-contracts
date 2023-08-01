@@ -128,3 +128,86 @@ steps:
         - native-production
       branch:
         - main
+
+---
+kind: pipeline
+type: docker
+name: deploy-x-chain
+
+trigger:
+  event:
+    - promote
+  target:
+    - x-chain-dev
+    - x-chain-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: check format
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run check-format
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: test
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run test
+
+  - name: x-chain deploy and verify dev
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - NETWORK
+    environment:
+      # todo check AUTHORIZED_REPORTER
+      AUTHORIZED_REPORTER: '0x767a2d69d7278f200ae1f79a00ac2cae299dd784'
+      PRIVATE_KEY:
+        from_secret: deployer-dev-privatekey
+    commands:
+      - npm run deploy-x-chain -- --network $NETWORK
+      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
+      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
+    when:
+      target:
+        - x-chain-dev
+      branch:
+        - develop
+
+  - name: x-chain deploy and verify production
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - NETWORK
+    environment:
+      # todo check AUTHORIZED_REPORTER
+      AUTHORIZED_REPORTER: '0xa1135C5f1309eF9836679d31d7bea9846827f699'
+      PRIVATE_KEY:
+        from_secret: deployer-prod-privatekey
+    commands:
+      - npm run deploy-native -- --network $NETWORK
+      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
+      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
+    when:
+      target:
+        - x-chain-production
+      branch:
+        - main
