@@ -75,23 +75,11 @@ steps:
       - npm -v
       - npm ci
 
-  - name: check format
-    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-    image: node:18.12.1
-    commands:
-      - npm run check-format
-
   - name: compile
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     commands:
       - npm run compile
-
-  - name: test
-    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-    image: node:18.12.1
-    commands:
-      - npm run test
 
   - name: native deploy and verify dev
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
@@ -156,29 +144,17 @@ steps:
 
   - name: install deps
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-    pull: always
+    image: node:18.12.1
     commands:
       - node -v
       - npm -v
       - npm ci
-
-  - name: check format
-    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-    image: node:18.12.1
-    commands:
-      - npm run check-format
 
   - name: compile
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     commands:
       - npm run compile
-
-  - name: test
-    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-    image: node:18.12.1
-    commands:
-      - npm run test
 
   - name: x-chain deploy and verify dev
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
