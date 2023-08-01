@@ -1,3 +1,3 @@
 module.exports = {
-    skipFiles: ['GenericOracle.sol']
+  skipFiles: ['GenericOracle.sol'],
 };
