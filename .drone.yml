@@ -47,3 +47,90 @@ steps:
     image: node:18.12.1
     commands:
       - npm run deploy-x-chain
+
+---
+kind: pipeline
+type: docker
+name: deploy-native
+
+trigger:
+  event:
+    - promote
+  target:
+    - native-dev
+    - native-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: check format
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run check-format
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: test
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run test
+
+  - name: native deployment dev
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    environment:
+      NETWORK: bellecour
+      # todo change TARGET_OWNER
+      TARGET_OWNER:
+        from_secret: deployer-dev-address
+      PRIVATE_KEY:
+        from_secret: deployer-dev-privatekey
+    commands:
+      - npm run deploy-native -- --network $NETWORK
+    when:
+      target:
+        - native-dev
+      branch:
+        - develop
+
+  - name: native deployment production
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    environment:
+      NETWORK: bellecour
+      # todo change TARGET_OWNER
+      TARGET_OWNER:
+        from_secret: deployer-prod-address
+      PRIVATE_KEY:
+        from_secret: deployer-prod-privatekey
+    commands:
+      - npm run deploy-native -- --network $NETWORK
+    when:
+      target:
+        - native-production
+      branch:
+        - main
+
+  - name: verify
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    environment:
+      NETWORK: bellecour
+    commands:
+      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/VerifiedResultOracle/address) $(cat deployed/$NETWORK/VerifiedResultOracle/constructorArgs)
