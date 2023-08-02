@@ -141,18 +141,16 @@ trigger:
 
 steps:
   - name: ensure selected network
-    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-    image: node:18.12.1
-    pull: always
+    image: bash
     params:
       - NETWORK
     commands:
-      - if [ "$NETWORK" == "" ]; then echo "missing NETWORK param" && exit 1; fi;
-      - echo "selected network $NETWORK"
+      - \[[ "$NETWORK" == "" ]] && echo "missing NETWORK param" && exit 1 || echo "network $NETWORK"
 
   - name: install deps
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
+    pull: always
     commands:
       - node -v
       - npm -v
