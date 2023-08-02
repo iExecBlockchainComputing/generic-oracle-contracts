@@ -257,12 +257,6 @@ steps:
     commands:
       - npm run test
 
-  - name: build
-    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-    image: node:18.12.1
-    commands:
-      - npm run build
-
   - name: set version nightly
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
