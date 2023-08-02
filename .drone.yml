@@ -29,11 +29,11 @@ steps:
     commands:
       - npm run compile
 
-  - name: test
+  - name: test coverage
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     commands:
-      - npm run test
+      - npm run coverage
 
   - name: native deployment dry-run
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
