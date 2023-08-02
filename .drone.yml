@@ -35,13 +35,13 @@ steps:
     commands:
       - npm run coverage
 
-  - name: native deployment dry-run
+  - name: test deploy-native script
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     commands:
       - npm run deploy-native
 
-  - name: x-chain deployment dry-run
+  - name: test deploy-x-chain script
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     environment:
