@@ -17,12 +17,12 @@
  ******************************************************************************/
 
 pragma solidity >=0.6.12;
+
 /**
  * @dev Any contract which implements this GenericOracle contract should add its
  * own protection logic reponsible of securing the `_updateValue(..)` method.
  */
 abstract contract GenericOracle {
-
     // Data storage
     struct TimedRawValue {
         bytes value;
@@ -40,47 +40,42 @@ abstract contract GenericOracle {
     );
 
     // Update value
-    function _updateValue(bytes32 id, bytes32 callId, uint256 date, bytes memory value)
-        internal
-    {
+    function _updateValue(
+        bytes32 id,
+        bytes32 callId,
+        uint256 date,
+        bytes memory value
+    ) internal {
         values[id].date = date; //What if date is older?
         values[id].value = value;
         emit ValueUpdated(id, callId, date, value);
     }
 
     // Read value
-    function getString(bytes32 _oracleId)
-        public
-        view
-        returns (string memory stringValue, uint256 date)
-    {
+    function getString(
+        bytes32 _oracleId
+    ) public view returns (string memory stringValue, uint256 date) {
         bytes memory value = values[_oracleId].value;
         return (abi.decode(value, (string)), values[_oracleId].date);
     }
 
-    function getRaw(bytes32 _oracleId)
-        public
-        view
-        returns (bytes memory bytesValue, uint256 date)
-    {
+    function getRaw(
+        bytes32 _oracleId
+    ) public view returns (bytes memory bytesValue, uint256 date) {
         bytes memory value = values[_oracleId].value;
         return (value, values[_oracleId].date);
     }
 
-    function getInt(bytes32 _oracleId)
-        public
-        view
-        returns (int256 intValue, uint256 date)
-    {
+    function getInt(
+        bytes32 _oracleId
+    ) public view returns (int256 intValue, uint256 date) {
         bytes memory value = values[_oracleId].value;
         return (abi.decode(value, (int256)), values[_oracleId].date);
     }
 
-    function getBool(bytes32 _oracleId)
-        public
-        view
-        returns (bool boolValue, uint256 date)
-    {
+    function getBool(
+        bytes32 _oracleId
+    ) public view returns (bool boolValue, uint256 date) {
         bytes memory value = values[_oracleId].value;
         return (abi.decode(value, (bool)), values[_oracleId].date);
     }
