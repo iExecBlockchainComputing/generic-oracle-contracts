@@ -65,8 +65,8 @@ trigger:
   event:
     - promote
   target:
-    - native-dev
-    - native-production
+    - deploy-native-dev
+    - deploy-native-production
   branch:
     - develop
     - main
@@ -102,7 +102,7 @@ steps:
       - npx hardhat verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
     when:
       target:
-        - native-dev
+        - deploy-native-dev
       branch:
         - develop
 
@@ -121,7 +121,7 @@ steps:
       - npx hardhat verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
     when:
       target:
-        - native-production
+        - deploy-native-production
       branch:
         - main
 
@@ -134,8 +134,8 @@ trigger:
   event:
     - promote
   target:
-    - x-chain-dev
-    - x-chain-production
+    - deploy-x-chain-dev
+    - deploy-x-chain-production
   branch:
     - develop
     - main
@@ -187,7 +187,7 @@ steps:
       - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
     when:
       target:
-        - x-chain-dev
+        - deploy-x-chain-dev
       branch:
         - develop
 
@@ -213,7 +213,7 @@ steps:
       - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
     when:
       target:
-        - x-chain-production
+        - deploy-x-chain-production
       branch:
         - main
 
