@@ -2,8 +2,7 @@ import { ethers, network } from 'hardhat';
 import { exit } from 'process';
 import { saveDeployed } from './utils/utils';
 
-const iexecHubAddress =
-  process.env.IEXEC_HUB_ADDRESS ?? '0x3eca1B216A7DF1C7689aEb259fFB83ADFB894E7f';
+let iexecHubAddress = process.env.IEXEC_HUB_ADDRESS;
 
 const targetOwner = process.env.TARGET_OWNER;
 
@@ -13,6 +12,20 @@ async function main() {
   console.log('Deploying contract...');
   console.log('Chain ID: ', chainId);
   console.log('Deployer: ', deployer.address);
+
+  if (!iexecHubAddress) {
+    if (network.name === 'hardhat') {
+      console.log('deploying stub contract for iexec');
+      const StubFactory = await ethers.getContractFactory('Stub');
+      const stub = await StubFactory.connect(deployer).deploy();
+      await stub.deployTransaction.wait();
+      console.log(`Stub:${stub.address} [tx:${stub.deployTransaction.hash}]`);
+      iexecHubAddress = stub.address;
+    } else {
+      console.log('using default iexec instance');
+      iexecHubAddress = '0x3eca1B216A7DF1C7689aEb259fFB83ADFB894E7f';
+    }
+  }
 
   const VerifiedResultOracleFactory = await ethers.getContractFactory(
     'VerifiedResultOracle'

@@ -35,12 +35,11 @@ steps:
     commands:
       - npm run test
 
-  # # require iexec instance not present on hardhat chain
-  # - name: native deployment dry-run
-  #   # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
-  #   image: node:18.12.1
-  #   commands:
-  #     - npm run deploy-native
+  - name: native deployment dry-run
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run deploy-native
 
   - name: x-chain deployment dry-run
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
