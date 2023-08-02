@@ -1,5 +1,6 @@
 {
   "name": "@iexec/generic-oracle-contracts",
+  "version": "2.2.0",
   "description": "Contracts for Iexec generic DOracle",
   "files": [
     "/typechain"
