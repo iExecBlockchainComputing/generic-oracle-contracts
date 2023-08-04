@@ -126,7 +126,21 @@ deployment details are saved in the `deployed/<network>/<contract>` folder and c
 # ex: contract verification on goerli
 npm run verify -- --network goerli $(cat deployed/goerli/SaltyForwarder/address) $(cat deployed/goerli/SaltyForwarder/constructorArgs)
 npm run verify -- --network goerli $(cat deployed/goerli/SingleReporterOracle/address) $(cat deployed/goerli/SingleReporterOracle/constructorArgs)
+```
 
+### update env native oracle (VerifiedResultOracle)
+
+specific environments:
+
+- `ORACLE_ADDRESS`: VerifiedResultOracle contract address
+- `AUTHORIZED_APP`: task must run with specified app to update the oracle
+- `AUTHORIZED_WORKERPOOL`: task must run on specified workerpool to update the oracle
+- `REQUIRED_TAG`: task must run with tag to update the oracle (default tee + scone)
+
+```sh
+npm run update-env-native
+# OR
+npm run update-env-native -- --network bellecour
 ```
 
 ## Dev deployments
