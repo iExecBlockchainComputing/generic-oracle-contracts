@@ -52,6 +52,10 @@ steps:
   - name: test update-env-native script
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
+    environment:
+      AUTHORIZED_APP: '0x000000000000000000000000000000000000000a'
+      AUTHORIZED_WORKERPOOL: '0x000000000000000000000000000000000000000b'
+      REQUIRED_TAG: '0x0000000000000000000000000000000000000000000000000000000000000003'
     commands:
       - npm run update-env-native
 
