@@ -97,7 +97,7 @@ steps:
     commands:
       - npm run deploy-native -- --network bellecour
       - sleep 30
-      - npx hardhat verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
+      - npm run verify -- verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
     when:
       target:
         - deploy-native-dev
@@ -115,7 +115,7 @@ steps:
     commands:
       - npm run deploy-native -- --network bellecour
       - sleep 30
-      - npx hardhat verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
+      - npm run verify -- --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
     when:
       target:
         - deploy-native-production
@@ -178,8 +178,8 @@ steps:
     commands:
       - npm run deploy-x-chain -- --network $NETWORK
       - sleep 30
-      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
-      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
+      - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
+      - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
     when:
       target:
         - deploy-x-chain-dev
@@ -204,8 +204,8 @@ steps:
     commands:
       - npm run deploy-native -- --network $NETWORK
       - sleep 30
-      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
-      - npx hardhat verify --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
+      - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
+      - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
     when:
       target:
         - deploy-x-chain-production
