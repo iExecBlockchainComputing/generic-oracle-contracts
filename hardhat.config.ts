@@ -7,13 +7,12 @@ import { HardhatUserConfig } from 'hardhat/types';
 import 'solidity-coverage';
 
 dotEnvConfig();
-var PRIVATE_KEY: string =
-  process.env.PRIVATE_KEY ||
+const PRIVATE_KEY: string =
+  process.env.PRIVATE_KEY ??
   '0x0000000000000000000000000000000000000000000000000000000000000000';
-var INFURA_API_KEY: string = process.env.INFURA_API_KEY || '';
-var ETHERSCAN_API_KEY: string = process.env.ETHERSCAN_API_KEY || '';
-var ETHERSCAN_POLYGON_API_KEY: string =
-  process.env.ETHERSCAN_POLYGON_API_KEY || '';
+const INFURA_API_KEY: string = process.env.INFURA_API_KEY ?? '';
+const ETHERSCAN_API_KEY: string = process.env.ETHERSCAN_API_KEY ?? '';
+const POLYSCAN_API_KEY: string = process.env.POLYSCAN_API_KEY ?? '';
 
 const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
@@ -27,12 +26,12 @@ const config: HardhatUserConfig = {
       url: 'https://goerli.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
-    polygonTestnet: {
-      url: 'https://rpc-mumbai.maticvigil.com',
+    polygonMumbai: {
+      url: 'https://polygon-mumbai.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
     polygon: {
-      url: 'https://rpc-mainnet.maticvigil.com',
+      url: 'https://polygon-mainnet.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
     bellecour: {
@@ -44,9 +43,20 @@ const config: HardhatUserConfig = {
     apiKey: {
       mainnet: ETHERSCAN_API_KEY,
       goerli: ETHERSCAN_API_KEY,
-      polygonMumbai: ETHERSCAN_POLYGON_API_KEY,
-      polygon: ETHERSCAN_POLYGON_API_KEY,
+      polygonMumbai: POLYSCAN_API_KEY,
+      polygon: POLYSCAN_API_KEY,
+      bellecour: 'abc',
     },
+    customChains: [
+      {
+        network: 'bellecour',
+        chainId: 134,
+        urls: {
+          apiURL: 'https://blockscout-bellecour.iex.ec/api',
+          browserURL: 'https://blockscout-bellecour.iex.ec',
+        },
+      },
+    ],
   },
   solidity: {
     compilers: [

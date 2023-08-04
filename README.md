@@ -1,6 +1,7 @@
 # Generic Oracle Contracts
 
 ## Overview
+
 ```
  +-----------------------------+ +----------------------------+
  |                             | |                            |
@@ -64,71 +65,117 @@
           +---------------------------------------------+
 ```
 
-
 ## Build
-```
-npx hardhat compile
-npx hardhat coverage
-```
-## Deploy
-```
-npx hardhat run scripts/deploy.ts --network goerli
+
+```sh
+npm ci
+npm run compile
 ```
 
-## Verify
+## Test
 
-* Automatic
+```sh
+npm run test
+# OR with coverage
+npm run coverage
+```
 
-```
-npx hardhat verify --network <network> <SaltyForwarderAddress>
-npx hardhat verify --network <network> <SingleReporterOracleAddress> "0x767A2D69D7278F200ae1F79a00Ac2CaE299dD784" "<SaltyForwarderAddress>"
-```
-See: https://mumbai.polygonscan.com/
+## Scripts
 
-* Manual
-```
-npx hardhat flatten contracts/VerifiedResultOracle.sol  > VerifiedResultOracle_flat.sol
-```
-with couple updates to clean imported interfaces, pragmas, licenses (`SPDX-License-Identifier: X AND Y`), ..
+Each deployment require configuration environment variables that can be loaded from a `.env` file (see `.env.template`)
 
-## NPM publish
+### Deploy native oracle (VerifiedResultOracle)
+
+specific environments:
+
+- `IEXEC_HUB_ADDRESS`: \[optional\] iExec contract address used for oracle updates (default to official deployment or stub contract on "hardhat" network)
+- `TARGET_OWNER`: \[optional\] address to transfer the contract ownership to
+
+```sh
+npm run deploy-native
+# OR
+npm run deploy-native -- --network bellecour
 ```
-npm publish --access public
+
+#### Contract verification
+
+deployment details are saved in the `deployed/<network>/<contract>` folder and can be used to run the verification script
+
+```sh
+# ex: contract verification on bellecour
+npm run verify -- verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
+```
+
+### Deploy x-chain oracle (SaltyForwarder + SingleReporterOracle)
+
+specific environments:
+
+- `AUTHORIZED_REPORTER`: Authorized reporter address for the contract SingleReporterOracle
+
+```sh
+npm run deploy-x-chain
+# OR
+npm run deploy-x-chain -- --network goerli
+```
+
+#### Contract verification
+
+deployment details are saved in the `deployed/<network>/<contract>` folder and can be used to run the verification script
+
+```sh
+# ex: contract verification on goerli
+npm run verify -- --network goerli $(cat deployed/goerli/SaltyForwarder/address) $(cat deployed/goerli/SaltyForwarder/constructorArgs)
+npm run verify -- --network goerli $(cat deployed/goerli/SingleReporterOracle/address) $(cat deployed/goerli/SingleReporterOracle/constructorArgs)
+
 ```
 
 ## Dev deployments
-* Polygon Mumbai
+
+- Polygon Mumbai
+
 ```
 SaltyForwarder deployed to: 0xa715674ecf9D14141421190b6f8Acf20686b54d7
 SingleReporterOracle deployed to: 0x330031CF7e6E2C318Dba230fe25A7f39fD3644EA
 ```
-* Goerli
+
+- Goerli
+
 ```
 SaltyForwarder deployed to: 0x2aD6aD4F35cf7354fE703da74F459690dBcC12bf
 SingleReporterOracle deployed to: 0x8dFf608952ADCDa4cF7320324Db1ef44001BE79b
 ```
-* Bellecour
+
+- Bellecour
+
 ```
-VerifiedResultOracle deployed to: 0xc83b0110F91aD082b580D894BE6c8660cf1FB26d
+VerifiedResultOracle deployed to: 0x0132DaF5c7C177499c256b5eaC30E7201A9b75e2
 ```
 
 ## Production deployments
-* Polygon Mumbai
+
+- Polygon Mumbai
+
 ```
-SaltyForwarder: 0xc684E8645c8414812f22918146d72d1071E722AE
-SingleReporterOracle: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
+SaltyForwarder deployed to: 0xc684E8645c8414812f22918146d72d1071E722AE
+SingleReporterOracle deployed to: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
-* Polygon Mainnet
+
+- Polygon Mainnet
+
 ```
-SaltyForwarder: 0xc684E8645c8414812f22918146d72d1071E722AE
-SingleReporterOracle: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
+SaltyForwarder deployed to: 0xc684E8645c8414812f22918146d72d1071E722AE
+SingleReporterOracle deployed to: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
-* Goerli
+
+- Goerli
+
 ```
-SaltyForwarder: 0xc684E8645c8414812f22918146d72d1071E722AE
-SingleReporterOracle: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E 
+SaltyForwarder deployed to: 0xc684E8645c8414812f22918146d72d1071E722AE
+SingleReporterOracle deployed to: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
-* Bellecour
+
+- Bellecour
+
 ```
-VerifiedResultOracle:0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E 
+VerifiedResultOracle deployed to: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
