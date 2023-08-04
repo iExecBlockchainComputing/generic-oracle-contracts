@@ -225,6 +225,86 @@ steps:
 ---
 kind: pipeline
 type: docker
+name: update-env-native
+
+trigger:
+  event:
+    - promote
+  target:
+    - update-env-native-dev
+    - update-env-native-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: ensure selected params AUTHORIZED_APP AUTHORIZED_WORKERPOOL REQUIRED_TAG
+    image: bash
+    params:
+      - AUTHORIZED_APP
+      - AUTHORIZED_WORKERPOOL
+      - REQUIRED_TAG
+    commands:
+      - \[[ "$AUTHORIZED_APP" == "" ]] && echo "missing AUTHORIZED_APP param" && exit 1 || echo "network $NETWORK"
+      - \[[ "$AUTHORIZED_WORKERPOOL" == "" ]] && echo "missing AUTHORIZED_WORKERPOOL param" && exit 1 || echo "network $NETWORK"
+      - \[[ "$REQUIRED_TAG" == "" ]] && echo "missing REQUIRED_TAG param" && exit 1 || echo "network $NETWORK"
+
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: update-env native dev
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - AUTHORIZED_APP
+      - AUTHORIZED_WORKERPOOL
+      - REQUIRED_TAG
+    environment:
+      ORACLE_ADDRESS: '0x0132DaF5c7C177499c256b5eaC30E7201A9b75e2'
+      PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-dev-privatekey
+    commands:
+      - npm run update-env-native -- --network bellecour
+    when:
+      target:
+        - update-env-native-dev
+      branch:
+        - develop
+
+  - name: update-env native production
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - AUTHORIZED_APP
+      - AUTHORIZED_WORKERPOOL
+      - REQUIRED_TAG
+    environment:
+      ORACLE_ADDRESS: '0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E'
+      PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-prod-privatekey
+    commands:
+      - npm run update-env-native -- --network bellecour
+    when:
+      target:
+        - update-env-native-production
+      branch:
+        - main
+
+---
+kind: pipeline
+type: docker
 name: publish npm nightly
 
 trigger:
