@@ -245,9 +245,9 @@ steps:
       - AUTHORIZED_WORKERPOOL
       - REQUIRED_TAG
     commands:
-      - \[[ "$AUTHORIZED_APP" == "" ]] && echo "missing AUTHORIZED_APP param" && exit 1 || echo "network $NETWORK"
-      - \[[ "$AUTHORIZED_WORKERPOOL" == "" ]] && echo "missing AUTHORIZED_WORKERPOOL param" && exit 1 || echo "network $NETWORK"
-      - \[[ "$REQUIRED_TAG" == "" ]] && echo "missing REQUIRED_TAG param" && exit 1 || echo "network $NETWORK"
+      - \[[ "$AUTHORIZED_APP" == "" ]] && echo "missing AUTHORIZED_APP param" && exit 1 || echo "AUTHORIZED_APP $AUTHORIZED_APP"
+      - \[[ "$AUTHORIZED_WORKERPOOL" == "" ]] && echo "missing AUTHORIZED_WORKERPOOL param" && exit 1 || echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
+      - \[[ "$REQUIRED_TAG" == "" ]] && echo "missing REQUIRED_TAG param" && exit 1 || echo "REQUIRED_TAG $REQUIRED_TAG"
 
   - name: install deps
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
