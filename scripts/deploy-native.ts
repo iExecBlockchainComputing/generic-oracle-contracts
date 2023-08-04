@@ -15,6 +15,7 @@ async function main() {
 
   if (!iexecHubAddress) {
     if (network.name === 'hardhat') {
+      // on hardhat only create prerequisites
       console.log('deploying stub contract for iexec');
       const StubFactory = await ethers.getContractFactory('Stub');
       const stub = await StubFactory.connect(deployer).deploy();
