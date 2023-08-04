@@ -10,6 +10,7 @@
     "compile": "hardhat compile",
     "deploy-native": "hardhat run scripts/deploy-native.ts",
     "deploy-x-chain": "hardhat run scripts/deploy-x-chain.ts",
+    "update-env-native": "hardhat run scripts/update-env-native.ts",
     "verify": "hardhat verify",
     "test": "hardhat test",
     "coverage": "hardhat coverage",
