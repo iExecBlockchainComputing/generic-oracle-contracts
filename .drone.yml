@@ -49,6 +49,12 @@ steps:
     commands:
       - npm run deploy-x-chain
 
+  - name: test update-env-native script
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run update-env-native
+
   - name: npm publish dry-run
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
