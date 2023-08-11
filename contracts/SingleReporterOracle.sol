@@ -27,13 +27,18 @@ import "./utils/IERC1154.sol";
 
 import "hardhat/console.sol";
 
-contract SingleReporterOracle is GenericOracle, IOracleConsumer, ERC2771Context {
+contract SingleReporterOracle is
+    GenericOracle,
+    IOracleConsumer,
+    ERC2771Context
+{
     // Authorized address to report result
     address public authorizedReporter;
 
-    constructor(address _authorizedReporter, address _trustedForwarder)
-        ERC2771Context(_trustedForwarder)
-    {
+    constructor(
+        address _authorizedReporter,
+        address _trustedForwarder
+    ) ERC2771Context(_trustedForwarder) {
         //might be deployed without forwarder, but reporter is required
         require(_authorizedReporter != address(0));
         authorizedReporter = _authorizedReporter;
@@ -49,18 +54,16 @@ contract SingleReporterOracle is GenericOracle, IOracleConsumer, ERC2771Context 
     }
 
     // ERC1154 - Callback processing
-    function receiveResult(bytes32 _callID, bytes memory callback)
-        external
-        override
-        onlyAuthorizedReporter
-    {
+    function receiveResult(
+        bytes32 _callID,
+        bytes memory callback
+    ) external override onlyAuthorizedReporter {
         // Parse results
         (bytes32 id, uint256 date, bytes memory value) = abi.decode(
             callback,
             (bytes32, uint256, bytes)
         );
-        
+
         _updateValue(id, _callID, date, value);
     }
-
 }

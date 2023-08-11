@@ -1,0 +1,411 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  event:
+    exclude:
+      - promote
+
+steps:
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: check format
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run check-format
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: test coverage
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run coverage
+
+  - name: test deploy-native script
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run deploy-native
+
+  - name: test deploy-x-chain script
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    environment:
+      AUTHORIZED_REPORTER: '0xa1135C5f1309eF9836679d31d7bea9846827f699'
+    commands:
+      - npm run deploy-x-chain
+
+  - name: test update-env-native script
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    environment:
+      AUTHORIZED_APP: '0x000000000000000000000000000000000000000a'
+      AUTHORIZED_WORKERPOOL: '0x000000000000000000000000000000000000000b'
+      REQUIRED_TAG: '0x0000000000000000000000000000000000000000000000000000000000000003'
+    commands:
+      - npm run update-env-native
+
+  - name: npm publish dry-run
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm publish --dry-run
+
+---
+kind: pipeline
+type: docker
+name: deploy-native
+
+trigger:
+  event:
+    - promote
+  target:
+    - deploy-native-dev
+    - deploy-native-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: native deploy and verify dev
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    environment:
+      TARGET_OWNER:
+        from_secret: oracle-factory-contract-owner-dev-address
+      PRIVATE_KEY:
+        from_secret: deployer-dev-privatekey
+    commands:
+      - npm run deploy-native -- --network bellecour
+      - sleep 30
+      - npm run verify -- verify --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
+    when:
+      target:
+        - deploy-native-dev
+      branch:
+        - develop
+
+  - name: native deploy and verify production
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    environment:
+      TARGET_OWNER:
+        from_secret: oracle-factory-contract-owner-prod-address
+      PRIVATE_KEY:
+        from_secret: deployer-prod-privatekey
+    commands:
+      - npm run deploy-native -- --network bellecour
+      - sleep 30
+      - npm run verify -- --network bellecour $(cat deployed/bellecour/VerifiedResultOracle/address) $(cat deployed/bellecour/VerifiedResultOracle/constructorArgs)
+    when:
+      target:
+        - deploy-native-production
+      branch:
+        - main
+
+---
+kind: pipeline
+type: docker
+name: deploy-x-chain
+
+trigger:
+  event:
+    - promote
+  target:
+    - deploy-x-chain-dev
+    - deploy-x-chain-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: ensure selected network
+    image: bash
+    params:
+      - NETWORK
+    commands:
+      - \[[ "$NETWORK" == "" ]] && echo "missing NETWORK param" && exit 1 || echo "network $NETWORK"
+
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: x-chain deploy and verify dev
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - NETWORK
+    environment:
+      AUTHORIZED_REPORTER: '0x767a2d69d7278f200ae1f79a00ac2cae299dd784'
+      PRIVATE_KEY:
+        from_secret: deployer-dev-privatekey
+      INFURA_API_KEY:
+        from_secret: infura-api-key
+      ETHERSCAN_API_KEY:
+        from_secret: etherscan-api-key
+      POLYSCAN_API_KEY:
+        from_secret: polyscan-api-key
+    commands:
+      - npm run deploy-x-chain -- --network $NETWORK
+      - sleep 30
+      - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
+      - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
+    when:
+      target:
+        - deploy-x-chain-dev
+      branch:
+        - develop
+
+  - name: x-chain deploy and verify production
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - NETWORK
+    environment:
+      AUTHORIZED_REPORTER: '0xa1135C5f1309eF9836679d31d7bea9846827f699'
+      PRIVATE_KEY:
+        from_secret: deployer-prod-privatekey
+      INFURA_API_KEY:
+        from_secret: infura-api-key
+      ETHERSCAN_API_KEY:
+        from_secret: etherscan-api-key
+      POLYSCAN_API_KEY:
+        from_secret: polyscan-api-key
+    commands:
+      - npm run deploy-native -- --network $NETWORK
+      - sleep 30
+      - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
+      - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
+    when:
+      target:
+        - deploy-x-chain-production
+      branch:
+        - main
+
+---
+kind: pipeline
+type: docker
+name: update-env-native
+
+trigger:
+  event:
+    - promote
+  target:
+    - update-env-native-dev
+    - update-env-native-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: ensure selected params AUTHORIZED_APP AUTHORIZED_WORKERPOOL REQUIRED_TAG
+    image: bash
+    params:
+      - AUTHORIZED_APP
+      - AUTHORIZED_WORKERPOOL
+      - REQUIRED_TAG
+    commands:
+      - \[[ "$AUTHORIZED_APP" == "" ]] && echo "missing AUTHORIZED_APP param" && exit 1 || echo "AUTHORIZED_APP $AUTHORIZED_APP"
+      - \[[ "$AUTHORIZED_WORKERPOOL" == "" ]] && echo "missing AUTHORIZED_WORKERPOOL param" && exit 1 || echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
+      - \[[ "$REQUIRED_TAG" == "" ]] && echo "missing REQUIRED_TAG param" && exit 1 || echo "REQUIRED_TAG $REQUIRED_TAG"
+
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: update-env native dev
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - AUTHORIZED_APP
+      - AUTHORIZED_WORKERPOOL
+      - REQUIRED_TAG
+    environment:
+      ORACLE_ADDRESS: '0x0132DaF5c7C177499c256b5eaC30E7201A9b75e2'
+      PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-dev-privatekey
+    commands:
+      - npm run update-env-native -- --network bellecour
+    when:
+      target:
+        - update-env-native-dev
+      branch:
+        - develop
+
+  - name: update-env native production
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - AUTHORIZED_APP
+      - AUTHORIZED_WORKERPOOL
+      - REQUIRED_TAG
+    environment:
+      ORACLE_ADDRESS: '0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E'
+      PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-prod-privatekey
+    commands:
+      - npm run update-env-native -- --network bellecour
+    when:
+      target:
+        - update-env-native-production
+      branch:
+        - main
+
+---
+kind: pipeline
+type: docker
+name: publish npm nightly
+
+trigger:
+  event:
+    - promote
+  target:
+    - nightly
+  branch:
+    - develop
+
+steps:
+  - name: install
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: format
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run check-format
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: test
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run test
+
+  - name: set version nightly
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - eval npm pkg set version="$(npm pkg get version)-nightly-$DRONE_COMMIT"
+
+  - name: npm publish
+    image: plugins/npm
+    settings:
+      username:
+        from_secret: npm_username
+      token:
+        from_secret: npm_token
+      tag: nightly
+      access: public
+
+---
+kind: pipeline
+type: docker
+name: publish npm latest
+
+trigger:
+  event:
+    - promote
+  target:
+    - latest
+  branch:
+    - main
+
+steps:
+  - name: install
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+
+  - name: format
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run check-format
+
+  - name: compile
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run compile
+
+  - name: test
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    commands:
+      - npm run test
+
+  - name: npm publish
+    image: plugins/npm
+    settings:
+      username:
+        from_secret: npm_username
+      token:
+        from_secret: npm_token
+      tag: latest
+      access: public
