@@ -7,7 +7,7 @@ typechain
 cache
 artifacts
 
-deployed
+deployed/hardhat
 
 .vscode
 
