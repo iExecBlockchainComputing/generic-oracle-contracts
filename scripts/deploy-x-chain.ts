@@ -1,6 +1,7 @@
 import { ethers, network } from 'hardhat';
 import { exit } from 'process';
 import { saveDeployed } from './utils/utils';
+import 'dotenv/config';
 
 async function main() {
   const authorizedReporter = process.env.AUTHORIZED_REPORTER;
