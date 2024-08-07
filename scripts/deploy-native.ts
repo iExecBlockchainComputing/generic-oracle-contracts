@@ -1,6 +1,7 @@
 import { ethers, network } from 'hardhat';
 import { exit } from 'process';
 import { saveDeployed } from './utils/utils';
+import 'dotenv/config';
 
 let iexecHubAddress = process.env.IEXEC_HUB_ADDRESS;
 

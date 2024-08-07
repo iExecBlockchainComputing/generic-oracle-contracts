@@ -5,6 +5,7 @@ import '@nomiclabs/hardhat-etherscan';
 import { config as dotEnvConfig } from 'dotenv';
 import { HardhatUserConfig } from 'hardhat/types';
 import 'solidity-coverage';
+import 'dotenv/config';
 
 dotEnvConfig();
 const PRIVATE_KEY: string =
@@ -15,7 +16,7 @@ const ETHERSCAN_API_KEY: string = process.env.ETHERSCAN_API_KEY ?? '';
 const POLYSCAN_API_KEY: string = process.env.POLYSCAN_API_KEY ?? '';
 
 const config: HardhatUserConfig = {
-  defaultNetwork: 'hardhat',
+  defaultNetwork: 'bellecour-bubble',
   networks: {
     hardhat: {},
     mainnet: {
@@ -38,6 +39,14 @@ const config: HardhatUserConfig = {
       url: 'https://bellecour.iex.ec',
       accounts: [PRIVATE_KEY],
     },
+    'bellecour-bubble': {
+      chainId: 65535,
+      gasPrice: 0,
+      blockGasLimit: 6_700_000,
+      hardfork: 'berlin',
+      url: 'http://chain.wp-throughput.az1.internal:8545',
+      accounts: [PRIVATE_KEY],
+    },
   },
   etherscan: {
     apiKey: {
@@ -54,6 +63,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: 'https://blockscout-bellecour.iex.ec/api',
           browserURL: 'https://blockscout-bellecour.iex.ec',
+        },
+      },
+      {
+        network: 'bellecour-bubble',
+        chainId: 65535,
+        urls: {
+          apiURL: 'http://chain.wp-throughput.az1.internal:4000/api',
+          browserURL: 'http://chain.wp-throughput.az1.internal:4000',
         },
       },
     ],

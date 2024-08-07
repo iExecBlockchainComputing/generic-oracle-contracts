@@ -1,5 +1,6 @@
 import { ethers, network } from 'hardhat';
 import { exit } from 'process';
+import 'dotenv/config';
 
 async function main() {
   const [owner] = await ethers.getSigners();
