@@ -39,12 +39,13 @@ const config: HardhatUserConfig = {
       url: 'https://bellecour.iex.ec',
       accounts: [PRIVATE_KEY],
     },
+    // poco-chain native config
     'dev-native': {
       chainId: 65535,
       gasPrice: 0,
       blockGasLimit: 6_700_000,
       hardfork: 'berlin',
-      url: 'http://chain.wp-throughput.az1.internal:8545',
+      url: process.env.RPC_URL ?? 'http://localhost:8545',
       accounts: [PRIVATE_KEY],
     },
   },
@@ -55,6 +56,7 @@ const config: HardhatUserConfig = {
       polygonMumbai: POLYSCAN_API_KEY,
       polygon: POLYSCAN_API_KEY,
       bellecour: 'abc',
+      'dev-native': 'abc',
     },
     customChains: [
       {
