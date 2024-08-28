@@ -65,14 +65,14 @@ const config: HardhatUserConfig = {
           browserURL: 'https://blockscout-bellecour.iex.ec',
         },
       },
-      {
-        network: 'dev-native',
-        chainId: 65535,
-        urls: {
-          apiURL: 'http://chain.wp-throughput.az1.internal:4000/api',
-          browserURL: 'http://chain.wp-throughput.az1.internal:4000',
-        },
-      },
+      // {
+      //   network: 'dev-native',
+      //   chainId: 65535,
+      //   urls: {
+      //     apiURL: 'http://chain.wp-throughput.az1.internal:4000/api',
+      //     browserURL: 'http://chain.wp-throughput.az1.internal:4000',
+      //   },
+      // },
     ],
   },
   solidity: {
