@@ -16,7 +16,7 @@ const ETHERSCAN_API_KEY: string = process.env.ETHERSCAN_API_KEY ?? '';
 const POLYSCAN_API_KEY: string = process.env.POLYSCAN_API_KEY ?? '';
 
 const config: HardhatUserConfig = {
-  defaultNetwork: 'bellecour-bubble',
+  defaultNetwork: 'dev-native',
   networks: {
     hardhat: {},
     mainnet: {
@@ -39,7 +39,7 @@ const config: HardhatUserConfig = {
       url: 'https://bellecour.iex.ec',
       accounts: [PRIVATE_KEY],
     },
-    'bellecour-bubble': {
+    'dev-native': {
       chainId: 65535,
       gasPrice: 0,
       blockGasLimit: 6_700_000,
@@ -66,7 +66,7 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: 'bellecour-bubble',
+        network: 'dev-native',
         chainId: 65535,
         urls: {
           apiURL: 'http://chain.wp-throughput.az1.internal:4000/api',
