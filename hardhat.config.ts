@@ -38,6 +38,14 @@ const config: HardhatUserConfig = {
       url: 'https://bellecour.iex.ec',
       accounts: [PRIVATE_KEY],
     },
+    'dev-native': {
+      chainId: 65535,
+      gasPrice: 0,
+      blockGasLimit: 6_700_000,
+      hardfork: 'berlin',
+      url: process.env.RPC_URL ?? 'http://localhost:8545',
+      accounts: [PRIVATE_KEY],
+    },
   },
   etherscan: {
     apiKey: {
