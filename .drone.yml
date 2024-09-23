@@ -305,6 +305,146 @@ steps:
 ---
 kind: pipeline
 type: docker
+name: add-authorized-workerpool
+
+trigger:
+  event:
+    - promote
+  target:
+    - add-authorized-workerpool-dev
+    - add-authorized-workerpool-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: ensure selected params WORKERPOOL
+    image: bash
+    params:
+      - WORKERPOOL
+    commands:
+      - \[[ "$WORKERPOOL" == "" ]] && echo "missing WORKERPOOL param" && exit 1 || echo "WORKERPOOL $WORKERPOOL"
+
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+      - cd node_modules/whitelist-smart-contract
+      - npm install
+
+  - name: dev add workerpool
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - WORKERPOOL
+    environment:
+      CONTRACT_ADDRESS: '0x92C7D28AeB0768B7D6eFBD819C4340aCbB1339c1'
+      WALLET_PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-dev-privatekey
+    commands:
+      - cd node_modules/whitelist-smart-contract
+      - npm run addResourceToWhitelist
+    when:
+      target:
+        - add-authorized-workerpool-dev
+      branch:
+        - develop
+
+  - name: prod add workerpool
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - WORKERPOOL
+    environment:
+      CONTRACT_ADDRESS: '0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84'
+      WALLET_PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-dev-privatekey
+    commands:
+      - cd node_modules/whitelist-smart-contract
+      - npm run addResourceToWhitelist
+    when:
+      target:
+        - add-authorized-workerpool-production
+      branch:
+        - main
+
+---
+kind: pipeline
+type: docker
+name: remove-authorized-workerpool
+
+trigger:
+  event:
+    - promote
+  target:
+    - remove-authorized-workerpool-dev
+    - remove-authorized-workerpool-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: ensure selected params WORKERPOOL
+    image: bash
+    params:
+      - WORKERPOOL
+    commands:
+      - \[[ "$WORKERPOOL" == "" ]] && echo "missing WORKERPOOL param" && exit 1 || echo "WORKERPOOL $WORKERPOOL"
+
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+      - cd node_modules/whitelist-smart-contract
+      - npm install
+
+  - name: dev remove workerpool
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - WORKERPOOL
+    environment:
+      CONTRACT_ADDRESS: '0x92C7D28AeB0768B7D6eFBD819C4340aCbB1339c1'
+      WALLET_PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-dev-privatekey
+    commands:
+      - cd node_modules/whitelist-smart-contract
+      - npm run removeResourceFromWhitelist
+    when:
+      target:
+        - remove-authorized-workerpool-dev
+      branch:
+        - develop
+
+  - name: prod remove workerpool
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - WORKERPOOL
+    environment:
+      CONTRACT_ADDRESS: '0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84'
+      WALLET_PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-dev-privatekey
+    commands:
+      - cd node_modules/whitelist-smart-contract
+      - npm run removeResourceFromWhitelist
+    when:
+      target:
+        - remove-authorized-workerpool-production
+      branch:
+        - main
+
+---
+kind: pipeline
+type: docker
 name: publish npm nightly
 
 trigger:
