@@ -148,21 +148,24 @@ npm run update-env-native -- --network bellecour
 - Polygon testnet Amoy
 
 ```
-SaltyForwarder deployed to: TODO
-SingleReporterOracle deployed to: TODO
+SaltyForwarder deployed at: TODO
+SingleReporterOracle deployed at: TODO
 ```
 
 - Ethereum testnet Sepolia
 
 ```
-SaltyForwarder deployed to: TODO
-SingleReporterOracle deployed to: TODO
+SaltyForwarder deployed at: TODO
+SingleReporterOracle deployed at: TODO
 ```
 
 - Bellecour
 
 ```
-VerifiedResultOracle deployed to: 0x0132DaF5c7C177499c256b5eaC30E7201A9b75e2
+admin: 0xF43632063E3fd4A09698c6bDC501B5Fe312e3dF8
+
+VerifiedResultOracle deployed at: 0x0132DaF5c7C177499c256b5eaC30E7201A9b75e2
+IExecWhitelist (authorized workerpools) deployed at: 0x92C7D28AeB0768B7D6eFBD819C4340aCbB1339c1
 ```
 
 ## Production deployments
@@ -170,26 +173,29 @@ VerifiedResultOracle deployed to: 0x0132DaF5c7C177499c256b5eaC30E7201A9b75e2
 - Polygon testnet Amoy
 
 ```
-SaltyForwarder deployed to: TODO
-SingleReporterOracle deployed to: TODO
+SaltyForwarder deployed at: TODO
+SingleReporterOracle deployed at: TODO
 ```
 
 - Polygon Mainnet
 
 ```
-SaltyForwarder deployed to: 0xc684E8645c8414812f22918146d72d1071E722AE
-SingleReporterOracle deployed to: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
+SaltyForwarder deployed at: 0xc684E8645c8414812f22918146d72d1071E722AE
+SingleReporterOracle deployed at: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
 
 - Ethereum testnet Sepolia
 
 ```
-SaltyForwarder deployed to: TODO
-SingleReporterOracle deployed to: TODO
+SaltyForwarder deployed at: TODO
+SingleReporterOracle deployed at: TODO
 ```
 
 - Bellecour
 
 ```
-VerifiedResultOracle deployed to: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
+admin: 0xFC1065f10f7BeEC68ba272bF7eF1E3CFBe1e4337
+
+VerifiedResultOracle deployed at: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
+IExecWhitelist (authorized workerpools) deployed at: 0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84
 ```
