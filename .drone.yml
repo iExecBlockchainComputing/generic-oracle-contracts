@@ -318,12 +318,12 @@ trigger:
     - main
 
 steps:
-  - name: ensure selected params WORKERPOOL
+  - name: ensure selected params ADDRESS_TO_ADD
     image: bash
     params:
-      - WORKERPOOL
+      - ADDRESS_TO_ADD
     commands:
-      - \[[ "$WORKERPOOL" == "" ]] && echo "missing WORKERPOOL param" && exit 1 || echo "WORKERPOOL $WORKERPOOL"
+      - \[[ "$ADDRESS_TO_ADD" == "" ]] && echo "missing ADDRESS_TO_ADD param" && exit 1 || echo "ADDRESS_TO_ADD $ADDRESS_TO_ADD"
 
   - name: install deps
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
@@ -340,7 +340,7 @@ steps:
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     params:
-      - WORKERPOOL
+      - ADDRESS_TO_ADD
     environment:
       CONTRACT_ADDRESS: '0x92C7D28AeB0768B7D6eFBD819C4340aCbB1339c1'
       WALLET_PRIVATE_KEY:
@@ -358,7 +358,7 @@ steps:
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     params:
-      - WORKERPOOL
+      - ADDRESS_TO_ADD
     environment:
       CONTRACT_ADDRESS: '0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84'
       WALLET_PRIVATE_KEY:
@@ -388,12 +388,12 @@ trigger:
     - main
 
 steps:
-  - name: ensure selected params WORKERPOOL
+  - name: ensure selected params ADDRESS_TO_REMOVE
     image: bash
     params:
-      - WORKERPOOL
+      - ADDRESS_TO_REMOVE
     commands:
-      - \[[ "$WORKERPOOL" == "" ]] && echo "missing WORKERPOOL param" && exit 1 || echo "WORKERPOOL $WORKERPOOL"
+      - \[[ "$ADDRESS_TO_REMOVE" == "" ]] && echo "missing ADDRESS_TO_REMOVE param" && exit 1 || echo "ADDRESS_TO_REMOVE $ADDRESS_TO_REMOVE"
 
   - name: install deps
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
@@ -410,7 +410,7 @@ steps:
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     params:
-      - WORKERPOOL
+      - ADDRESS_TO_REMOVE
     environment:
       CONTRACT_ADDRESS: '0x92C7D28AeB0768B7D6eFBD819C4340aCbB1339c1'
       WALLET_PRIVATE_KEY:
@@ -428,7 +428,7 @@ steps:
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
     image: node:18.12.1
     params:
-      - WORKERPOOL
+      - ADDRESS_TO_REMOVE
     environment:
       CONTRACT_ADDRESS: '0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84'
       WALLET_PRIVATE_KEY:
