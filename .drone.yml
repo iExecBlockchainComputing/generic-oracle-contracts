@@ -238,7 +238,7 @@ trigger:
     - main
 
 steps:
-  - name: ensure selected params AUTHORIZED_APP AUTHORIZED_WORKERPOOL REQUIRED_TAG
+  - name: check params (AUTHORIZED_APP required)
     image: bash
     params:
       - AUTHORIZED_APP
@@ -246,8 +246,8 @@ steps:
       - REQUIRED_TAG
     commands:
       - \[[ "$AUTHORIZED_APP" == "" ]] && echo "missing AUTHORIZED_APP param" && exit 1 || echo "AUTHORIZED_APP $AUTHORIZED_APP"
-      - \[[ "$AUTHORIZED_WORKERPOOL" == "" ]] && echo "missing AUTHORIZED_WORKERPOOL param" && exit 1 || echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
-      - \[[ "$REQUIRED_TAG" == "" ]] && echo "missing REQUIRED_TAG param" && exit 1 || echo "REQUIRED_TAG $REQUIRED_TAG"
+      - \[[ "$AUTHORIZED_WORKERPOOL" == "" ]] && echo "no optional AUTHORIZED_WORKERPOOL param, using default" || echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
+      - \[[ "$REQUIRED_TAG" == "" ]] && echo "no optional REQUIRED_TAG param, using default" || echo "REQUIRED_TAG $REQUIRED_TAG"
 
   - name: install deps
     # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
@@ -276,6 +276,11 @@ steps:
       PRIVATE_KEY:
         from_secret: oracle-factory-contract-owner-dev-privatekey
     commands:
+      - export REQUIRED_TAG="${REQUIRED_TAG:-"0x0000000000000000000000000000000000000000000000000000000000000003"}"
+      - export AUTHORIZED_WORKERPOOL="${AUTHORIZED_WORKERPOOL:-"0x92C7D28AeB0768B7D6eFBD819C4340aCbB1339c1"}"
+      - echo "AUTHORIZED_APP $AUTHORIZED_APP"
+      - echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
+      - echo "REQUIRED_TAG $REQUIRED_TAG"
       - npm run update-env-native -- --network bellecour
     when:
       target:
@@ -295,6 +300,11 @@ steps:
       PRIVATE_KEY:
         from_secret: oracle-factory-contract-owner-prod-privatekey
     commands:
+      - REQUIRED_TAG="${REQUIRED_TAG:-"0x0000000000000000000000000000000000000000000000000000000000000003"}"
+      - AUTHORIZED_WORKERPOOL="${AUTHORIZED_WORKERPOOL:-"0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84"}"
+      - echo "AUTHORIZED_APP $AUTHORIZED_APP"
+      - echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
+      - echo "REQUIRED_TAG $REQUIRED_TAG"
       - npm run update-env-native -- --network bellecour
     when:
       target:
