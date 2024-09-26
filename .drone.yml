@@ -372,7 +372,7 @@ steps:
     environment:
       CONTRACT_ADDRESS: '0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84'
       WALLET_PRIVATE_KEY:
-        from_secret: oracle-factory-contract-owner-dev-privatekey
+        from_secret: oracle-factory-contract-owner-prod-privatekey
     commands:
       - cd node_modules/whitelist-smart-contract
       - npm run addResourceToWhitelist
@@ -442,7 +442,7 @@ steps:
     environment:
       CONTRACT_ADDRESS: '0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84'
       WALLET_PRIVATE_KEY:
-        from_secret: oracle-factory-contract-owner-dev-privatekey
+        from_secret: oracle-factory-contract-owner-prod-privatekey
     commands:
       - cd node_modules/whitelist-smart-contract
       - npm run removeResourceFromWhitelist
