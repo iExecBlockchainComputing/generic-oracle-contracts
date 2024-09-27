@@ -22,14 +22,6 @@ const config: HardhatUserConfig = {
       url: 'https://mainnet.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
-    goerli: {
-      url: 'https://goerli.infura.io/v3/' + INFURA_API_KEY,
-      accounts: [PRIVATE_KEY],
-    },
-    polygonMumbai: {
-      url: 'https://polygon-mumbai.infura.io/v3/' + INFURA_API_KEY,
-      accounts: [PRIVATE_KEY],
-    },
     polygon: {
       url: 'https://polygon-mainnet.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
@@ -50,8 +42,6 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       mainnet: ETHERSCAN_API_KEY,
-      goerli: ETHERSCAN_API_KEY,
-      polygonMumbai: POLYSCAN_API_KEY,
       polygon: POLYSCAN_API_KEY,
       bellecour: 'abc',
     },
