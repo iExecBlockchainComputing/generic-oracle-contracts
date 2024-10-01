@@ -238,7 +238,7 @@ trigger:
     - main
 
 steps:
-  - name: check params (AUTHORIZED_APP required)
+  - name: print params
     image: bash
     params:
       - AUTHORIZED_APP
