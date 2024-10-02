@@ -238,14 +238,14 @@ trigger:
     - main
 
 steps:
-  - name: check params (AUTHORIZED_APP required)
+  - name: print params
     image: bash
     params:
       - AUTHORIZED_APP
       - AUTHORIZED_WORKERPOOL
       - REQUIRED_TAG
     commands:
-      - \[[ "$AUTHORIZED_APP" == "" ]] && echo "missing AUTHORIZED_APP param" && exit 1 || echo "AUTHORIZED_APP $AUTHORIZED_APP"
+      - \[[ "$AUTHORIZED_APP" == "" ]] && echo "no optional AUTHORIZED_APP param, using default" || echo "AUTHORIZED_APP $AUTHORIZED_APP"
       - \[[ "$AUTHORIZED_WORKERPOOL" == "" ]] && echo "no optional AUTHORIZED_WORKERPOOL param, using default" || echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
       - \[[ "$REQUIRED_TAG" == "" ]] && echo "no optional REQUIRED_TAG param, using default" || echo "REQUIRED_TAG $REQUIRED_TAG"
 
@@ -276,8 +276,9 @@ steps:
       PRIVATE_KEY:
         from_secret: oracle-factory-contract-owner-dev-privatekey
     commands:
-      - export REQUIRED_TAG="${REQUIRED_TAG:-"0x0000000000000000000000000000000000000000000000000000000000000003"}"
+      - export AUTHORIZED_APP="${AUTHORIZED_APP:-"0xa39b4E7d2447F510BF961b038eAE53390a05CaCc"}"
       - export AUTHORIZED_WORKERPOOL="${AUTHORIZED_WORKERPOOL:-"0x92C7D28AeB0768B7D6eFBD819C4340aCbB1339c1"}"
+      - export REQUIRED_TAG="${REQUIRED_TAG:-"0x0000000000000000000000000000000000000000000000000000000000000003"}"
       - echo "AUTHORIZED_APP $AUTHORIZED_APP"
       - echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
       - echo "REQUIRED_TAG $REQUIRED_TAG"
@@ -300,8 +301,9 @@ steps:
       PRIVATE_KEY:
         from_secret: oracle-factory-contract-owner-prod-privatekey
     commands:
-      - export REQUIRED_TAG="${REQUIRED_TAG:-"0x0000000000000000000000000000000000000000000000000000000000000003"}"
+      - export AUTHORIZED_APP="${AUTHORIZED_APP:-"0x26472b355849B409769545A8595fe97846a8F0C9"}"
       - export AUTHORIZED_WORKERPOOL="${AUTHORIZED_WORKERPOOL:-"0x976d03eE9D8bcD8d1f70DcE0d17c6b54Bc91aC84"}"
+      - export REQUIRED_TAG="${REQUIRED_TAG:-"0x0000000000000000000000000000000000000000000000000000000000000003"}"
       - echo "AUTHORIZED_APP $AUTHORIZED_APP"
       - echo "AUTHORIZED_WORKERPOOL $AUTHORIZED_WORKERPOOL"
       - echo "REQUIRED_TAG $REQUIRED_TAG"
@@ -449,6 +451,146 @@ steps:
     when:
       target:
         - remove-authorized-workerpool-production
+      branch:
+        - main
+
+---
+kind: pipeline
+type: docker
+name: add-authorized-app
+
+trigger:
+  event:
+    - promote
+  target:
+    - add-authorized-app-dev
+    - add-authorized-app-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: ensure selected params ADDRESS_TO_ADD
+    image: bash
+    params:
+      - ADDRESS_TO_ADD
+    commands:
+      - \[[ "$ADDRESS_TO_ADD" == "" ]] && echo "missing ADDRESS_TO_ADD param" && exit 1 || echo "ADDRESS_TO_ADD $ADDRESS_TO_ADD"
+
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+      - cd node_modules/whitelist-smart-contract
+      - npm install
+
+  - name: dev add app
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - ADDRESS_TO_ADD
+    environment:
+      CONTRACT_ADDRESS: '0xa39b4E7d2447F510BF961b038eAE53390a05CaCc'
+      WALLET_PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-dev-privatekey
+    commands:
+      - cd node_modules/whitelist-smart-contract
+      - npm run addResourceToWhitelist
+    when:
+      target:
+        - add-authorized-app-dev
+      branch:
+        - develop
+
+  - name: prod add app
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - ADDRESS_TO_ADD
+    environment:
+      CONTRACT_ADDRESS: '0x26472b355849B409769545A8595fe97846a8F0C9'
+      WALLET_PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-prod-privatekey
+    commands:
+      - cd node_modules/whitelist-smart-contract
+      - npm run addResourceToWhitelist
+    when:
+      target:
+        - add-authorized-app-production
+      branch:
+        - main
+
+---
+kind: pipeline
+type: docker
+name: remove-authorized-app
+
+trigger:
+  event:
+    - promote
+  target:
+    - remove-authorized-app-dev
+    - remove-authorized-app-production
+  branch:
+    - develop
+    - main
+
+steps:
+  - name: ensure selected params ADDRESS_TO_REMOVE
+    image: bash
+    params:
+      - ADDRESS_TO_REMOVE
+    commands:
+      - \[[ "$ADDRESS_TO_REMOVE" == "" ]] && echo "missing ADDRESS_TO_REMOVE param" && exit 1 || echo "ADDRESS_TO_REMOVE $ADDRESS_TO_REMOVE"
+
+  - name: install deps
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    pull: always
+    commands:
+      - node -v
+      - npm -v
+      - npm ci
+      - cd node_modules/whitelist-smart-contract
+      - npm install
+
+  - name: dev remove app
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - ADDRESS_TO_REMOVE
+    environment:
+      CONTRACT_ADDRESS: '0xa39b4E7d2447F510BF961b038eAE53390a05CaCc'
+      WALLET_PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-dev-privatekey
+    commands:
+      - cd node_modules/whitelist-smart-contract
+      - npm run removeResourceFromWhitelist
+    when:
+      target:
+        - remove-authorized-app-dev
+      branch:
+        - develop
+
+  - name: prod remove app
+    # fixed node version to work around https://github.com/NomicFoundation/hardhat/issues/3877
+    image: node:18.12.1
+    params:
+      - ADDRESS_TO_REMOVE
+    environment:
+      CONTRACT_ADDRESS: '0x26472b355849B409769545A8595fe97846a8F0C9'
+      WALLET_PRIVATE_KEY:
+        from_secret: oracle-factory-contract-owner-prod-privatekey
+    commands:
+      - cd node_modules/whitelist-smart-contract
+      - npm run removeResourceFromWhitelist
+    when:
+      target:
+        - remove-authorized-app-production
       branch:
         - main
 
