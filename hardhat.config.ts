@@ -22,8 +22,16 @@ const config: HardhatUserConfig = {
       url: 'https://mainnet.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
+    sepolia: {
+      url: 'https://sepolia.infura.io/v3/' + INFURA_API_KEY,
+      accounts: [PRIVATE_KEY],
+    },
     polygon: {
       url: 'https://polygon-mainnet.infura.io/v3/' + INFURA_API_KEY,
+      accounts: [PRIVATE_KEY],
+    },
+    amoy: {
+      url: 'https://rpc-amoy.polygon.technology',
       accounts: [PRIVATE_KEY],
     },
     bellecour: {
@@ -42,7 +50,9 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       mainnet: ETHERSCAN_API_KEY,
+      sepolia: ETHERSCAN_API_KEY,
       polygon: POLYSCAN_API_KEY,
+      amoy: POLYSCAN_API_KEY,
       bellecour: 'abc',
     },
     customChains: [
