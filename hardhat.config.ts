@@ -31,7 +31,7 @@ const config: HardhatUserConfig = {
       accounts: [PRIVATE_KEY],
     },
     polygonAmoy: {
-      url: 'https://rpc-amoy.polygon.technology',
+      url: 'https://polygon-amoy.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
     bellecour: {
