@@ -1,6 +1,7 @@
 import { ethers, network } from 'hardhat';
 import { exit } from 'process';
 import { saveDeployed } from './utils/utils';
+import { SaltyForwarder__factory } from '../typechain';
 
 async function main() {
   const authorizedReporter = process.env.AUTHORIZED_REPORTER;
@@ -13,6 +14,7 @@ async function main() {
   console.log('Chain ID: ', chainId);
   console.log('Deployer: ', deployer.address);
 
+  /*
   const SaltyForwarderFactory = await ethers.getContractFactory(
     'SaltyForwarder'
   );
@@ -20,6 +22,11 @@ async function main() {
   await forwarder.deployTransaction.wait();
   console.log(
     `SaltyForwarder: ${forwarder.address} [tx:${forwarder.deployTransaction.hash}]`
+  );
+    */
+  const forwarder = SaltyForwarder__factory.connect(
+    '0xc684E8645c8414812f22918146d72d1071E722AE',
+    ethers.provider
   );
   await saveDeployed({
     contractName: 'SaltyForwarder',
