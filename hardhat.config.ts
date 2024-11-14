@@ -22,8 +22,16 @@ const config: HardhatUserConfig = {
       url: 'https://mainnet.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
+    sepolia: {
+      url: 'https://sepolia.infura.io/v3/' + INFURA_API_KEY,
+      accounts: [PRIVATE_KEY],
+    },
     polygon: {
       url: 'https://polygon-mainnet.infura.io/v3/' + INFURA_API_KEY,
+      accounts: [PRIVATE_KEY],
+    },
+    polygonAmoy: {
+      url: 'https://polygon-amoy.infura.io/v3/' + INFURA_API_KEY,
       accounts: [PRIVATE_KEY],
     },
     bellecour: {
@@ -42,7 +50,9 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       mainnet: ETHERSCAN_API_KEY,
+      sepolia: ETHERSCAN_API_KEY,
       polygon: POLYSCAN_API_KEY,
+      polygonAmoy: POLYSCAN_API_KEY,
       bellecour: 'abc',
     },
     customChains: [
@@ -52,6 +62,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: 'https://blockscout-bellecour.iex.ec/api',
           browserURL: 'https://blockscout-bellecour.iex.ec',
+        },
+      },
+      {
+        network: 'polygonAmoy',
+        chainId: 80002,
+        urls: {
+          apiURL: 'https://api-amoy.polygonscan.com/api',
+          browserURL: 'https://amoy.polygonscan.com/',
         },
       },
     ],
