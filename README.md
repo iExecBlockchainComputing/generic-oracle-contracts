@@ -148,15 +148,15 @@ npm run update-env-native -- --network bellecour
 - Polygon testnet Amoy
 
 ```
-SaltyForwarder deployed at: TODO
-SingleReporterOracle deployed at: TODO
+SaltyForwarder deployed at: 0xa02dEe31775e82E29e762bC69910ca3991f1a20F
+SingleReporterOracle deployed at: 0x4c1EA90575470267CE84887e8460E44b76f79Eb0
 ```
 
 - Ethereum testnet Sepolia
 
 ```
-SaltyForwarder deployed at: TODO
-SingleReporterOracle deployed at: TODO
+SaltyForwarder deployed at: 0xaf92191ee3afd45ae756443d03d55ec7c5cdfb89
+SingleReporterOracle deployed at: 0x0F669760bAe5edDE51a3e35456caF54E9184DeAe
 ```
 
 - Bellecour
@@ -190,6 +190,13 @@ SingleReporterOracle deployed at: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
 SaltyForwarder deployed at: TODO
 SingleReporterOracle deployed at: TODO
+```
+
+- Ethereum Mainnet
+
+```
+SaltyForwarder deployed at: 0xc684E8645c8414812f22918146d72d1071E722AE
+SingleReporterOracle deployed at: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
 
 - Bellecour
