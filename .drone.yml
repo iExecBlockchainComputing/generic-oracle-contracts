@@ -213,7 +213,7 @@ steps:
       POLYSCAN_API_KEY:
         from_secret: polyscan-api-key
     commands:
-      - npm run deploy-native -- --network $NETWORK
+      - npm run deploy-x-chain -- --network $NETWORK
       - sleep 30
       - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SaltyForwarder/address) $(cat deployed/$NETWORK/SaltyForwarder/constructorArgs)
       - npm run verify -- --network $NETWORK $(cat deployed/$NETWORK/SingleReporterOracle/address) $(cat deployed/$NETWORK/SingleReporterOracle/constructorArgs)
