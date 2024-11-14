@@ -204,7 +204,8 @@ steps:
     environment:
       AUTHORIZED_REPORTER: '0xa1135C5f1309eF9836679d31d7bea9846827f699'
       PRIVATE_KEY:
-        from_secret: deployer-prod-privatekey
+        # this wallet `0xdE4783337aC682ffF36714E8a78BA902Adfe270E` must be only used for x-chain deployment and only once per chain to keep addresses consistency across all x-chain networks
+        from_secret: x-chain-contract-deployer-prod-privatekey
       INFURA_API_KEY:
         from_secret: infura-api-key
       ETHERSCAN_API_KEY:
