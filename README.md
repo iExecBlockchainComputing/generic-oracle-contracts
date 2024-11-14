@@ -174,8 +174,8 @@ IExecWhitelist (authorized apps) deployed at: 0xa39b4E7d2447F510BF961b038eAE5339
 - Polygon testnet Amoy
 
 ```
-SaltyForwarder deployed at: TODO
-SingleReporterOracle deployed at: TODO
+SaltyForwarder deployed at: 0xc684E8645c8414812f22918146d72d1071E722AE
+SingleReporterOracle deployed at: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
 
 - Polygon Mainnet
@@ -188,8 +188,8 @@ SingleReporterOracle deployed at: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 - Ethereum testnet Sepolia
 
 ```
-SaltyForwarder deployed at: TODO
-SingleReporterOracle deployed at: TODO
+SaltyForwarder deployed at: 0xc684E8645c8414812f22918146d72d1071E722AE
+SingleReporterOracle deployed at: 0x36dA71ccAd7A67053f0a4d9D5f55b725C9A25A3E
 ```
 
 - Ethereum Mainnet
